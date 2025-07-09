@@ -1,0 +1,3 @@
+/target
+.env
+api_spec/types
