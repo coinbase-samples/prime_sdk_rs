@@ -17,11 +17,11 @@
  */
 
 use serde::{Deserialize, Serialize};
-use crate::types::generated::generated::asset_balance::AssetBalance;
-use crate::types::generated::generated::loan_info::LoanInfo;
-use crate::types::generated::generated::market_rate::MarketRate;
 use crate::types::generated::generated::margin_add_on::MarginAddOn;
+use crate::types::generated::generated::loan_info::LoanInfo;
 use crate::types::generated::generated::pm_asset_info::PmAssetInfo;
+use crate::types::generated::generated::market_rate::MarketRate;
+use crate::types::generated::generated::asset_balance::AssetBalance;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct MarginSummary {

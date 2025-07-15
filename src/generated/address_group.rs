@@ -17,8 +17,8 @@
  */
 
 use serde::{Deserialize, Serialize};
-use crate::types::generated::generated::address_entry::AddressEntry;
 use crate::types::generated::generated::network_type::NetworkType;
+use crate::types::generated::generated::address_entry::AddressEntry;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AddressGroup {

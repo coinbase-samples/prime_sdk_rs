@@ -17,8 +17,8 @@
  */
 
 use serde::{Deserialize, Serialize};
-use crate::types::generated::generated::risk_assessment::RiskAssessment;
 use crate::types::generated::generated::signing_status::SigningStatus;
+use crate::types::generated::generated::risk_assessment::RiskAssessment;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct OnchainTransactionDetails {

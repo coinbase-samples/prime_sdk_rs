@@ -17,8 +17,8 @@
  */
 
 use serde::{Deserialize, Serialize};
-use crate::types::generated::generated::rpc_config::RpcConfig;
 use crate::types::generated::generated::create_onchain_transaction_request_period_evm_params::CreateOnchainTransactionRequestPeriodEvmParams;
+use crate::types::generated::generated::rpc_config::RpcConfig;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CreateOnchainTransactionRequest {

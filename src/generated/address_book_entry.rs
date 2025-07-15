@@ -17,8 +17,8 @@
  */
 
 use serde::{Deserialize, Serialize};
-use crate::types::generated::generated::display_user::DisplayUser;
 use crate::types::generated::generated::address_book_type::AddressBookType;
+use crate::types::generated::generated::display_user::DisplayUser;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AddressBookEntry {

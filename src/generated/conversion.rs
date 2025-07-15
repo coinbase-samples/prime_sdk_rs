@@ -17,8 +17,8 @@
  */
 
 use serde::{Deserialize, Serialize};
-use crate::types::generated::generated::short_collateral::ShortCollateral;
 use crate::types::generated::generated::conversion_detail::ConversionDetail;
+use crate::types::generated::generated::short_collateral::ShortCollateral;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Conversion {

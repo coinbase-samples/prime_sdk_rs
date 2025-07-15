@@ -17,8 +17,8 @@
  */
 
 use serde::{Deserialize, Serialize};
-use crate::types::generated::generated::network::Network;
 use crate::types::generated::generated::wallet_deposit_instruction_type::WalletDepositInstructionType;
+use crate::types::generated::generated::network::Network;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct WalletCryptoDepositInstructions {

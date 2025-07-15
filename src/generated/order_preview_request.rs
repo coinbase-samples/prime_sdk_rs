@@ -17,9 +17,9 @@
  */
 
 use serde::{Deserialize, Serialize};
-use crate::types::generated::generated::time_in_force_type::TimeInForceType;
-use crate::types::generated::generated::order_side::OrderSide;
 use crate::types::generated::generated::order_type::OrderType;
+use crate::types::generated::generated::order_side::OrderSide;
+use crate::types::generated::generated::time_in_force_type::TimeInForceType;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct OrderPreviewRequest {

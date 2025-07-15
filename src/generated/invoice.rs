@@ -17,8 +17,8 @@
  */
 
 use serde::{Deserialize, Serialize};
-use crate::types::generated::generated::invoice_state::InvoiceState;
 use crate::types::generated::generated::invoice_item::InvoiceItem;
+use crate::types::generated::generated::invoice_state::InvoiceState;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Invoice {

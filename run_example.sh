@@ -72,6 +72,8 @@ dotenv = "0.15"
 log = "0.4"
 env_logger = "0.11"
 uuid = { version = "1.17", features = ["v4"] }
+time = { version = "0.3", features = ["formatting"] }
+time-tz = "2"
 EOF
 
 # Copy .env file if it exists

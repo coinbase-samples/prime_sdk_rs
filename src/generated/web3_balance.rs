@@ -17,8 +17,8 @@
  */
 
 use serde::{Deserialize, Serialize};
-use crate::types::generated::generated::web3_asset::Web3Asset;
 use crate::types::generated::generated::visibility_status::VisibilityStatus;
+use crate::types::generated::generated::web3_asset::Web3Asset;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Web3Balance {

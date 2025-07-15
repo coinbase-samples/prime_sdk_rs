@@ -17,8 +17,8 @@
  */
 
 use serde::{Deserialize, Serialize};
-use crate::types::generated::generated::web3_transaction_metadata::Web3TransactionMetadata;
 use crate::types::generated::generated::match_metadata::MatchMetadata;
+use crate::types::generated::generated::web3_transaction_metadata::Web3TransactionMetadata;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct TransactionMetadata {

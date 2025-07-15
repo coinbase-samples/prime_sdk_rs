@@ -17,9 +17,9 @@
  */
 
 use serde::{Deserialize, Serialize};
-use crate::types::generated::generated::balance::Balance;
-use crate::types::generated::generated::aggregated_fiat_balance::AggregatedFiatBalance;
 use crate::types::generated::generated::portfolio_balance_type::PortfolioBalanceType;
+use crate::types::generated::generated::aggregated_fiat_balance::AggregatedFiatBalance;
+use crate::types::generated::generated::balance::Balance;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GetPortfolioBalancesResponse {

@@ -21,6 +21,7 @@ pub mod balances;
 pub mod commission;
 pub mod invoices;
 pub mod onchain_address_groups;
+pub mod orders;
 pub mod payment_methods;
 pub mod portfolios;
 pub mod positions;
@@ -88,6 +89,8 @@ pub use transactions::{
     ListPortfolioTransactionsResponse, ListWalletTransactionsRequest,
     ListWalletTransactionsResponse, TransactionsService,
 };
+
+pub use orders::{CreateOrderRequest, OrderSide, OrderType, OrdersService, TimeInForceType};
 
 // Re-export SortDirection from generated types for convenience
 pub use crate::types::generated::generated::sort_direction::SortDirection;

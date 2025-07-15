@@ -17,9 +17,9 @@
  */
 
 use serde::{Deserialize, Serialize};
+use crate::types::generated::generated::paginated_response::PaginatedResponse;
 use crate::types::generated::generated::defi_balance::DefiBalance;
 use crate::types::generated::generated::web3_balance::Web3Balance;
-use crate::types::generated::generated::paginated_response::PaginatedResponse;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct ListWeb3WalletBalancesResponse {

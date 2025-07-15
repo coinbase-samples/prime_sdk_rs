@@ -18,8 +18,8 @@
 
 use serde::{Deserialize, Serialize};
 use crate::types::generated::generated::payment_method_destination::PaymentMethodDestination;
-use crate::types::generated::generated::blockchain_address::BlockchainAddress;
 use crate::types::generated::generated::destination_type::DestinationType;
+use crate::types::generated::generated::blockchain_address::BlockchainAddress;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CreateWalletWithdrawalRequest {

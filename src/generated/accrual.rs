@@ -17,9 +17,9 @@
  */
 
 use serde::{Deserialize, Serialize};
-use crate::types::generated::generated::rate_type::RateType;
-use crate::types::generated::generated::loan_type::LoanType;
 use crate::types::generated::generated::benchmark::Benchmark;
+use crate::types::generated::generated::loan_type::LoanType;
+use crate::types::generated::generated::rate_type::RateType;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Accrual {

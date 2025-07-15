@@ -17,9 +17,9 @@
  */
 
 use serde::{Deserialize, Serialize};
-use crate::types::generated::generated::wallet_visibility::WalletVisibility;
-use crate::types::generated::generated::wallet_type::WalletType;
 use crate::types::generated::generated::network::Network;
+use crate::types::generated::generated::wallet_type::WalletType;
+use crate::types::generated::generated::wallet_visibility::WalletVisibility;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Wallet {
