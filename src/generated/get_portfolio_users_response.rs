@@ -17,8 +17,8 @@
  */
 
 use serde::{Deserialize, Serialize};
-use crate::types::generated::generated::portfolio_user::PortfolioUser;
 use crate::types::generated::generated::paginated_response::PaginatedResponse;
+use crate::types::generated::generated::portfolio_user::PortfolioUser;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GetPortfolioUsersResponse {

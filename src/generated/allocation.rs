@@ -17,9 +17,9 @@
  */
 
 use serde::{Deserialize, Serialize};
-use crate::types::generated::generated::order_side::OrderSide;
 use crate::types::generated::generated::allocation_status::AllocationStatus;
 use crate::types::generated::generated::destination_alloc::DestinationAlloc;
+use crate::types::generated::generated::order_side::OrderSide;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Allocation {

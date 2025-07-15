@@ -17,14 +17,14 @@
  */
 
 use serde::{Deserialize, Serialize};
-use crate::types::generated::generated::prime_activity_type::PrimeActivityType;
-use crate::types::generated::generated::activity_metadata_account::ActivityMetadataAccount;
-use crate::types::generated::generated::user_action::UserAction;
-use crate::types::generated::generated::activity_status::ActivityStatus;
-use crate::types::generated::generated::activity_secondary_type::ActivitySecondaryType;
-use crate::types::generated::generated::activity_metadata_transactions::ActivityMetadataTransactions;
-use crate::types::generated::generated::hierarchy_type::HierarchyType;
 use crate::types::generated::generated::activity_category::ActivityCategory;
+use crate::types::generated::generated::activity_metadata_account::ActivityMetadataAccount;
+use crate::types::generated::generated::activity_metadata_transactions::ActivityMetadataTransactions;
+use crate::types::generated::generated::activity_secondary_type::ActivitySecondaryType;
+use crate::types::generated::generated::activity_status::ActivityStatus;
+use crate::types::generated::generated::hierarchy_type::HierarchyType;
+use crate::types::generated::generated::prime_activity_type::PrimeActivityType;
+use crate::types::generated::generated::user_action::UserAction;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Activity {

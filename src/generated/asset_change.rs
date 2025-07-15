@@ -17,9 +17,9 @@
  */
 
 use serde::{Deserialize, Serialize};
+use crate::types::generated::generated::asset_change_type::AssetChangeType;
 use crate::types::generated::generated::nft_collection::NftCollection;
 use crate::types::generated::generated::nft_item::NftItem;
-use crate::types::generated::generated::asset_change_type::AssetChangeType;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct AssetChange {

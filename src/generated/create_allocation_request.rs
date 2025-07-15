@@ -17,8 +17,8 @@
  */
 
 use serde::{Deserialize, Serialize};
-use crate::types::generated::generated::allocation_size_type::AllocationSizeType;
 use crate::types::generated::generated::allocation_leg::AllocationLeg;
+use crate::types::generated::generated::allocation_size_type::AllocationSizeType;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CreateAllocationRequest {

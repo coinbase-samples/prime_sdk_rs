@@ -720,12 +720,12 @@ fn build_use_statements(
     type_to_module: &HashMap<String, String>,
     defined_types: &HashSet<String>,
 ) -> String {
-    let mut use_statements = String::new();
+    let mut use_lines = Vec::new();
 
     for type_name in referenced_types {
         if !defined_types.contains(type_name) {
             if let Some(module) = type_to_module.get(type_name) {
-                use_statements.push_str(&format!(
+                use_lines.push(format!(
                     "use crate::types::generated::generated::{}::{};\n",
                     module, type_name
                 ));
@@ -733,7 +733,8 @@ fn build_use_statements(
         }
     }
 
-    use_statements
+    use_lines.sort();
+    use_lines.concat()
 }
 
 fn build_final_output(use_statements: &str, processed_content: &str) -> String {

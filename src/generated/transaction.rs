@@ -17,14 +17,14 @@
  */
 
 use serde::{Deserialize, Serialize};
-use crate::types::generated::generated::transaction_status::TransactionStatus;
-use crate::types::generated::generated::transfer_location::TransferLocation;
 use crate::types::generated::generated::asset_change::AssetChange;
+use crate::types::generated::generated::estimated_network_fees::EstimatedNetworkFees;
 use crate::types::generated::generated::network::Network;
 use crate::types::generated::generated::onchain_transaction_details::OnchainTransactionDetails;
-use crate::types::generated::generated::estimated_network_fees::EstimatedNetworkFees;
-use crate::types::generated::generated::transaction_type::TransactionType;
 use crate::types::generated::generated::transaction_metadata::TransactionMetadata;
+use crate::types::generated::generated::transaction_status::TransactionStatus;
+use crate::types::generated::generated::transaction_type::TransactionType;
+use crate::types::generated::generated::transfer_location::TransferLocation;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Transaction {

@@ -17,8 +17,8 @@
  */
 
 use serde::{Deserialize, Serialize};
-use crate::types::generated::generated::rfq_product_details::RfqProductDetails;
 use crate::types::generated::generated::product_permissions::ProductPermissions;
+use crate::types::generated::generated::rfq_product_details::RfqProductDetails;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Product {

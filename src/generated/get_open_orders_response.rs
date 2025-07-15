@@ -17,8 +17,8 @@
  */
 
 use serde::{Deserialize, Serialize};
-use crate::types::generated::generated::paginated_response::PaginatedResponse;
 use crate::types::generated::generated::order::Order;
+use crate::types::generated::generated::paginated_response::PaginatedResponse;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GetOpenOrdersResponse {

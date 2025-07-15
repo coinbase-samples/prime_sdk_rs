@@ -17,8 +17,8 @@
  */
 
 use serde::{Deserialize, Serialize};
-use crate::types::generated::generated::fcm_futures_sweep_status::FcmFuturesSweepStatus;
 use crate::types::generated::generated::fcm_futures_sweep_period_request_amount::FcmFuturesSweepPeriodRequestAmount;
+use crate::types::generated::generated::fcm_futures_sweep_status::FcmFuturesSweepStatus;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct FcmFuturesSweep {
