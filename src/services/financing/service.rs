@@ -22,6 +22,21 @@ use std::collections::HashMap;
 
 use super::types::*;
 
+use crate::types::generated::generated::{
+    create_new_locates_response::CreateNewLocatesResponse as GeneratedCreateNewLocatesResponse,
+    get_buying_power_response::GetBuyingPowerResponse as GeneratedGetBuyingPowerResponse,
+    get_existing_locates_response::GetExistingLocatesResponse as GeneratedGetExistingLocatesResponse,
+    get_interest_accruals_response::GetInterestAccrualsResponse as GeneratedGetInterestAccrualsResponse,
+    get_locate_availabilities_response::GetLocateAvailabilitiesResponse as GeneratedGetLocateAvailabilitiesResponse,
+    get_margin_conversions_response::GetMarginConversionsResponse as GeneratedGetMarginConversionsResponse,
+    get_margin_information_response::GetMarginInformationResponse as GeneratedGetMarginInformationResponse,
+    get_margin_summaries_response::GetMarginSummariesResponse as GeneratedGetMarginSummariesResponse,
+    get_portfolio_interest_accruals_response::GetPortfolioInterestAccrualsResponse as GeneratedGetPortfolioInterestAccrualsResponse,
+    get_post_trade_credit_response::GetPostTradeCreditResponse as GeneratedGetPostTradeCreditResponse,
+    get_tf_tiered_pricing_fees_response::GetTfTieredPricingFeesResponse as GeneratedGetTfTieredPricingFeesResponse,
+    get_withdrawal_power_response::GetWithdrawalPowerResponse as GeneratedGetWithdrawalPowerResponse,
+};
+
 /// Service for interacting with financing-related endpoints
 pub struct FinancingService {
     client: Box<dyn HttpClient>,
@@ -57,7 +72,7 @@ impl FinancingService {
             req = req.with_query_params(query_params);
         }
         let resp = self.client.execute(req).await?;
-        let response: crate::types::generated::generated::get_interest_accruals_response::GetInterestAccrualsResponse = resp.json().await?;
+        let response: GeneratedGetInterestAccrualsResponse = resp.json().await?;
         Ok(response.into())
     }
 
@@ -80,7 +95,7 @@ impl FinancingService {
             req = req.with_query_params(query_params);
         }
         let resp = self.client.execute(req).await?;
-        let response: crate::types::generated::generated::get_portfolio_interest_accruals_response::GetPortfolioInterestAccrualsResponse = resp.json().await?;
+        let response: GeneratedGetPortfolioInterestAccrualsResponse = resp.json().await?;
         Ok(response.into())
     }
 
@@ -103,7 +118,7 @@ impl FinancingService {
             req = req.with_query_params(query_params);
         }
         let resp = self.client.execute(req).await?;
-        let response: crate::types::generated::generated::get_margin_summaries_response::GetMarginSummariesResponse = resp.json().await?;
+        let response: GeneratedGetMarginSummariesResponse = resp.json().await?;
         Ok(response.into())
     }
 
@@ -126,7 +141,7 @@ impl FinancingService {
             req = req.with_query_params(query_params);
         }
         let resp = self.client.execute(req).await?;
-        let response: crate::types::generated::generated::get_locate_availabilities_response::GetLocateAvailabilitiesResponse = resp.json().await?;
+        let response: GeneratedGetLocateAvailabilitiesResponse = resp.json().await?;
         Ok(response.into())
     }
 
@@ -146,7 +161,7 @@ impl FinancingService {
             req = req.with_query_params(query_params);
         }
         let resp = self.client.execute(req).await?;
-        let response: crate::types::generated::generated::get_tf_tiered_pricing_fees_response::GetTfTieredPricingFeesResponse = resp.json().await?;
+        let response: GeneratedGetTfTieredPricingFeesResponse = resp.json().await?;
         Ok(response.into())
     }
 
@@ -159,7 +174,7 @@ impl FinancingService {
         let req = HttpRequest::new(HttpMethod::Get, &path)
             .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?;
         let resp = self.client.execute(req).await?;
-        let response: crate::types::generated::generated::get_margin_information_response::GetMarginInformationResponse = resp.json().await?;
+        let response: GeneratedGetMarginInformationResponse = resp.json().await?;
         Ok(response.into())
     }
 
@@ -176,7 +191,7 @@ impl FinancingService {
         query_params.insert("quote_currency".to_string(), request.quote_currency.clone());
         req = req.with_query_params(query_params);
         let resp = self.client.execute(req).await?;
-        let response: crate::types::generated::generated::get_buying_power_response::GetBuyingPowerResponse = resp.json().await?;
+        let response: GeneratedGetBuyingPowerResponse = resp.json().await?;
         Ok(response.into())
     }
 
@@ -189,7 +204,7 @@ impl FinancingService {
         let req = HttpRequest::new(HttpMethod::Get, &path)
             .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?;
         let resp = self.client.execute(req).await?;
-        let response: crate::types::generated::generated::get_post_trade_credit_response::GetPostTradeCreditResponse = resp.json().await?;
+        let response: GeneratedGetPostTradeCreditResponse = resp.json().await?;
         Ok(response.into())
     }
 
@@ -205,7 +220,7 @@ impl FinancingService {
         query_params.insert("symbol".to_string(), request.symbol.clone());
         req = req.with_query_params(query_params);
         let resp = self.client.execute(req).await?;
-        let response: crate::types::generated::generated::get_withdrawal_power_response::GetWithdrawalPowerResponse = resp.json().await?;
+        let response: GeneratedGetWithdrawalPowerResponse = resp.json().await?;
         Ok(response.into())
     }
 
@@ -230,7 +245,7 @@ impl FinancingService {
             req = req.with_query_params(query_params);
         }
         let resp = self.client.execute(req).await?;
-        let response: crate::types::generated::generated::get_existing_locates_response::GetExistingLocatesResponse = resp.json().await?;
+        let response: GeneratedGetExistingLocatesResponse = resp.json().await?;
         Ok(response.into())
     }
 
@@ -253,7 +268,7 @@ impl FinancingService {
             req = req.with_query_params(query_params);
         }
         let resp = self.client.execute(req).await?;
-        let response: crate::types::generated::generated::get_margin_conversions_response::GetMarginConversionsResponse = resp.json().await?;
+        let response: GeneratedGetMarginConversionsResponse = resp.json().await?;
         Ok(response.into())
     }
 
@@ -270,7 +285,7 @@ impl FinancingService {
             .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?
             .with_json_body(json_body);
         let resp = self.client.execute(req).await?;
-        let response: crate::types::generated::generated::create_new_locates_response::CreateNewLocatesResponse = resp.json().await?;
+        let response: GeneratedCreateNewLocatesResponse = resp.json().await?;
         Ok(response.into())
     }
 }

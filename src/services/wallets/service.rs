@@ -28,6 +28,17 @@ use super::types::{
     ListWalletsResponse,
 };
 
+use crate::types::generated::generated::{
+    blockchain_address::BlockchainAddress as GeneratedBlockchainAddress,
+    create_wallet_deposit_address_request::CreateWalletDepositAddressRequest as GeneratedCreateWalletDepositAddressRequest,
+    create_wallet_request::CreateWalletRequest as GeneratedCreateWalletRequest,
+    create_wallet_response::CreateWalletResponse as GeneratedCreateWalletResponse,
+    get_wallet_deposit_instructions_response::GetWalletDepositInstructionsResponse as GeneratedGetWalletDepositInstructionsResponse,
+    get_wallet_response::GetWalletResponse as GeneratedGetWalletResponse,
+    get_wallets_response::GetWalletsResponse as GeneratedGetWalletsResponse,
+    list_wallet_addresses_response::ListWalletAddressesResponse as GeneratedListWalletAddressesResponse,
+};
+
 /// Service for managing wallets
 pub struct WalletsService {
     client: Box<dyn HttpClient>,
@@ -64,8 +75,7 @@ impl WalletsService {
         }
 
         let resp = self.client.execute(req).await?;
-        let response: crate::types::generated::generated::get_wallets_response::GetWalletsResponse =
-            resp.json().await?;
+        let response: GeneratedGetWalletsResponse = resp.json().await?;
         Ok(response.into())
     }
 
@@ -81,8 +91,7 @@ impl WalletsService {
         let req = HttpRequest::new(HttpMethod::Get, &path)
             .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?;
         let resp = self.client.execute(req).await?;
-        let response: crate::types::generated::generated::get_wallet_response::GetWalletResponse =
-            resp.json().await?;
+        let response: GeneratedGetWalletResponse = resp.json().await?;
         Ok(response)
     }
 
@@ -93,7 +102,7 @@ impl WalletsService {
         request: CreateWalletRequest,
     ) -> crate::error::HttpResult<CreateWalletResponse> {
         let path = format!("portfolios/{}/wallets", portfolio_id);
-        let gen_req: crate::types::generated::generated::create_wallet_request::CreateWalletRequest = request.into();
+        let gen_req: GeneratedCreateWalletRequest = request.into();
         let req = HttpRequest::new(HttpMethod::Post, &path)
             .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?
             .with_json_body(
@@ -101,7 +110,7 @@ impl WalletsService {
                     .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?,
             );
         let resp = self.client.execute(req).await?;
-        let response: crate::types::generated::generated::create_wallet_response::CreateWalletResponse = resp.json().await?;
+        let response: GeneratedCreateWalletResponse = resp.json().await?;
         Ok(response.into())
     }
 
@@ -136,7 +145,7 @@ impl WalletsService {
         }
 
         let resp = self.client.execute(req).await?;
-        let response: crate::types::generated::generated::get_wallet_deposit_instructions_response::GetWalletDepositInstructionsResponse = resp.json().await?;
+        let response: GeneratedGetWalletDepositInstructionsResponse = resp.json().await?;
         Ok(response)
     }
 
@@ -163,7 +172,7 @@ impl WalletsService {
         }
         req = req.with_query_params(query_params);
         let resp = self.client.execute(req).await?;
-        let response: crate::types::generated::generated::list_wallet_addresses_response::ListWalletAddressesResponse = resp.json().await?;
+        let response: GeneratedListWalletAddressesResponse = resp.json().await?;
         Ok(response.into())
     }
 
@@ -176,7 +185,7 @@ impl WalletsService {
             "portfolios/{}/wallets/{}/addresses",
             request.portfolio_id, request.wallet_id
         );
-        let gen_req = crate::types::generated::generated::create_wallet_deposit_address_request::CreateWalletDepositAddressRequest {
+        let gen_req = GeneratedCreateWalletDepositAddressRequest {
             network_id: request.network_id.clone(),
         };
         let req = HttpRequest::new(HttpMethod::Post, &path)
@@ -186,8 +195,7 @@ impl WalletsService {
                     .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?,
             );
         let resp = self.client.execute(req).await?;
-        let response: crate::types::generated::generated::blockchain_address::BlockchainAddress =
-            resp.json().await?;
+        let response: GeneratedBlockchainAddress = resp.json().await?;
         Ok(response)
     }
 }

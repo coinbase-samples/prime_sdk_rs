@@ -17,14 +17,18 @@ use crate::client::PrimeClient;
 use crate::error::HttpResult;
 use crate::types::generated::generated::{
     accept_quote_request::AcceptQuoteRequest as GeneratedAcceptQuoteRequest,
+    accept_quote_response::AcceptQuoteResponse as GeneratedAcceptQuoteResponse,
+    cancel_order_response::CancelOrderResponse as GeneratedCancelOrderResponse,
     create_order_request::CreateOrderRequest as GeneratedCreateOrderRequest,
+    create_order_response::CreateOrderResponse as GeneratedCreateOrderResponse,
     get_open_orders_response::GetOpenOrdersResponse as GeneratedGetOpenOrdersResponse,
     get_order_fills_response::GetOrderFillsResponse as GeneratedGetOrderFillsResponse,
     get_order_response::GetOrderResponse as GeneratedGetOrderResponse,
     get_orders_response::GetOrdersResponse as GeneratedGetOrdersResponse,
     get_portfolio_fills_response::GetPortfolioFillsResponse as GeneratedGetPortfolioFillsResponse,
     order_preview_request::OrderPreviewRequest as GeneratedOrderPreviewRequest,
-    rfq::Rfq as GeneratedRfq,
+    post_order_preview_response::PostOrderPreviewResponse as GeneratedPostOrderPreviewResponse,
+    quote_response::QuoteResponse as GeneratedQuoteResponse, rfq::Rfq as GeneratedRfq,
 };
 use core_rs::http_client::HttpClient;
 use core_rs::http_method::HttpMethod;
@@ -214,7 +218,7 @@ impl OrdersService {
             .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?;
 
         let resp = self.client.execute(req).await?;
-        let response: crate::types::generated::generated::cancel_order_response::CancelOrderResponse = resp.json().await?;
+        let response: GeneratedCancelOrderResponse = resp.json().await?;
         Ok(response.into())
     }
 
@@ -231,7 +235,7 @@ impl OrdersService {
             .with_json_body(json_body);
 
         let resp = self.client.execute(req).await?;
-        let response: crate::types::generated::generated::create_order_response::CreateOrderResponse = resp.json().await?;
+        let response: GeneratedCreateOrderResponse = resp.json().await?;
         Ok(response.into())
     }
 
@@ -248,7 +252,7 @@ impl OrdersService {
             .with_json_body(json_body);
 
         let resp = self.client.execute(req).await?;
-        let response: crate::types::generated::generated::post_order_preview_response::PostOrderPreviewResponse = resp.json().await?;
+        let response: GeneratedPostOrderPreviewResponse = resp.json().await?;
         Ok(response.into())
     }
 
@@ -262,8 +266,7 @@ impl OrdersService {
             .with_json_body(json_body);
 
         let resp = self.client.execute(req).await?;
-        let response: crate::types::generated::generated::quote_response::QuoteResponse =
-            resp.json().await?;
+        let response: GeneratedQuoteResponse = resp.json().await?;
         Ok(response.into())
     }
 
@@ -279,7 +282,7 @@ impl OrdersService {
             .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?
             .with_json_body(json_body);
         let resp = self.client.execute(req).await?;
-        let response: crate::types::generated::generated::accept_quote_response::AcceptQuoteResponse = resp.json().await?;
+        let response: GeneratedAcceptQuoteResponse = resp.json().await?;
         Ok(response.into())
     }
 }

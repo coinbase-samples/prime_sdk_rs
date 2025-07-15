@@ -22,6 +22,11 @@ use crate::error::HttpResult;
 use core_rs::http_client::HttpClient;
 use core_rs::http_method::HttpMethod;
 use core_rs::http_request::HttpRequest;
+use crate::types::generated::generated::{
+    activity_creation_response::ActivityCreationResponse as GeneratedActivityCreationResponse,
+    change_onchain_address_group_request_is_a_request_to_create_or_update_a_new_onchain_address_group::ChangeOnchainAddressGroupRequestIsARequestToCreateOrUpdateANewOnchainAddressGroup as GeneratedChangeOnchainAddressGroupRequest,
+    list_onchain_address_groups_response::ListOnchainAddressGroupsResponse as GeneratedListOnchainAddressGroupsResponse,
+};
 
 pub struct OnchainAddressGroupsService {
     client: Box<dyn HttpClient>,
@@ -40,7 +45,7 @@ impl OnchainAddressGroupsService {
         request: CreateOnchainAddressGroupRequest,
     ) -> HttpResult<ActivityCreationResponse> {
         let path = format!("portfolios/{}/onchain_address_group", request.portfolio_id);
-        let body = crate::types::generated::generated::change_onchain_address_group_request_is_a_request_to_create_or_update_a_new_onchain_address_group::ChangeOnchainAddressGroupRequestIsARequestToCreateOrUpdateANewOnchainAddressGroup::new(request.address_group);
+        let body = GeneratedChangeOnchainAddressGroupRequest::new(request.address_group);
         let req = HttpRequest::new(HttpMethod::Post, &path)
             .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?
             .with_json_body(
@@ -48,7 +53,7 @@ impl OnchainAddressGroupsService {
                     .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?,
             );
         let resp = self.client.execute(req).await?;
-        let response: crate::types::generated::generated::activity_creation_response::ActivityCreationResponse = resp.json().await?;
+        let response: GeneratedActivityCreationResponse = resp.json().await?;
         Ok(response.into())
     }
 
@@ -58,7 +63,7 @@ impl OnchainAddressGroupsService {
         request: super::types::UpdateOnchainAddressGroupRequest,
     ) -> HttpResult<super::types::ActivityCreationResponse> {
         let path = format!("portfolios/{}/onchain_address_group", request.portfolio_id);
-        let body = crate::types::generated::generated::change_onchain_address_group_request_is_a_request_to_create_or_update_a_new_onchain_address_group::ChangeOnchainAddressGroupRequestIsARequestToCreateOrUpdateANewOnchainAddressGroup::new(request.address_group);
+        let body = GeneratedChangeOnchainAddressGroupRequest::new(request.address_group);
         let req = HttpRequest::new(HttpMethod::Put, &path)
             .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?
             .with_json_body(
@@ -66,7 +71,7 @@ impl OnchainAddressGroupsService {
                     .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?,
             );
         let resp = self.client.execute(req).await?;
-        let response: crate::types::generated::generated::activity_creation_response::ActivityCreationResponse = resp.json().await?;
+        let response: GeneratedActivityCreationResponse = resp.json().await?;
         Ok(response.into())
     }
 
@@ -82,7 +87,7 @@ impl OnchainAddressGroupsService {
         let req = HttpRequest::new(HttpMethod::Delete, &path)
             .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?;
         let resp = self.client.execute(req).await?;
-        let response: crate::types::generated::generated::activity_creation_response::ActivityCreationResponse = resp.json().await?;
+        let response: GeneratedActivityCreationResponse = resp.json().await?;
         Ok(response.into())
     }
 
@@ -95,7 +100,7 @@ impl OnchainAddressGroupsService {
         let req = HttpRequest::new(HttpMethod::Get, &path)
             .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?;
         let resp = self.client.execute(req).await?;
-        let response: crate::types::generated::generated::list_onchain_address_groups_response::ListOnchainAddressGroupsResponse = resp.json().await?;
+        let response: GeneratedListOnchainAddressGroupsResponse = resp.json().await?;
         Ok(response.into())
     }
 }

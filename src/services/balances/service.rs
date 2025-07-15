@@ -17,7 +17,9 @@ use crate::client::PrimeClient;
 use crate::constants::DEFAULT_LIMIT;
 use crate::types::generated::generated::{
     get_portfolio_balances_response::GetPortfolioBalancesResponse,
+    get_wallet_balance_response::GetWalletBalanceResponse as GeneratedGetWalletBalanceResponse,
     list_entity_balances_response::ListEntityBalancesResponse as GeneratedListEntityBalancesResponse,
+    list_web3_wallet_balances_response::ListWeb3WalletBalancesResponse as GeneratedListWeb3WalletBalancesResponse,
 };
 use crate::utils::PaginationParams;
 use core_rs::http_client::HttpClient;
@@ -147,7 +149,7 @@ impl BalancesService {
             .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?;
 
         let resp = self.client.execute(req).await?;
-        let response: crate::types::generated::generated::get_wallet_balance_response::GetWalletBalanceResponse = resp.json().await?;
+        let response: GeneratedGetWalletBalanceResponse = resp.json().await?;
         Ok(response.into())
     }
 
@@ -191,7 +193,7 @@ impl BalancesService {
         }
 
         let resp = self.client.execute(req).await?;
-        let response: crate::types::generated::generated::list_web3_wallet_balances_response::ListWeb3WalletBalancesResponse = resp.json().await?;
+        let response: GeneratedListWeb3WalletBalancesResponse = resp.json().await?;
         Ok(response.into())
     }
 }

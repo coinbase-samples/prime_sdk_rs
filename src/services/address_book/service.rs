@@ -16,6 +16,7 @@
 use crate::client::PrimeClient;
 use crate::constants::DEFAULT_LIMIT;
 use crate::types::generated::generated::{
+    create_portfolio_address_book_entry_request::CreatePortfolioAddressBookEntryRequest as GeneratedCreatePortfolioAddressBookEntryRequest,
     create_portfolio_address_book_entry_response::CreatePortfolioAddressBookEntryResponse,
     get_portfolio_address_book_response::GetPortfolioAddressBookResponse,
 };
@@ -96,7 +97,7 @@ impl AddressBookService {
         let path = format!("portfolios/{}/address_book", request.portfolio_id);
 
         // Create the actual API request body
-        let request_body = crate::types::generated::generated::create_portfolio_address_book_entry_request::CreatePortfolioAddressBookEntryRequest {
+        let request_body = GeneratedCreatePortfolioAddressBookEntryRequest {
             address: request.address,
             currency_symbol: request.currency_symbol,
             name: request.name,

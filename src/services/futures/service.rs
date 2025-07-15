@@ -16,6 +16,7 @@
 use crate::client::PrimeClient;
 use crate::error::HttpResult;
 use crate::types::generated::generated::{
+    cancel_futures_sweep_response::CancelFuturesSweepResponse as GeneratedCancelFuturesSweepResponse,
     get_fcm_balance_response::GetFcmBalanceResponse as GeneratedGetFcmBalanceResponse,
     get_futures_sweeps_response::GetFuturesSweepsResponse as GeneratedGetFuturesSweepsResponse,
     get_positions_response::GetPositionsResponse as GeneratedGetPositionsResponse,
@@ -133,7 +134,7 @@ impl FuturesService {
         let req = HttpRequest::new(HttpMethod::Delete, &path)
             .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?;
         let resp = self.client.execute(req).await?;
-        let response: crate::types::generated::generated::cancel_futures_sweep_response::CancelFuturesSweepResponse = resp.json().await?;
+        let response: GeneratedCancelFuturesSweepResponse = resp.json().await?;
         Ok(response.into())
     }
 }
