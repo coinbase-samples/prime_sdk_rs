@@ -49,7 +49,7 @@ impl OnchainAddressGroupsService {
             );
         let resp = self.client.execute(req).await?;
         let response: crate::types::generated::generated::activity_creation_response::ActivityCreationResponse = resp.json().await?;
-        Ok(ActivityCreationResponse::from(response))
+        Ok(response.into())
     }
 
     // Update Onchain Address Group
@@ -67,7 +67,7 @@ impl OnchainAddressGroupsService {
             );
         let resp = self.client.execute(req).await?;
         let response: crate::types::generated::generated::activity_creation_response::ActivityCreationResponse = resp.json().await?;
-        Ok(super::types::ActivityCreationResponse::from(response))
+        Ok(response.into())
     }
 
     // Delete Onchain Address Group
@@ -83,7 +83,7 @@ impl OnchainAddressGroupsService {
             .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?;
         let resp = self.client.execute(req).await?;
         let response: crate::types::generated::generated::activity_creation_response::ActivityCreationResponse = resp.json().await?;
-        Ok(super::types::ActivityCreationResponse::from(response))
+        Ok(response.into())
     }
 
     // List Onchain Address Groups
@@ -96,6 +96,6 @@ impl OnchainAddressGroupsService {
             .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?;
         let resp = self.client.execute(req).await?;
         let response: crate::types::generated::generated::list_onchain_address_groups_response::ListOnchainAddressGroupsResponse = resp.json().await?;
-        Ok(ListOnchainAddressGroupsResponse::from(response))
+        Ok(response.into())
     }
 }

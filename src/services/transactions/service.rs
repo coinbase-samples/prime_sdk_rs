@@ -88,7 +88,7 @@ impl TransactionsService {
         }
         let resp = self.client.execute(req).await?;
         let response: GeneratedGetPortfolioTransactionsResponse = resp.json().await?;
-        Ok(ListPortfolioTransactionsResponse::from(response))
+        Ok(response.into())
     }
 
     /// Get a transaction by ID
@@ -143,7 +143,7 @@ impl TransactionsService {
         }
         let resp = self.client.execute(req).await?;
         let response: GeneratedGetWalletTransactionsResponse = resp.json().await?;
-        Ok(ListWalletTransactionsResponse::from(response))
+        Ok(response.into())
     }
 
     pub async fn create_onchain_transaction(

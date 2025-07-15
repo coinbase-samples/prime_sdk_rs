@@ -24,7 +24,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("📋 Submitting get_fcm_balance request: {:#?}", request);
     match futures_service.get_fcm_balance(request).await {
         Ok(response) => {
-            println!("✅ FCM Balance response: {:#?}", response.inner);
+            println!("✅ FCM Balance response: {:#?}", response);
         }
         Err(e) => {
             eprintln!("❌ Failed to get FCM balance: {}", e);

@@ -34,7 +34,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("📋 Submitting set_auto_sweep request: {:#?}", request);
     match futures_service.set_auto_sweep(request).await {
         Ok(response) => {
-            println!("✅ Set auto sweep response: {:#?}", response.inner);
+            println!("✅ Set auto sweep response: {:#?}", response);
         }
         Err(e) => {
             eprintln!("❌ Failed to set auto sweep: {}", e);

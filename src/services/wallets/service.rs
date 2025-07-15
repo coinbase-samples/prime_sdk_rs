@@ -102,7 +102,7 @@ impl WalletsService {
             );
         let resp = self.client.execute(req).await?;
         let response: crate::types::generated::generated::create_wallet_response::CreateWalletResponse = resp.json().await?;
-        Ok(CreateWalletResponse::from(response))
+        Ok(response.into())
     }
 
     /// Get deposit instructions for a wallet

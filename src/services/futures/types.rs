@@ -137,73 +137,94 @@ impl CancelFuturesSweepRequest {
 
 #[derive(Debug, Clone)]
 pub struct GetFcmBalanceResponse {
-    pub inner: GeneratedGetFcmBalanceResponse,
+    pub portfolio_id: Option<String>,
+    pub cfm_usd_balance: Option<String>,
+    pub unrealized_pnl: Option<String>,
+    pub daily_realized_pnl: Option<String>,
+    pub excess_liquidity: Option<String>,
+    pub futures_buying_power: Option<String>,
+    pub initial_margin: Option<String>,
+    pub maintenance_margin: Option<String>,
+    pub clearing_account_id: Option<String>,
 }
 impl From<GeneratedGetFcmBalanceResponse> for GetFcmBalanceResponse {
-    fn from(inner: GeneratedGetFcmBalanceResponse) -> Self {
-        Self { inner }
+    fn from(g: GeneratedGetFcmBalanceResponse) -> Self {
+        Self {
+            portfolio_id: g.portfolio_id,
+            cfm_usd_balance: g.cfm_usd_balance,
+            unrealized_pnl: g.unrealized_pnl,
+            daily_realized_pnl: g.daily_realized_pnl,
+            excess_liquidity: g.excess_liquidity,
+            futures_buying_power: g.futures_buying_power,
+            initial_margin: g.initial_margin,
+            maintenance_margin: g.maintenance_margin,
+            clearing_account_id: g.clearing_account_id,
+        }
     }
 }
 
 #[derive(Debug, Clone)]
 pub struct GetPositionsResponse {
-    pub inner: GeneratedGetPositionsResponse,
+    pub positions: Vec<FcmPosition>,
+    pub clearing_account_id: Option<String>,
 }
 impl From<GeneratedGetPositionsResponse> for GetPositionsResponse {
-    fn from(inner: GeneratedGetPositionsResponse) -> Self {
-        Self { inner }
-    }
-}
-impl GetPositionsResponse {
-    pub fn positions(&self) -> &[FcmPosition] {
-        self.inner.positions.as_deref().unwrap_or(&[])
+    fn from(g: GeneratedGetPositionsResponse) -> Self {
+        Self {
+            positions: g.positions.unwrap_or_default(),
+            clearing_account_id: g.clearing_account_id,
+        }
     }
 }
 
 #[derive(Debug, Clone)]
 pub struct GetFuturesSweepsResponse {
-    pub inner: GeneratedGetFuturesSweepsResponse,
+    pub sweeps: Vec<FcmFuturesSweep>,
+    pub auto_sweep: Option<bool>,
 }
 impl From<GeneratedGetFuturesSweepsResponse> for GetFuturesSweepsResponse {
-    fn from(inner: GeneratedGetFuturesSweepsResponse) -> Self {
-        Self { inner }
-    }
-}
-impl GetFuturesSweepsResponse {
-    pub fn sweeps(&self) -> &[FcmFuturesSweep] {
-        self.inner.sweeps.as_deref().unwrap_or(&[])
-    }
-    pub fn auto_sweep(&self) -> Option<bool> {
-        self.inner.auto_sweep
+    fn from(g: GeneratedGetFuturesSweepsResponse) -> Self {
+        Self {
+            sweeps: g.sweeps.unwrap_or_default(),
+            auto_sweep: g.auto_sweep,
+        }
     }
 }
 
 #[derive(Debug, Clone)]
 pub struct SetAutoSweepResponse {
-    pub inner: GeneratedSetAutoSweepResponse,
+    pub success: Option<bool>,
 }
 impl From<GeneratedSetAutoSweepResponse> for SetAutoSweepResponse {
-    fn from(inner: GeneratedSetAutoSweepResponse) -> Self {
-        Self { inner }
+    fn from(g: GeneratedSetAutoSweepResponse) -> Self {
+        Self { success: g.success }
     }
 }
 
 #[derive(Debug, Clone)]
 pub struct ScheduleFuturesSweepResponse {
-    pub inner: GeneratedScheduleFuturesSweepResponse,
+    pub success: Option<bool>,
+    pub request_id: Option<String>,
 }
 impl From<GeneratedScheduleFuturesSweepResponse> for ScheduleFuturesSweepResponse {
-    fn from(inner: GeneratedScheduleFuturesSweepResponse) -> Self {
-        Self { inner }
+    fn from(g: GeneratedScheduleFuturesSweepResponse) -> Self {
+        Self {
+            success: g.success,
+            request_id: g.request_id,
+        }
     }
 }
 
 #[derive(Debug, Clone)]
 pub struct CancelFuturesSweepResponse {
-    pub inner: crate::types::generated::generated::cancel_futures_sweep_response::CancelFuturesSweepResponse,
+    pub success: Option<bool>,
+    pub request_id: Option<String>,
 }
 impl From<crate::types::generated::generated::cancel_futures_sweep_response::CancelFuturesSweepResponse> for CancelFuturesSweepResponse {
-    fn from(inner: crate::types::generated::generated::cancel_futures_sweep_response::CancelFuturesSweepResponse) -> Self {
-        Self { inner }
+    fn from(g: crate::types::generated::generated::cancel_futures_sweep_response::CancelFuturesSweepResponse) -> Self {
+        Self {
+            success: g.success,
+            request_id: g.request_id,
+        }
     }
 }

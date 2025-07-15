@@ -43,7 +43,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     );
     match futures_service.schedule_futures_sweep(request).await {
         Ok(response) => {
-            println!("✅ Schedule futures sweep response: {:#?}", response.inner);
+            println!("✅ Schedule futures sweep response: {:#?}", response);
         }
         Err(e) => {
             eprintln!("❌ Failed to schedule futures sweep: {}", e);

@@ -19,6 +19,7 @@ pub mod allocations;
 pub mod assets;
 pub mod balances;
 pub mod commission;
+pub mod financing;
 pub mod futures;
 pub mod invoices;
 pub mod onchain_address_groups;
@@ -41,6 +42,12 @@ pub use address_book::{
     GetAddressBookResponse, ListAddressBookRequest, ListAddressBookResponse,
 };
 
+pub use allocations::{
+    AllocationService, GetAllocationRequest, GetAllocationResponse,
+    ListAllocationsByClientNettingIdRequest, ListAllocationsByClientNettingIdResponse,
+    ListPortfolioAllocationsRequest, ListPortfolioAllocationsResponse,
+};
+
 pub use assets::{AssetsService, ListEntityAssetsRequest, ListEntityAssetsResponse};
 
 pub use balances::{
@@ -53,7 +60,33 @@ pub use commission::{
     CommissionService, GetPortfolioCommissionRequest, GetPortfolioCommissionResponse,
 };
 
-pub use products::{ListPortfolioProductsRequest, ListPortfolioProductsResponse, ProductsService};
+pub use financing::{
+    CreateNewLocatesRequest, CreateNewLocatesResponse, FinancingService, GetBuyingPowerRequest,
+    GetBuyingPowerResponse, GetMarginInformationRequest, GetMarginInformationResponse,
+    GetPostTradeCreditRequest, GetPostTradeCreditResponse, GetWithdrawalPowerRequest,
+    GetWithdrawalPowerResponse, ListExistingLocatesRequest, ListExistingLocatesResponse,
+    ListInterestAccrualsRequest, ListInterestAccrualsResponse, ListLocateAvailabilitiesRequest,
+    ListLocateAvailabilitiesResponse, ListMarginConversionsRequest, ListMarginConversionsResponse,
+    ListMarginSummariesRequest, ListMarginSummariesResponse, ListPortfolioInterestAccrualsRequest,
+    ListPortfolioInterestAccrualsResponse, ListTFTieredPricingFeesRequest,
+    ListTFTieredPricingFeesResponse,
+};
+
+pub use futures::{
+    FuturesService, GetFcmBalanceRequest, GetFcmBalanceResponse, GetFuturesSweepsRequest,
+    GetFuturesSweepsResponse, GetPositionsRequest, GetPositionsResponse,
+};
+
+pub use invoices::{InvoiceService, ListInvoicesRequest, ListInvoicesResponse};
+
+pub use onchain_address_groups::*;
+
+pub use orders::{CreateOrderRequest, OrderSide, OrderType, OrdersService, TimeInForceType};
+
+pub use payment_methods::{
+    GetEntityPaymentMethodDetailsRequest, GetEntityPaymentMethodDetailsResponse,
+    ListEntityPaymentMethodsRequest, ListEntityPaymentMethodsResponse, PaymentMethodsService,
+};
 
 pub use portfolios::{GetPortfolioResponse, ListPortfoliosResponse, Portfolio, PortfoliosService};
 
@@ -61,29 +94,7 @@ pub use positions::{
     ListAggregateEntityPositionsResponse, ListEntityPositionsResponse, PositionsService,
 };
 
-pub use payment_methods::{
-    GetEntityPaymentMethodDetailsRequest, GetEntityPaymentMethodDetailsResponse,
-    ListEntityPaymentMethodsRequest, ListEntityPaymentMethodsResponse, PaymentMethodsService,
-};
-
-pub use users::{
-    ListEntityUsersRequest, ListEntityUsersResponse, ListPortfolioUsersRequest,
-    ListPortfolioUsersResponse, UsersService,
-};
-
-pub use invoices::{InvoiceService, ListInvoicesRequest, ListInvoicesResponse};
-
-pub use allocations::{
-    AllocationService, GetAllocationRequest, GetAllocationResponse,
-    ListAllocationsByClientNettingIdRequest, ListAllocationsByClientNettingIdResponse,
-    ListPortfolioAllocationsRequest, ListPortfolioAllocationsResponse,
-};
-
-pub use wallets::{
-    CreateWalletRequest, CreateWalletResponse, GetWalletDepositInstructionsRequest,
-    GetWalletDepositInstructionsResponse, GetWalletRequest, GetWalletResponse, ListWalletsRequest,
-    ListWalletsResponse, WalletsService,
-};
+pub use products::{ListPortfolioProductsRequest, ListPortfolioProductsResponse, ProductsService};
 
 pub use transactions::{
     GetTransactionRequest, GetTransactionResponse, ListPortfolioTransactionsRequest,
@@ -91,11 +102,15 @@ pub use transactions::{
     ListWalletTransactionsResponse, TransactionsService,
 };
 
-pub use orders::{CreateOrderRequest, OrderSide, OrderType, OrdersService, TimeInForceType};
+pub use users::{
+    ListEntityUsersRequest, ListEntityUsersResponse, ListPortfolioUsersRequest,
+    ListPortfolioUsersResponse, UsersService,
+};
 
-pub use futures::{
-    FuturesService, GetFcmBalanceRequest, GetFcmBalanceResponse, GetFuturesSweepsRequest,
-    GetFuturesSweepsResponse, GetPositionsRequest, GetPositionsResponse,
+pub use wallets::{
+    CreateWalletRequest, CreateWalletResponse, GetWalletDepositInstructionsRequest,
+    GetWalletDepositInstructionsResponse, GetWalletRequest, GetWalletResponse, ListWalletsRequest,
+    ListWalletsResponse, WalletsService,
 };
 
 // Re-export SortDirection from generated types for convenience
