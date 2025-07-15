@@ -1,10 +1,10 @@
-# prime_rs_sdk
+# prime_sdk_rs
 
 A Rust SDK for interacting with the Coinbase Prime REST APIs, built on top of the `core_rs` library.
 
 ## Overview
 
-The `prime_rs_sdk` crate provides a high-level, type-safe, and async interface for Coinbase Prime APIs. It includes generated types and services for all major API endpoints, as well as example programs to help you get started.
+The `prime_sdk_rs` crate provides a high-level, type-safe, and async interface for Coinbase Prime APIs. It includes generated types and services for all major API endpoints, as well as example programs to help you get started.
 
 ## Features
 
@@ -18,8 +18,8 @@ The `prime_rs_sdk` crate provides a high-level, type-safe, and async interface f
 ### 1. Clone the Repository
 
 ```sh
-git clone git@github.com:coinbase-samples/prime_rs_sdk.git
-cd prime_rs_sdk
+git clone git@github.com:coinbase-samples/prime_sdk_rs.git
+cd prime_sdk_rs
 ```
 
 ### 2. Environment Variables

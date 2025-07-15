@@ -1,10 +1,10 @@
-use prime_rs_sdk::client::PrimeClient;
-use prime_rs_sdk::services::onchain_address_groups::{
+use prime_sdk_rs::client::PrimeClient;
+use prime_sdk_rs::services::onchain_address_groups::{
     types::CreateOnchainAddressGroupRequest, OnchainAddressGroupsService,
 };
-use prime_rs_sdk::types::generated::generated::address_entry::AddressEntry;
-use prime_rs_sdk::types::generated::generated::address_group::AddressGroup;
-use prime_rs_sdk::types::generated::generated::network_type::NetworkType;
+use prime_sdk_rs::types::generated::generated::address_entry::AddressEntry;
+use prime_sdk_rs::types::generated::generated::address_group::AddressGroup;
+use prime_sdk_rs::types::generated::generated::network_type::NetworkType;
 use std::env;
 
 /// Usage:

@@ -1,6 +1,6 @@
-use prime_rs_sdk::orders::{OrderPreviewRequest, OrdersService};
-use prime_rs_sdk::services::orders::{OrderSide, OrderType, TimeInForceType};
-use prime_rs_sdk::PrimeClient;
+use prime_sdk_rs::orders::{OrderPreviewRequest, OrdersService};
+use prime_sdk_rs::services::orders::{OrderSide, OrderType, TimeInForceType};
+use prime_sdk_rs::PrimeClient;
 use std::env;
 use time::{Duration, OffsetDateTime};
 use time_tz::timezones::get_by_name;

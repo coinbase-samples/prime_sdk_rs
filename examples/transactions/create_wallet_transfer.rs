@@ -1,7 +1,7 @@
 use dotenv;
 use env_logger;
-use prime_rs_sdk::client::PrimeClient;
-use prime_rs_sdk::services::transactions::{CreateWalletTransferRequest, TransactionsService};
+use prime_sdk_rs::client::PrimeClient;
+use prime_sdk_rs::services::transactions::{CreateWalletTransferRequest, TransactionsService};
 use std::env;
 use tokio;
 use uuid::Uuid;

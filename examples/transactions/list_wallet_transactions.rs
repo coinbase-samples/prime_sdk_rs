@@ -1,5 +1,5 @@
-use prime_rs_sdk::services::{ListWalletTransactionsRequest, TransactionsService};
-use prime_rs_sdk::PrimeClient;
+use prime_sdk_rs::services::{ListWalletTransactionsRequest, TransactionsService};
+use prime_sdk_rs::PrimeClient;
 use std::env;
 
 /// Usage:

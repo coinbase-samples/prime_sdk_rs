@@ -59,7 +59,7 @@ name = "$FILE_NAME"
 path = "$(pwd)/$RUST_FILE"
 
 [dependencies]
-prime_rs_sdk = { path = "$(pwd)" }
+prime_sdk_rs = { path = "$(pwd)" }
 core_rs = { path = "$(pwd)/../core_rs" }
 tokio = { version = "1", features = ["full"] }
 serde = { version = "1", features = ["derive"] }

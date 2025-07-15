@@ -31,7 +31,7 @@ use std::sync::Arc;
 /// # Example
 ///
 /// ```rust
-/// use prime_rs_sdk::client::PrimeClient;
+/// use prime_sdk_rs::client::PrimeClient;
 ///
 /// #[tokio::main]
 /// async fn main() -> Result<(), Box<dyn std::error::Error>> {

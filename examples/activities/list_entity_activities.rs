@@ -1,4 +1,4 @@
-use prime_rs_sdk::{
+use prime_sdk_rs::{
     services::{ActivitiesService, ListEntityActivitiesRequest, SortDirection},
     utils::PaginatedList,
     PrimeClient,

@@ -1,4 +1,4 @@
-use prime_rs_sdk::{
+use prime_sdk_rs::{
     client::PrimeClient,
     services::orders::{GetOrderRequest, OrdersService},
 };

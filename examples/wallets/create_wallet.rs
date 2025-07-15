@@ -1,6 +1,6 @@
-use prime_rs_sdk::services::{CreateWalletRequest, WalletsService};
-use prime_rs_sdk::types::generated::generated::wallet_type::WalletType;
-use prime_rs_sdk::PrimeClient;
+use prime_sdk_rs::services::{CreateWalletRequest, WalletsService};
+use prime_sdk_rs::types::generated::generated::wallet_type::WalletType;
+use prime_sdk_rs::PrimeClient;
 use std::env;
 use uuid::Uuid;
 

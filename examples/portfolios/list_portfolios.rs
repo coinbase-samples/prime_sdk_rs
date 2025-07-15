@@ -1,4 +1,4 @@
-use prime_rs_sdk::{services::portfolios::PortfoliosService, PrimeClient};
+use prime_sdk_rs::{services::portfolios::PortfoliosService, PrimeClient};
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {

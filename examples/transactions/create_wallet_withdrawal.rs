@@ -1,8 +1,8 @@
 use dotenv;
 use env_logger;
-use prime_rs_sdk::client::PrimeClient;
-use prime_rs_sdk::services::transactions::{CreateWalletWithdrawalRequest, TransactionsService};
-use prime_rs_sdk::types::generated::generated::{
+use prime_sdk_rs::client::PrimeClient;
+use prime_sdk_rs::services::transactions::{CreateWalletWithdrawalRequest, TransactionsService};
+use prime_sdk_rs::types::generated::generated::{
     blockchain_address::BlockchainAddress, destination_type::DestinationType,
 };
 use std::env;

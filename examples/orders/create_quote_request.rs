@@ -1,6 +1,6 @@
-use prime_rs_sdk::orders::{OrdersService, RfqRequest};
-use prime_rs_sdk::services::orders::OrderSide;
-use prime_rs_sdk::PrimeClient;
+use prime_sdk_rs::orders::{OrdersService, RfqRequest};
+use prime_sdk_rs::services::orders::OrderSide;
+use prime_sdk_rs::PrimeClient;
 use std::env;
 use uuid::Uuid;
 

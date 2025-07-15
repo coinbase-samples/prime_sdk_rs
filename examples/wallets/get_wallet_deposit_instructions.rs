@@ -1,5 +1,5 @@
-use prime_rs_sdk::services::{GetWalletDepositInstructionsRequest, WalletsService};
-use prime_rs_sdk::PrimeClient;
+use prime_sdk_rs::services::{GetWalletDepositInstructionsRequest, WalletsService};
+use prime_sdk_rs::PrimeClient;
 use std::env;
 
 /// Usage:
@@ -30,7 +30,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let network_type = args.next();
 
     let deposit_type_enum = deposit_type.as_deref().and_then(|dt| {
-        use prime_rs_sdk::types::generated::generated::wallet_deposit_instruction_type::WalletDepositInstructionType;
+        use prime_sdk_rs::types::generated::generated::wallet_deposit_instruction_type::WalletDepositInstructionType;
         match dt.to_uppercase().as_str() {
             "CRYPTO" => Some(WalletDepositInstructionType::Crypto),
             "WIRE" => Some(WalletDepositInstructionType::Wire),

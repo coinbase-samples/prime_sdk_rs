@@ -1,5 +1,5 @@
-use prime_rs_sdk::client::PrimeClient;
-use prime_rs_sdk::services::onchain_address_groups::{
+use prime_sdk_rs::client::PrimeClient;
+use prime_sdk_rs::services::onchain_address_groups::{
     types::DeleteOnchainAddressGroupRequest, OnchainAddressGroupsService,
 };
 use std::env;

@@ -1,4 +1,4 @@
-use prime_rs_sdk::{
+use prime_sdk_rs::{
     client::PrimeClient,
     services::address_book::{AddressBookService, ListAddressBookRequest},
     utils::PaginatedList,

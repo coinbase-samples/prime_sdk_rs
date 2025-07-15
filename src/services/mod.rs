@@ -19,6 +19,7 @@ pub mod allocations;
 pub mod assets;
 pub mod balances;
 pub mod commission;
+pub mod futures;
 pub mod invoices;
 pub mod onchain_address_groups;
 pub mod orders;
@@ -91,6 +92,11 @@ pub use transactions::{
 };
 
 pub use orders::{CreateOrderRequest, OrderSide, OrderType, OrdersService, TimeInForceType};
+
+pub use futures::{
+    FuturesService, GetFcmBalanceRequest, GetFcmBalanceResponse, GetFuturesSweepsRequest,
+    GetFuturesSweepsResponse, GetPositionsRequest, GetPositionsResponse,
+};
 
 // Re-export SortDirection from generated types for convenience
 pub use crate::types::generated::generated::sort_direction::SortDirection;

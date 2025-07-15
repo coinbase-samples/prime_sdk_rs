@@ -5,8 +5,8 @@
 /// Required env vars: PORTFOLIO_ID, WALLET_ID
 use dotenv;
 use env_logger;
-use prime_rs_sdk::client::PrimeClient;
-use prime_rs_sdk::services::transactions::{CreateConversionRequest, TransactionsService};
+use prime_sdk_rs::client::PrimeClient;
+use prime_sdk_rs::services::transactions::{CreateConversionRequest, TransactionsService};
 use std::env;
 use tokio;
 use uuid::Uuid;

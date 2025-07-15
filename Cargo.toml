@@ -1,5 +1,5 @@
 [package]
-name = "prime_rs_sdk"
+name = "prime_sdk_rs"
 version = "0.1.0"
 edition = "2021"
 license = "Apache-2.0"
