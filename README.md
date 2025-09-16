@@ -13,6 +13,23 @@ The `prime_sdk_rs` crate provides a high-level, type-safe, and async interface f
 - Credential and authentication management
 - Example programs for common API operations
 
+## Installation
+
+### From crates.io (Recommended)
+
+Add the library to your project using Cargo:
+
+```sh
+cargo add prime_sdk_rs
+```
+
+Or add it manually to your `Cargo.toml`:
+
+```toml
+[dependencies]
+prime_sdk_rs = "0.1.0"
+```
+
 ## Setup
 
 ### 1. Clone the Repository
