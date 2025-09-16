@@ -4,6 +4,10 @@ version = "0.1.0"
 edition = "2021"
 license = "Apache-2.0"
 build = "build.rs"
+description = "A library to help call Coinbase Prime Api"
+readme = "README.md"
+repository = "https://github.com/coinbase-samples/prime_sdk_rs"
+exclude = ["examples/"]
 
 [dependencies]
 core_rs = { path = "../core_rs" }
