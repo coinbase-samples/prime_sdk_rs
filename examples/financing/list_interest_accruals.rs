@@ -1,3 +1,20 @@
+/**
+ * Copyright 2025-present Coinbase Global, Inc.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+// #docs operationId: PrimeRESTAPI_GetInterestAccruals
+// #docs operationName: List Interest Accruals
 use prime_sdk_rs::{
     client::PrimeClient,
     services::financing::{FinancingService, ListInterestAccrualsRequest},
@@ -6,10 +23,12 @@ use std::env;
 use std::process;
 use time::{format_description, OffsetDateTime};
 
-/// Usage:
-///   ./run_example.sh financing/list_interest_accruals [START_DATE] [END_DATE]
-///
-/// Requires ENTITY_ID env var. Optionally PORTFOLIO_ID env var. Dates should be in YYYY-MM-DD format.
+/**
+ * Usage:
+ * ./run_example.sh financing/list_interest_accruals [START_DATE] [END_DATE]
+ *
+ * Requires ENTITY_ID env var. Optionally PORTFOLIO_ID env var. Dates should be in YYYY-MM-DD format.
+ */
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     env_logger::init();
