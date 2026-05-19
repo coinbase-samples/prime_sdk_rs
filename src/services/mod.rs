@@ -114,7 +114,9 @@ pub use products::{
 };
 
 pub use transactions::{
-    GetTransactionRequest, GetTransactionResponse, ListPortfolioTransactionsRequest,
+    CreateOnchainTransactionRequest, CreateOnchainTransactionResponse, GetTransactionRequest,
+    GetTransactionResponse, ListAdvancedTransferTransactionsRequest,
+    ListAdvancedTransferTransactionsResponse, ListPortfolioTransactionsRequest,
     ListPortfolioTransactionsResponse, ListWalletTransactionsRequest,
     ListWalletTransactionsResponse, TransactionsService,
 };

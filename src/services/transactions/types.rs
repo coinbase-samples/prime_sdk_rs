@@ -28,6 +28,7 @@ use crate::types::generated::generated::{
     get_portfolio_transactions_response::GetPortfolioTransactionsResponse as GeneratedGetPortfolioTransactionsResponse,
     get_transaction_response::GetTransactionResponse as GeneratedGetTransactionResponse,
     get_wallet_transactions_response::GetWalletTransactionsResponse as GeneratedGetWalletTransactionsResponse,
+    list_advanced_transfer_transactions_response::ListAdvancedTransferTransactionsResponse as GeneratedListAdvancedTransferTransactionsResponse,
     paginated_response::PaginatedResponse, payment_method_destination::PaymentMethodDestination,
     rpc_config::RpcConfig, sort_direction::SortDirection, transaction::Transaction,
     transaction_type::TransactionType,
@@ -353,3 +354,24 @@ impl From<CreateConversionRequest> for GeneratedCreateConversionRequest {
     }
 }
 pub type CreateConversionResponse = GeneratedCreateConversionResponse;
+
+#[derive(Debug, Clone)]
+pub struct ListAdvancedTransferTransactionsRequest {
+    pub portfolio_id: String,
+    pub advanced_transfer_id: String,
+}
+
+impl ListAdvancedTransferTransactionsRequest {
+    pub fn new(
+        portfolio_id: impl Into<String>,
+        advanced_transfer_id: impl Into<String>,
+    ) -> Self {
+        Self {
+            portfolio_id: portfolio_id.into(),
+            advanced_transfer_id: advanced_transfer_id.into(),
+        }
+    }
+}
+
+pub type ListAdvancedTransferTransactionsResponse =
+    GeneratedListAdvancedTransferTransactionsResponse;
