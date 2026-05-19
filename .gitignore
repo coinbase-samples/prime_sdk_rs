@@ -1,3 +1,4 @@
 /target
 .env
 api_spec/types
+scripts/__pycache__
