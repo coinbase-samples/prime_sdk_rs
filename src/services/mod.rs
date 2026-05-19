@@ -64,14 +64,20 @@ pub use commission::{
 
 pub use financing::{
     CreateNewLocatesRequest, CreateNewLocatesResponse, FinancingService, GetBuyingPowerRequest,
-    GetBuyingPowerResponse, GetMarginInformationRequest, GetMarginInformationResponse,
-    GetPostTradeCreditRequest, GetPostTradeCreditResponse, GetWithdrawalPowerRequest,
-    GetWithdrawalPowerResponse, ListExistingLocatesRequest, ListExistingLocatesResponse,
-    ListInterestAccrualsRequest, ListInterestAccrualsResponse, ListLocateAvailabilitiesRequest,
-    ListLocateAvailabilitiesResponse, ListMarginConversionsRequest, ListMarginConversionsResponse,
-    ListMarginSummariesRequest, ListMarginSummariesResponse, ListPortfolioInterestAccrualsRequest,
-    ListPortfolioInterestAccrualsResponse, ListTFTieredPricingFeesRequest,
-    ListTFTieredPricingFeesResponse,
+    GetBuyingPowerResponse, GetCrossMarginOverviewRequest, GetCrossMarginOverviewResponse,
+    GetCrossMarginPrimeOverviewRequest, GetCrossMarginPrimeOverviewResponse,
+    GetCrossMarginRiskParametersRequest, GetCrossMarginRiskParametersResponse,
+    GetMarginInformationRequest, GetMarginInformationResponse, GetMarketDataRequest,
+    GetMarketDataResponse, GetPostTradeCreditRequest, GetPostTradeCreditResponse,
+    GetWithdrawalPowerRequest, GetWithdrawalPowerResponse, ListExistingLocatesRequest,
+    ListExistingLocatesResponse, ListFinancingEligibleAssetsRequest,
+    ListFinancingEligibleAssetsResponse, ListInterestAccrualsRequest,
+    ListInterestAccrualsResponse, ListLocateAvailabilitiesRequest, ListLocateAvailabilitiesResponse,
+    ListMarginConversionsRequest, ListMarginConversionsResponse, ListMarginSummariesRequest,
+    ListMarginSummariesResponse, ListPortfolioInterestAccrualsRequest,
+    ListPortfolioInterestAccrualsResponse, ListTfObligationsRequest, ListTfObligationsResponse,
+    ListTFTieredPricingFeesRequest, ListTFTieredPricingFeesResponse, SetFundingSettingsRequest,
+    SetFundingSettingsResponse,
 };
 
 pub use futures::{

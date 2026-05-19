@@ -35,6 +35,13 @@ use crate::types::generated::generated::{
     get_post_trade_credit_response::GetPostTradeCreditResponse as GeneratedGetPostTradeCreditResponse,
     get_tf_tiered_pricing_fees_response::GetTfTieredPricingFeesResponse as GeneratedGetTfTieredPricingFeesResponse,
     get_withdrawal_power_response::GetWithdrawalPowerResponse as GeneratedGetWithdrawalPowerResponse,
+    get_cross_margin_overview_response::GetCrossMarginOverviewResponse as GeneratedGetCrossMarginOverviewResponse,
+    get_cross_margin_risk_parameters_response::GetCrossMarginRiskParametersResponse as GeneratedGetCrossMarginRiskParametersResponse,
+    get_cross_margin_prime_overview_response::GetCrossMarginPrimeOverviewResponse as GeneratedGetCrossMarginPrimeOverviewResponse,
+    list_financing_eligible_assets_response::ListFinancingEligibleAssetsResponse as GeneratedListFinancingEligibleAssetsResponse,
+    list_tf_obligations_response::ListTfObligationsResponse as GeneratedListTfObligationsResponse,
+    get_market_data_response::GetMarketDataResponse as GeneratedGetMarketDataResponse,
+    set_funding_settings_response::SetFundingSettingsResponse as GeneratedSetFundingSettingsResponse,
 };
 
 /// Service for interacting with financing-related endpoints
@@ -287,5 +294,87 @@ impl FinancingService {
         let resp = self.client.execute(req).await?;
         let response: GeneratedCreateNewLocatesResponse = resp.json().await?;
         Ok(response.into())
+    }
+
+    pub async fn get_cross_margin_overview(
+        &self,
+        request: GetCrossMarginOverviewRequest,
+    ) -> HttpResult<GetCrossMarginOverviewResponse> {
+        let path = format!("entities/{}/cross_margin", request.entity_id);
+        let req = HttpRequest::new(HttpMethod::Get, &path)
+            .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?;
+        let resp = self.client.execute(req).await?;
+        Ok(resp.json().await?)
+    }
+
+    pub async fn get_cross_margin_risk_parameters(
+        &self,
+        request: GetCrossMarginRiskParametersRequest,
+    ) -> HttpResult<GetCrossMarginRiskParametersResponse> {
+        let path = format!(
+            "entities/{}/cross_margin/risk_parameters",
+            request.entity_id
+        );
+        let req = HttpRequest::new(HttpMethod::Get, &path)
+            .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?;
+        let resp = self.client.execute(req).await?;
+        Ok(resp.json().await?)
+    }
+
+    pub async fn get_cross_margin_prime_overview(
+        &self,
+        request: GetCrossMarginPrimeOverviewRequest,
+    ) -> HttpResult<GetCrossMarginPrimeOverviewResponse> {
+        let path = format!("v2/entities/{}/cross_margin/prime", request.entity_id);
+        let req = HttpRequest::new(HttpMethod::Get, &path)
+            .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?;
+        let resp = self.client.execute(req).await?;
+        Ok(resp.json().await?)
+    }
+
+    pub async fn list_financing_eligible_assets(
+        &self,
+        _request: ListFinancingEligibleAssetsRequest,
+    ) -> HttpResult<ListFinancingEligibleAssetsResponse> {
+        let req = HttpRequest::new(HttpMethod::Get, "financing/eligible-assets")
+            .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?;
+        let resp = self.client.execute(req).await?;
+        Ok(resp.json().await?)
+    }
+
+    pub async fn list_tf_obligations(
+        &self,
+        request: ListTfObligationsRequest,
+    ) -> HttpResult<ListTfObligationsResponse> {
+        let path = format!("entities/{}/tf_obligations", request.entity_id);
+        let req = HttpRequest::new(HttpMethod::Get, &path)
+            .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?;
+        let resp = self.client.execute(req).await?;
+        Ok(resp.json().await?)
+    }
+
+    pub async fn get_market_data(
+        &self,
+        request: GetMarketDataRequest,
+    ) -> HttpResult<GetMarketDataResponse> {
+        let path = format!("entities/{}/market_data", request.entity_id);
+        let req = HttpRequest::new(HttpMethod::Get, &path)
+            .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?;
+        let resp = self.client.execute(req).await?;
+        Ok(resp.json().await?)
+    }
+
+    pub async fn set_funding_settings(
+        &self,
+        request: SetFundingSettingsRequest,
+    ) -> HttpResult<SetFundingSettingsResponse> {
+        let path = format!("entities/{}/funding_settings", request.entity_id);
+        let json_body = serde_json::to_value(&request.body)
+            .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?;
+        let req = HttpRequest::new(HttpMethod::Post, &path)
+            .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?
+            .with_json_body(json_body);
+        let resp = self.client.execute(req).await?;
+        Ok(resp.json().await?)
     }
 }
