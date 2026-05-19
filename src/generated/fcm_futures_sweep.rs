@@ -17,7 +17,7 @@
  */
 
 use serde::{Deserialize, Serialize};
-use crate::types::generated::generated::fcm_futures_sweep_period_request_amount::FcmFuturesSweepPeriodRequestAmount;
+use crate::types::generated::generated::fcm_futures_sweep_request_amount::FcmFuturesSweepRequestAmount;
 use crate::types::generated::generated::fcm_futures_sweep_status::FcmFuturesSweepStatus;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
@@ -26,7 +26,7 @@ pub struct FcmFuturesSweep {
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,
     #[serde(rename = "requested_amount", skip_serializing_if = "Option::is_none")]
-    pub requested_amount: Option<Box<FcmFuturesSweepPeriodRequestAmount>>,
+    pub requested_amount: Option<Box<FcmFuturesSweepRequestAmount>>,
     /// Should sweep all
     #[serde(rename = "should_sweep_all", skip_serializing_if = "Option::is_none")]
     pub should_sweep_all: Option<bool>,
@@ -34,7 +34,7 @@ pub struct FcmFuturesSweep {
     pub status: Option<FcmFuturesSweepStatus>,
     /// Scheduled time
     #[serde(rename = "scheduled_time", skip_serializing_if = "Option::is_none")]
-    pub scheduled_time: Option<String>,
+    pub scheduled_time: Option<chrono::DateTime<chrono::FixedOffset>>,
 }
 impl FcmFuturesSweep {
     pub fn new() -> FcmFuturesSweep {

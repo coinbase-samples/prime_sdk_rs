@@ -21,8 +21,6 @@ use serde::{Deserialize, Serialize};
 /// - UNKNOWN_ORDER_STATUS: nil value  - OPEN: The order is open but unfilled  - FILLED: The order was filled  - CANCELLED: The order was cancelled  - EXPIRED: The order has expired  - FAILED: Order submission failed  - PENDING: The order has been sent but is not yet confirmed
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum OrderStatus {
-    #[serde(rename = "UNKNOWN_ORDER_STATUS")]
-    UnknownOrderStatus,
     #[serde(rename = "OPEN")]
     Open,
     #[serde(rename = "FILLED")]
@@ -39,7 +37,6 @@ pub enum OrderStatus {
 impl std::fmt::Display for OrderStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match self {
-            Self::UnknownOrderStatus => write!(f, "UNKNOWN_ORDER_STATUS"),
             Self::Open => write!(f, "OPEN"),
             Self::Filled => write!(f, "FILLED"),
             Self::Cancelled => write!(f, "CANCELLED"),
@@ -51,6 +48,6 @@ impl std::fmt::Display for OrderStatus {
 }
 impl Default for OrderStatus {
     fn default() -> OrderStatus {
-        Self::UnknownOrderStatus
+        Self::Open
     }
 }

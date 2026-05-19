@@ -47,6 +47,18 @@ pub struct NetworkDetails {
     /// Base URL to our recommended block explorer (crypto only)
     #[serde(rename = "network_link", skip_serializing_if = "Option::is_none")]
     pub network_link: Option<String>,
+    /// Indicates the symbol that can be used to query other endpoints, related to transactions, wallets, and activities, to get information particularly for this asset on the network
+    #[serde(rename = "network_scoped_symbol", skip_serializing_if = "Option::is_none")]
+    pub network_scoped_symbol: Option<String>,
+    /// The minimum withdrawal amount for this network. Applies to trading, prime custody, and vault wallets.
+    #[serde(rename = "min_withdrawal_amount", skip_serializing_if = "Option::is_none")]
+    pub min_withdrawal_amount: Option<String>,
+    /// The platform maximum withdrawal amount for this network. Applies to trading, prime custody, and vault wallets. Note that Prime Transfer policies may override this value.
+    #[serde(rename = "max_withdrawal_amount", skip_serializing_if = "Option::is_none")]
+    pub max_withdrawal_amount: Option<String>,
+    /// The minimum deposit amount for this network. Applies to trading, prime custody, and vault wallets.
+    #[serde(rename = "min_deposit_amount", skip_serializing_if = "Option::is_none")]
+    pub min_deposit_amount: Option<String>,
 }
 impl NetworkDetails {
     pub fn new() -> NetworkDetails {
@@ -60,6 +72,10 @@ impl NetworkDetails {
             prime_custody_supported: None,
             destination_tag_required: None,
             network_link: None,
+            network_scoped_symbol: None,
+            min_withdrawal_amount: None,
+            max_withdrawal_amount: None,
+            min_deposit_amount: None,
         }
     }
 }

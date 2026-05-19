@@ -21,8 +21,6 @@ use serde::{Deserialize, Serialize};
 /// - VAULT: A crypto vault  - TRADING: A trading wallet  - WALLET_TYPE_OTHER: Other wallet types (like consumer, etc)  - QC: A QC Wallet  - ONCHAIN: An Onchain wallet
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum WalletType {
-    #[serde(rename = "UNKNOWN_WALLET_TYPE")]
-    UnknownWalletType,
     #[serde(rename = "VAULT")]
     Vault,
     #[serde(rename = "TRADING")]
@@ -37,7 +35,6 @@ pub enum WalletType {
 impl std::fmt::Display for WalletType {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match self {
-            Self::UnknownWalletType => write!(f, "UNKNOWN_WALLET_TYPE"),
             Self::Vault => write!(f, "VAULT"),
             Self::Trading => write!(f, "TRADING"),
             Self::WalletTypeOther => write!(f, "WALLET_TYPE_OTHER"),
@@ -48,6 +45,6 @@ impl std::fmt::Display for WalletType {
 }
 impl Default for WalletType {
     fn default() -> WalletType {
-        Self::UnknownWalletType
+        Self::Vault
     }
 }

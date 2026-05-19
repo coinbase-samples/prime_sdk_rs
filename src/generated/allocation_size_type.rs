@@ -19,8 +19,6 @@
 use serde::{Deserialize, Serialize};
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum AllocationSizeType {
-    #[serde(rename = "ALLOCATION_SIZE_TYPE_UNKNOWN")]
-    AllocationSizeTypeUnknown,
     #[serde(rename = "BASE")]
     Base,
     #[serde(rename = "QUOTE")]
@@ -31,7 +29,6 @@ pub enum AllocationSizeType {
 impl std::fmt::Display for AllocationSizeType {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match self {
-            Self::AllocationSizeTypeUnknown => write!(f, "ALLOCATION_SIZE_TYPE_UNKNOWN"),
             Self::Base => write!(f, "BASE"),
             Self::Quote => write!(f, "QUOTE"),
             Self::Percent => write!(f, "PERCENT"),
@@ -40,6 +37,6 @@ impl std::fmt::Display for AllocationSizeType {
 }
 impl Default for AllocationSizeType {
     fn default() -> AllocationSizeType {
-        Self::AllocationSizeTypeUnknown
+        Self::Base
     }
 }

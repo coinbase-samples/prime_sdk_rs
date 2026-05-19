@@ -42,9 +42,6 @@ pub struct CreateAllocationRequest {
     /// The portfolio where to allocate the remainder of the size
     #[serde(rename = "remainder_destination_portfolio", skip_serializing_if = "Option::is_none")]
     pub remainder_destination_portfolio: Option<String>,
-    /// The ID to identify an in-flight net allocation.
-    #[serde(rename = "netting_id", skip_serializing_if = "Option::is_none")]
-    pub netting_id: Option<String>,
 }
 impl CreateAllocationRequest {
     pub fn new() -> CreateAllocationRequest {
@@ -56,7 +53,6 @@ impl CreateAllocationRequest {
             allocation_legs: None,
             size_type: None,
             remainder_destination_portfolio: None,
-            netting_id: None,
         }
     }
 }

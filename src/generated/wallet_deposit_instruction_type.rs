@@ -21,8 +21,6 @@ use serde::{Deserialize, Serialize};
 /// - UNKNOWN_WALLET_DEPOSIT_TYPE: nil value  - CRYPTO: A cryptocurrency deposit  - WIRE: A wire deposit  - SEN: DEPRECATED. A Silvergate Exchange Network deposit  - SWIFT: A SWIFT deposit  - SEPA: A SEPA deposit (Single Euro Payments Area)
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum WalletDepositInstructionType {
-    #[serde(rename = "UNKNOWN_WALLET_DEPOSIT_TYPE")]
-    UnknownWalletDepositType,
     #[serde(rename = "CRYPTO")]
     Crypto,
     #[serde(rename = "WIRE")]
@@ -37,7 +35,6 @@ pub enum WalletDepositInstructionType {
 impl std::fmt::Display for WalletDepositInstructionType {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match self {
-            Self::UnknownWalletDepositType => write!(f, "UNKNOWN_WALLET_DEPOSIT_TYPE"),
             Self::Crypto => write!(f, "CRYPTO"),
             Self::Wire => write!(f, "WIRE"),
             Self::Sen => write!(f, "SEN"),
@@ -48,6 +45,6 @@ impl std::fmt::Display for WalletDepositInstructionType {
 }
 impl Default for WalletDepositInstructionType {
     fn default() -> WalletDepositInstructionType {
-        Self::UnknownWalletDepositType
+        Self::Crypto
     }
 }

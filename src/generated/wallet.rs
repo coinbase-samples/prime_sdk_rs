@@ -32,7 +32,7 @@ pub struct Wallet {
     #[serde(rename = "type", skip_serializing_if = "Option::is_none")]
     pub r#type: Option<WalletType>,
     #[serde(rename = "created_at", skip_serializing_if = "Option::is_none")]
-    pub created_at: Option<String>,
+    pub created_at: Option<chrono::DateTime<chrono::FixedOffset>>,
     #[serde(rename = "address", skip_serializing_if = "Option::is_none")]
     pub address: Option<String>,
     #[serde(rename = "visibility", skip_serializing_if = "Option::is_none")]

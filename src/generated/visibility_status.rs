@@ -19,8 +19,6 @@
 use serde::{Deserialize, Serialize};
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum VisibilityStatus {
-    #[serde(rename = "UNKNOWN_VISIBILITY_STATUS")]
-    UnknownVisibilityStatus,
     #[serde(rename = "VISIBLE")]
     Visible,
     #[serde(rename = "HIDDEN")]
@@ -31,7 +29,6 @@ pub enum VisibilityStatus {
 impl std::fmt::Display for VisibilityStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match self {
-            Self::UnknownVisibilityStatus => write!(f, "UNKNOWN_VISIBILITY_STATUS"),
             Self::Visible => write!(f, "VISIBLE"),
             Self::Hidden => write!(f, "HIDDEN"),
             Self::Spam => write!(f, "SPAM"),
@@ -40,6 +37,6 @@ impl std::fmt::Display for VisibilityStatus {
 }
 impl Default for VisibilityStatus {
     fn default() -> VisibilityStatus {
-        Self::UnknownVisibilityStatus
+        Self::Visible
     }
 }

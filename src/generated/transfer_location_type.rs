@@ -19,8 +19,6 @@
 use serde::{Deserialize, Serialize};
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum TransferLocationType {
-    #[serde(rename = "TRANSFER_LOCATION_TYPE_UNKNOWN")]
-    TransferLocationTypeUnknown,
     #[serde(rename = "PAYMENT_METHOD")]
     PaymentMethod,
     #[serde(rename = "WALLET")]
@@ -37,7 +35,6 @@ pub enum TransferLocationType {
 impl std::fmt::Display for TransferLocationType {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match self {
-            Self::TransferLocationTypeUnknown => write!(f, "TRANSFER_LOCATION_TYPE_UNKNOWN"),
             Self::PaymentMethod => write!(f, "PAYMENT_METHOD"),
             Self::Wallet => write!(f, "WALLET"),
             Self::Address => write!(f, "ADDRESS"),
@@ -49,6 +46,6 @@ impl std::fmt::Display for TransferLocationType {
 }
 impl Default for TransferLocationType {
     fn default() -> TransferLocationType {
-        Self::TransferLocationTypeUnknown
+        Self::PaymentMethod
     }
 }

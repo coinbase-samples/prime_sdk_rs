@@ -19,6 +19,7 @@
 use serde::{Deserialize, Serialize};
 use crate::types::generated::generated::order_side::OrderSide;
 use crate::types::generated::generated::order_type::OrderType;
+use crate::types::generated::generated::peg_offset_type::PegOffsetType;
 use crate::types::generated::generated::time_in_force_type::TimeInForceType;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
@@ -38,13 +39,14 @@ pub struct CreateOrderRequest {
     #[serde(rename = "limit_price", skip_serializing_if = "Option::is_none")]
     pub limit_price: Option<String>,
     #[serde(rename = "start_time", skip_serializing_if = "Option::is_none")]
-    pub start_time: Option<String>,
+    pub start_time: Option<chrono::DateTime<chrono::FixedOffset>>,
     #[serde(rename = "expiry_time", skip_serializing_if = "Option::is_none")]
-    pub expiry_time: Option<String>,
+    pub expiry_time: Option<chrono::DateTime<chrono::FixedOffset>>,
     #[serde(rename = "time_in_force", skip_serializing_if = "Option::is_none")]
     pub time_in_force: Option<TimeInForceType>,
     #[serde(rename = "stp_id", skip_serializing_if = "Option::is_none")]
     pub stp_id: Option<String>,
+    /// Optionally specify a display size. This is the maximum order size that will show up on venue order books. Specifying a value here effectively makes a LIMIT order into an \"iceberg\" style order. This property only applies to LIMIT orders and will be ignored for other order types.
     #[serde(rename = "display_quote_size", skip_serializing_if = "Option::is_none")]
     pub display_quote_size: Option<String>,
     #[serde(rename = "display_base_size", skip_serializing_if = "Option::is_none")]
@@ -55,9 +57,18 @@ pub struct CreateOrderRequest {
     pub historical_pov: Option<String>,
     #[serde(rename = "stop_price", skip_serializing_if = "Option::is_none")]
     pub stop_price: Option<String>,
-    /// next: 19
     #[serde(rename = "settl_currency", skip_serializing_if = "Option::is_none")]
     pub settl_currency: Option<String>,
+    /// Post-only flag - when true, the order will only be posted to the order book and not immediately matched. Only applicable to LIMIT orders with GTC or GTD time in force.
+    #[serde(rename = "post_only", skip_serializing_if = "Option::is_none")]
+    pub post_only: Option<bool>,
+    #[serde(rename = "peg_offset_type", skip_serializing_if = "Option::is_none")]
+    pub peg_offset_type: Option<PegOffsetType>,
+    #[serde(rename = "offset", skip_serializing_if = "Option::is_none")]
+    pub offset: Option<String>,
+    /// next: 23
+    #[serde(rename = "wig_level", skip_serializing_if = "Option::is_none")]
+    pub wig_level: Option<String>,
 }
 impl CreateOrderRequest {
     pub fn new(product_id: String, side: OrderSide, client_order_id: String, r#type: OrderType) -> CreateOrderRequest {
@@ -79,6 +90,10 @@ impl CreateOrderRequest {
             historical_pov: None,
             stop_price: None,
             settl_currency: None,
+            post_only: None,
+            peg_offset_type: None,
+            offset: None,
+            wig_level: None,
         }
     }
 }

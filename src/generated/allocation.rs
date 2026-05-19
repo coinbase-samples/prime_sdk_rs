@@ -31,7 +31,7 @@ pub struct Allocation {
     pub reversal_id: Option<String>,
     /// Time the final leg of the root allocation was completed.
     #[serde(rename = "allocation_completed_at", skip_serializing_if = "Option::is_none")]
-    pub allocation_completed_at: Option<String>,
+    pub allocation_completed_at: Option<chrono::DateTime<chrono::FixedOffset>>,
     /// The ID of the user that created the allocation.
     #[serde(rename = "user_id", skip_serializing_if = "Option::is_none")]
     pub user_id: Option<String>,

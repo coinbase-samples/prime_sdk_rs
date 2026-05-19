@@ -17,12 +17,10 @@
  */
 
 use serde::{Deserialize, Serialize};
-/// UserRole : - USER_ROLE_UNKNOWN: nil value  - AUDITOR: An auditor  - SIGNATORY: A signatory  - ADMIN: An admin  - INITIATOR: An initiator  - REVIEWER: A reviewer  - TRADER: A trader  - FULL_TRADER: A trader with full permissions  - TEAM_MANAGER: A team manager  - APPROVER: An approver
-/// - USER_ROLE_UNKNOWN: nil value  - AUDITOR: An auditor  - SIGNATORY: A signatory  - ADMIN: An admin  - INITIATOR: An initiator  - REVIEWER: A reviewer  - TRADER: A trader  - FULL_TRADER: A trader with full permissions  - TEAM_MANAGER: A team manager  - APPROVER: An approver
+/// UserRole : - USER_ROLE_UNKNOWN: nil value  - AUDITOR: An auditor  - SIGNATORY: A signatory  - ADMIN: An admin  - INITIATOR: An initiator  - REVIEWER: A reviewer  - TRADER: A trader  - FULL_TRADER: A trader with full permissions  - TEAM_MANAGER: A team manager  - APPROVER: An approver  - TAX_MANAGER: A tax manager  - BUSINESS_MANAGER: A business manager
+/// - USER_ROLE_UNKNOWN: nil value  - AUDITOR: An auditor  - SIGNATORY: A signatory  - ADMIN: An admin  - INITIATOR: An initiator  - REVIEWER: A reviewer  - TRADER: A trader  - FULL_TRADER: A trader with full permissions  - TEAM_MANAGER: A team manager  - APPROVER: An approver  - TAX_MANAGER: A tax manager  - BUSINESS_MANAGER: A business manager
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum UserRole {
-    #[serde(rename = "USER_ROLE_UNKNOWN")]
-    UserRoleUnknown,
     #[serde(rename = "AUDITOR")]
     Auditor,
     #[serde(rename = "SIGNATORY")]
@@ -41,11 +39,14 @@ pub enum UserRole {
     TeamManager,
     #[serde(rename = "APPROVER")]
     Approver,
+    #[serde(rename = "TAX_MANAGER")]
+    TaxManager,
+    #[serde(rename = "BUSINESS_MANAGER")]
+    BusinessManager,
 }
 impl std::fmt::Display for UserRole {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match self {
-            Self::UserRoleUnknown => write!(f, "USER_ROLE_UNKNOWN"),
             Self::Auditor => write!(f, "AUDITOR"),
             Self::Signatory => write!(f, "SIGNATORY"),
             Self::Admin => write!(f, "ADMIN"),
@@ -55,11 +56,13 @@ impl std::fmt::Display for UserRole {
             Self::FullTrader => write!(f, "FULL_TRADER"),
             Self::TeamManager => write!(f, "TEAM_MANAGER"),
             Self::Approver => write!(f, "APPROVER"),
+            Self::TaxManager => write!(f, "TAX_MANAGER"),
+            Self::BusinessManager => write!(f, "BUSINESS_MANAGER"),
         }
     }
 }
 impl Default for UserRole {
     fn default() -> UserRole {
-        Self::UserRoleUnknown
+        Self::Auditor
     }
 }

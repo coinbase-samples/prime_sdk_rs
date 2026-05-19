@@ -19,8 +19,6 @@
 use serde::{Deserialize, Serialize};
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum AssetChangeType {
-    #[serde(rename = "ASSET_CHANGE_TYPE_UNKNOWN")]
-    AssetChangeTypeUnknown,
     #[serde(rename = "BALANCE_TRANSFER")]
     BalanceTransfer,
     #[serde(rename = "BALANCE_APPROVAL")]
@@ -35,7 +33,6 @@ pub enum AssetChangeType {
 impl std::fmt::Display for AssetChangeType {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match self {
-            Self::AssetChangeTypeUnknown => write!(f, "ASSET_CHANGE_TYPE_UNKNOWN"),
             Self::BalanceTransfer => write!(f, "BALANCE_TRANSFER"),
             Self::BalanceApproval => write!(f, "BALANCE_APPROVAL"),
             Self::ItemTransfer => write!(f, "ITEM_TRANSFER"),
@@ -46,6 +43,6 @@ impl std::fmt::Display for AssetChangeType {
 }
 impl Default for AssetChangeType {
     fn default() -> AssetChangeType {
-        Self::AssetChangeTypeUnknown
+        Self::BalanceTransfer
     }
 }

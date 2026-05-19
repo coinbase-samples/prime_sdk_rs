@@ -37,6 +37,9 @@ pub struct Rfq {
     pub limit_price: String,
     #[serde(rename = "settl_currency", skip_serializing_if = "Option::is_none")]
     pub settl_currency: Option<String>,
+    /// Optional quote timeout in milliseconds. Defaults to 3000 ms (3 seconds) if not specified. Maximum allowed value is 30000 ms (30 seconds); requests with a larger value are rejected. Mirrors FIX tag 8090 (QuoteRequestGoodForMs).
+    #[serde(rename = "quote_duration_ms", skip_serializing_if = "Option::is_none")]
+    pub quote_duration_ms: Option<String>,
 }
 impl Rfq {
     /// based off PostOrderPreviewRequest
@@ -49,6 +52,7 @@ impl Rfq {
             quote_value: None,
             limit_price,
             settl_currency: None,
+            quote_duration_ms: None,
         }
     }
 }

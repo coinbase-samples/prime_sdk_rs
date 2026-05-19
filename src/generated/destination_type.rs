@@ -19,27 +19,27 @@
 use serde::{Deserialize, Serialize};
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum DestinationType {
-    #[serde(rename = "UNKNOWN_DESTINATION")]
-    UnknownDestination,
     #[serde(rename = "DESTINATION_PAYMENT_METHOD")]
     DestinationPaymentMethod,
     #[serde(rename = "DESTINATION_BLOCKCHAIN")]
     DestinationBlockchain,
     #[serde(rename = "DESTINATION_WALLET")]
     DestinationWallet,
+    #[serde(rename = "DESTINATION_COUNTERPARTY")]
+    DestinationCounterparty,
 }
 impl std::fmt::Display for DestinationType {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match self {
-            Self::UnknownDestination => write!(f, "UNKNOWN_DESTINATION"),
             Self::DestinationPaymentMethod => write!(f, "DESTINATION_PAYMENT_METHOD"),
             Self::DestinationBlockchain => write!(f, "DESTINATION_BLOCKCHAIN"),
             Self::DestinationWallet => write!(f, "DESTINATION_WALLET"),
+            Self::DestinationCounterparty => write!(f, "DESTINATION_COUNTERPARTY"),
         }
     }
 }
 impl Default for DestinationType {
     fn default() -> DestinationType {
-        Self::UnknownDestination
+        Self::DestinationPaymentMethod
     }
 }

@@ -17,17 +17,19 @@
  */
 
 use serde::{Deserialize, Serialize};
-use crate::types::generated::generated::staking_inputs::StakingInputs;
+use crate::types::generated::generated::wallet_stake_inputs::WalletStakeInputs;
 
+/// StakingInitiateRequest : StakingInitiateRequest represents a request to initiate a staking operation.
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct StakingInitiateRequest {
     /// The client generated idempotency key for requested execution. Subsequent requests using the same key will fail
     #[serde(rename = "idempotency_key")]
     pub idempotency_key: String,
     #[serde(rename = "inputs", skip_serializing_if = "Option::is_none")]
-    pub inputs: Option<Box<StakingInputs>>,
+    pub inputs: Option<Box<WalletStakeInputs>>,
 }
 impl StakingInitiateRequest {
+    /// StakingInitiateRequest represents a request to initiate a staking operation.
     pub fn new(idempotency_key: String) -> StakingInitiateRequest {
         StakingInitiateRequest {
             idempotency_key,

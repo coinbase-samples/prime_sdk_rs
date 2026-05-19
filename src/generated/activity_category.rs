@@ -27,8 +27,6 @@ pub enum ActivityCategory {
     ActivityCategoryTransaction,
     #[serde(rename = "ACTIVITY_CATEGORY_ACCOUNT")]
     ActivityCategoryAccount,
-    #[serde(rename = "ACTIVITY_CATEGORY_ADMIN")]
-    ActivityCategoryAdmin,
     #[serde(rename = "ACTIVITY_CATEGORY_ALLOCATION")]
     ActivityCategoryAllocation,
     #[serde(rename = "ACTIVITY_CATEGORY_LENDING")]
@@ -41,7 +39,6 @@ impl std::fmt::Display for ActivityCategory {
             Self::ActivityCategoryOrder => write!(f, "ACTIVITY_CATEGORY_ORDER"),
             Self::ActivityCategoryTransaction => write!(f, "ACTIVITY_CATEGORY_TRANSACTION"),
             Self::ActivityCategoryAccount => write!(f, "ACTIVITY_CATEGORY_ACCOUNT"),
-            Self::ActivityCategoryAdmin => write!(f, "ACTIVITY_CATEGORY_ADMIN"),
             Self::ActivityCategoryAllocation => write!(f, "ACTIVITY_CATEGORY_ALLOCATION"),
             Self::ActivityCategoryLending => write!(f, "ACTIVITY_CATEGORY_LENDING"),
         }

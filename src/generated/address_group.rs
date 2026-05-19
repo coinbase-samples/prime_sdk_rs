@@ -31,7 +31,7 @@ pub struct AddressGroup {
     #[serde(rename = "addresses", skip_serializing_if = "Option::is_none")]
     pub addresses: Option<Vec<AddressEntry>>,
     #[serde(rename = "added_at", skip_serializing_if = "Option::is_none")]
-    pub added_at: Option<String>,
+    pub added_at: Option<chrono::DateTime<chrono::FixedOffset>>,
 }
 impl AddressGroup {
     pub fn new() -> AddressGroup {

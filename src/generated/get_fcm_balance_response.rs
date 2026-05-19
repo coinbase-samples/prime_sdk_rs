@@ -46,6 +46,9 @@ pub struct GetFcmBalanceResponse {
     /// Clearing account ID
     #[serde(rename = "clearing_account_id", skip_serializing_if = "Option::is_none")]
     pub clearing_account_id: Option<String>,
+    /// Unsettled accrued funding PNL from the last settlement
+    #[serde(rename = "cfm_unsettled_accrued_funding_pnl", skip_serializing_if = "Option::is_none")]
+    pub cfm_unsettled_accrued_funding_pnl: Option<String>,
 }
 impl GetFcmBalanceResponse {
     pub fn new() -> GetFcmBalanceResponse {
@@ -59,6 +62,7 @@ impl GetFcmBalanceResponse {
             initial_margin: None,
             maintenance_margin: None,
             clearing_account_id: None,
+            cfm_unsettled_accrued_funding_pnl: None,
         }
     }
 }

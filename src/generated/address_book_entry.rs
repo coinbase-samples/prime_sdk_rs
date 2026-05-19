@@ -48,10 +48,10 @@ pub struct AddressBookEntry {
     pub explorer_link: Option<String>,
     /// When this entry was last used for a transaction
     #[serde(rename = "last_used_at", skip_serializing_if = "Option::is_none")]
-    pub last_used_at: Option<String>,
+    pub last_used_at: Option<chrono::DateTime<chrono::FixedOffset>>,
     /// When this entry was added to the address book
     #[serde(rename = "added_at", skip_serializing_if = "Option::is_none")]
-    pub added_at: Option<String>,
+    pub added_at: Option<chrono::DateTime<chrono::FixedOffset>>,
     #[serde(rename = "added_by")]
     pub added_by: Box<DisplayUser>,
     #[serde(rename = "type", skip_serializing_if = "Option::is_none")]

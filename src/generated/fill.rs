@@ -17,7 +17,9 @@
  */
 
 use serde::{Deserialize, Serialize};
+use crate::types::generated::generated::commission_detail_total::CommissionDetailTotal;
 use crate::types::generated::generated::order_side::OrderSide;
+use crate::types::generated::generated::product_type::ProductType;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Fill {
@@ -46,13 +48,23 @@ pub struct Fill {
     pub price: Option<String>,
     /// The date and time of the fill
     #[serde(rename = "time", skip_serializing_if = "Option::is_none")]
-    pub time: Option<String>,
+    pub time: Option<chrono::DateTime<chrono::FixedOffset>>,
     /// The commission incurred for the fill
     #[serde(rename = "commission", skip_serializing_if = "Option::is_none")]
     pub commission: Option<String>,
     /// The name of the venue
     #[serde(rename = "venue", skip_serializing_if = "Option::is_none")]
     pub venue: Option<String>,
+    /// The venue fees incurred for the fill
+    #[serde(rename = "venue_fees", skip_serializing_if = "Option::is_none")]
+    pub venue_fees: Option<String>,
+    /// The CES commission incurred for the fill
+    #[serde(rename = "ces_commission", skip_serializing_if = "Option::is_none")]
+    pub ces_commission: Option<String>,
+    #[serde(rename = "product_type", skip_serializing_if = "Option::is_none")]
+    pub product_type: Option<ProductType>,
+    #[serde(rename = "commission_detail_total", skip_serializing_if = "Option::is_none")]
+    pub commission_detail_total: Option<Box<CommissionDetailTotal>>,
 }
 impl Fill {
     pub fn new() -> Fill {
@@ -68,6 +80,10 @@ impl Fill {
             time: None,
             commission: None,
             venue: None,
+            venue_fees: None,
+            ces_commission: None,
+            product_type: None,
+            commission_detail_total: None,
         }
     }
 }

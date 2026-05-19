@@ -18,8 +18,10 @@
 
 use serde::{Deserialize, Serialize};
 use crate::types::generated::generated::blockchain_address::BlockchainAddress;
+use crate::types::generated::generated::counterparty_destination::CounterpartyDestination;
 use crate::types::generated::generated::destination_type::DestinationType;
 use crate::types::generated::generated::payment_method_destination::PaymentMethodDestination;
+use crate::types::generated::generated::travel_rule_data::TravelRuleData;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CreateWalletWithdrawalRequest {
@@ -38,6 +40,10 @@ pub struct CreateWalletWithdrawalRequest {
     pub payment_method: Option<Box<PaymentMethodDestination>>,
     #[serde(rename = "blockchain_address", skip_serializing_if = "Option::is_none")]
     pub blockchain_address: Option<Box<BlockchainAddress>>,
+    #[serde(rename = "counterparty", skip_serializing_if = "Option::is_none")]
+    pub counterparty: Option<Box<CounterpartyDestination>>,
+    #[serde(rename = "travel_rule_data", skip_serializing_if = "Option::is_none")]
+    pub travel_rule_data: Option<Box<TravelRuleData>>,
 }
 impl CreateWalletWithdrawalRequest {
     pub fn new(amount: String, destination_type: DestinationType, idempotency_key: String, currency_symbol: String) -> CreateWalletWithdrawalRequest {
@@ -48,6 +54,8 @@ impl CreateWalletWithdrawalRequest {
             currency_symbol,
             payment_method: None,
             blockchain_address: None,
+            counterparty: None,
+            travel_rule_data: None,
         }
     }
 }

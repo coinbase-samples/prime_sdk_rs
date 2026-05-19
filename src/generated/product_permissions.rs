@@ -19,8 +19,6 @@
 use serde::{Deserialize, Serialize};
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum ProductPermissions {
-    #[serde(rename = "PRODUCT_PERMISSION_UNKNOWN")]
-    ProductPermissionUnknown,
     #[serde(rename = "PRODUCT_PERMISSION_READ")]
     ProductPermissionRead,
     #[serde(rename = "PRODUCT_PERMISSION_TRADE")]
@@ -31,7 +29,6 @@ pub enum ProductPermissions {
 impl std::fmt::Display for ProductPermissions {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match self {
-            Self::ProductPermissionUnknown => write!(f, "PRODUCT_PERMISSION_UNKNOWN"),
             Self::ProductPermissionRead => write!(f, "PRODUCT_PERMISSION_READ"),
             Self::ProductPermissionTrade => write!(f, "PRODUCT_PERMISSION_TRADE"),
             Self::ProductPermissionLending => write!(f, "PRODUCT_PERMISSION_LENDING"),
@@ -40,6 +37,6 @@ impl std::fmt::Display for ProductPermissions {
 }
 impl Default for ProductPermissions {
     fn default() -> ProductPermissions {
-        Self::ProductPermissionUnknown
+        Self::ProductPermissionRead
     }
 }
