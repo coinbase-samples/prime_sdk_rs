@@ -15,6 +15,7 @@
  */
 pub mod activities;
 pub mod address_book;
+pub mod advanced_transfers;
 pub mod allocations;
 pub mod assets;
 pub mod balances;
@@ -43,6 +44,8 @@ pub use address_book::{
     AddressBookService, CreateAddressBookEntryRequest, CreateAddressBookEntryResponse,
     GetAddressBookResponse, ListAddressBookRequest, ListAddressBookResponse,
 };
+
+pub use advanced_transfers::AdvancedTransfersService;
 
 pub use allocations::{
     AllocationService, CreateAllocationRequest, CreateAllocationResponse,
