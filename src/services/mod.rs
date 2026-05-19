@@ -28,6 +28,7 @@ pub mod payment_methods;
 pub mod portfolios;
 pub mod positions;
 pub mod products;
+pub mod staking;
 pub mod transactions;
 pub mod travel_rule;
 pub mod users;
@@ -113,6 +114,8 @@ pub use products::{
     GetCandlesRequest, GetCandlesResponse, ListPortfolioProductsRequest,
     ListPortfolioProductsResponse, ProductsService,
 };
+
+pub use staking::StakingService;
 
 pub use transactions::{
     CreateOnchainTransactionRequest, CreateOnchainTransactionResponse, GetTransactionRequest,
