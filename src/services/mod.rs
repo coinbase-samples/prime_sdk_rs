@@ -43,9 +43,11 @@ pub use address_book::{
 };
 
 pub use allocations::{
-    AllocationService, GetAllocationRequest, GetAllocationResponse,
-    ListAllocationsByClientNettingIdRequest, ListAllocationsByClientNettingIdResponse,
-    ListPortfolioAllocationsRequest, ListPortfolioAllocationsResponse,
+    AllocationService, CreateAllocationRequest, CreateAllocationResponse,
+    CreateNetAllocationRequest, CreateNetAllocationResponse, GetAllocationRequest,
+    GetAllocationResponse, ListAllocationsByClientNettingIdRequest,
+    ListAllocationsByClientNettingIdResponse, ListPortfolioAllocationsRequest,
+    ListPortfolioAllocationsResponse,
 };
 
 pub use assets::{AssetsService, ListEntityAssetsRequest, ListEntityAssetsResponse};
