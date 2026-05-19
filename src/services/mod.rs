@@ -29,6 +29,7 @@ pub mod portfolios;
 pub mod positions;
 pub mod products;
 pub mod transactions;
+pub mod travel_rule;
 pub mod users;
 pub mod wallets;
 
@@ -119,6 +120,11 @@ pub use transactions::{
     ListAdvancedTransferTransactionsResponse, ListPortfolioTransactionsRequest,
     ListPortfolioTransactionsResponse, ListWalletTransactionsRequest,
     ListWalletTransactionsResponse, TransactionsService,
+};
+
+pub use travel_rule::{
+    GetTransactionTravelRuleDataRequest, GetTransactionTravelRuleDataResponse,
+    SubmitDepositTravelRuleDataRequest, SubmitDepositTravelRuleDataResponse, TravelRuleService,
 };
 
 pub use users::{
