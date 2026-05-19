@@ -735,3 +735,49 @@ impl From<GeneratedAcceptQuoteResponse> for AcceptQuoteResponse {
         }
     }
 }
+
+use crate::types::generated::generated::{
+    edit_order_request::EditOrderRequest as GeneratedEditOrderBody,
+    edit_order_response::EditOrderResponse as GeneratedEditOrderResponse,
+    get_order_edit_history_response::GetOrderEditHistoryResponse as GeneratedGetOrderEditHistoryResponse,
+};
+
+#[derive(Debug, Clone)]
+pub struct EditOrderRequest {
+    pub portfolio_id: String,
+    pub order_id: String,
+    pub body: GeneratedEditOrderBody,
+}
+
+impl EditOrderRequest {
+    pub fn new(
+        portfolio_id: impl Into<String>,
+        order_id: impl Into<String>,
+        body: GeneratedEditOrderBody,
+    ) -> Self {
+        Self {
+            portfolio_id: portfolio_id.into(),
+            order_id: order_id.into(),
+            body,
+        }
+    }
+}
+
+pub type EditOrderResponse = GeneratedEditOrderResponse;
+
+#[derive(Debug, Clone)]
+pub struct GetOrderEditHistoryRequest {
+    pub portfolio_id: String,
+    pub order_id: String,
+}
+
+impl GetOrderEditHistoryRequest {
+    pub fn new(portfolio_id: impl Into<String>, order_id: impl Into<String>) -> Self {
+        Self {
+            portfolio_id: portfolio_id.into(),
+            order_id: order_id.into(),
+        }
+    }
+}
+
+pub type GetOrderEditHistoryResponse = GeneratedGetOrderEditHistoryResponse;

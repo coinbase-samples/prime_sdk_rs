@@ -83,7 +83,10 @@ pub use invoices::{InvoiceService, ListInvoicesRequest, ListInvoicesResponse};
 
 pub use onchain_address_groups::*;
 
-pub use orders::{CreateOrderRequest, OrderSide, OrderType, OrdersService, TimeInForceType};
+pub use orders::{
+    CreateOrderRequest, EditOrderRequest, EditOrderResponse, GetOrderEditHistoryRequest,
+    GetOrderEditHistoryResponse, OrderSide, OrderType, OrdersService, TimeInForceType,
+};
 
 pub use payment_methods::{
     GetEntityPaymentMethodDetailsRequest, GetEntityPaymentMethodDetailsResponse,
