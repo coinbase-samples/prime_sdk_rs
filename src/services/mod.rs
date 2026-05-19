@@ -75,8 +75,11 @@ pub use financing::{
 };
 
 pub use futures::{
-    FuturesService, GetFcmBalanceRequest, GetFcmBalanceResponse, GetFuturesSweepsRequest,
-    GetFuturesSweepsResponse, GetPositionsRequest, GetPositionsResponse,
+    FuturesService, GetFcmBalanceRequest, GetFcmBalanceResponse, GetFcmEquityRequest,
+    GetFcmEquityResponse, GetFcmMarginCallDetailsRequest, GetFcmMarginCallDetailsResponse,
+    GetFcmRiskLimitsRequest, GetFcmRiskLimitsResponse, GetFcmSettingsRequest,
+    GetFcmSettingsResponse, GetFuturesSweepsRequest, GetFuturesSweepsResponse, GetPositionsRequest,
+    GetPositionsResponse, SetFcmSettingsRequest, SetFcmSettingsResponse,
 };
 
 pub use invoices::{InvoiceService, ListInvoicesRequest, ListInvoicesResponse};
