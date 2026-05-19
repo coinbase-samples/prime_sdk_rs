@@ -1,4 +1,4 @@
-.PHONY: install-dev-tools generate-types clean-types fetch-spec remove-docs all
+.PHONY: install-dev-tools generate-types clean-types fetch-spec remove-docs check-endpoints all
 
 BREW_PREFIX := $(shell brew --prefix 2>/dev/null)
 JAVA_HOME ?= $(BREW_PREFIX)/opt/openjdk/libexec/openjdk.jdk/Contents/Home
@@ -18,6 +18,12 @@ install-dev-tools:
 		echo "Rust/Cargo not found. Install it from https://rustup.rs"; \
 		exit 1; \
 	}
+	@command -v python3 >/dev/null 2>&1 || { \
+		echo "Error: python3 is required for make check-endpoints"; \
+		exit 1; \
+	}
+	@echo "Installing Python dependencies for endpoint coverage check..."
+	pip3 install -q -r scripts/requirements.txt
 	@echo ""
 	@echo "Dev tools installed successfully."
 	@echo ""
@@ -40,6 +46,9 @@ clean-types:
 
 remove-docs:
 	rm -rf api_spec/types/docs
+
+check-endpoints:
+	python3 scripts/check_endpoint_coverage.py
 
 # Default target
 all: generate-types remove-docs
