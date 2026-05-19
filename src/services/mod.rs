@@ -99,7 +99,10 @@ pub use positions::{
     ListAggregateEntityPositionsResponse, ListEntityPositionsResponse, PositionsService,
 };
 
-pub use products::{ListPortfolioProductsRequest, ListPortfolioProductsResponse, ProductsService};
+pub use products::{
+    GetCandlesRequest, GetCandlesResponse, ListPortfolioProductsRequest,
+    ListPortfolioProductsResponse, ProductsService,
+};
 
 pub use transactions::{
     GetTransactionRequest, GetTransactionResponse, ListPortfolioTransactionsRequest,
