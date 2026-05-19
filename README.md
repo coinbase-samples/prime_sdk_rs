@@ -27,7 +27,7 @@ Or add it manually to your `Cargo.toml`:
 
 ```toml
 [dependencies]
-prime_sdk_rs = "0.1.0"
+prime_sdk_rs = "0.2.0"
 ```
 
 ## Setup

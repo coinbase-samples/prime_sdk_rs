@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 pub const API_BASE_PATH: &str = "https://api.prime.coinbase.com/v1/";
-pub const USER_AGENT: &str = "coinbase-prime-rs/0.1.0";
+pub const SDK_VERSION: &str = env!("CARGO_PKG_VERSION");
+pub const USER_AGENT: &str = concat!("coinbase-prime-rs/", env!("CARGO_PKG_VERSION"));
 pub const CB_ACCESS_KEY_HEADER: &str = "X-CB-ACCESS-KEY";
 pub const CB_ACCESS_PHRASE_HEADER: &str = "X-CB-ACCESS-PASSPHRASE";
 pub const CB_ACCESS_SIGNATURE_HEADER: &str = "X-CB-ACCESS-SIGNATURE";
