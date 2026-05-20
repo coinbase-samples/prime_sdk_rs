@@ -18,9 +18,7 @@ use crate::constants::DEFAULT_LIMIT;
 use crate::error::HttpResult;
 use crate::types::generated::generated::{
     cancel_advanced_transfer_response::CancelAdvancedTransferResponse as GeneratedCancelAdvancedTransferResponse,
-    create_advanced_transfer_response::CreateAdvancedTransferResponse as GeneratedCreateAdvancedTransferResponse,
     get_portfolio_counterparty_id_response::GetPortfolioCounterpartyIdResponse as GeneratedGetPortfolioCounterpartyIdResponse,
-    list_advanced_transfers_response::ListAdvancedTransfersResponse as GeneratedListAdvancedTransfersResponse,
 };
 use core_rs::http_client::HttpClient;
 use core_rs::http_method::HttpMethod;

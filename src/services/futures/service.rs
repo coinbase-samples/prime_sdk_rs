@@ -24,11 +24,6 @@ use crate::types::generated::generated::{
     schedule_futures_sweep_response::ScheduleFuturesSweepResponse as GeneratedScheduleFuturesSweepResponse,
     set_auto_sweep_request::SetAutoSweepRequest as GeneratedSetAutoSweepRequest,
     set_auto_sweep_response::SetAutoSweepResponse as GeneratedSetAutoSweepResponse,
-    get_fcm_equity_response::GetFcmEquityResponse as GeneratedGetFcmEquityResponse,
-    get_fcm_margin_call_details_response::GetFcmMarginCallDetailsResponse as GeneratedGetFcmMarginCallDetailsResponse,
-    get_fcm_risk_limits_response::GetFcmRiskLimitsResponse as GeneratedGetFcmRiskLimitsResponse,
-    get_fcm_settings_response::GetFcmSettingsResponse as GeneratedGetFcmSettingsResponse,
-    set_fcm_settings_response::SetFcmSettingsResponse as GeneratedSetFcmSettingsResponse,
 };
 use core_rs::http_client::HttpClient;
 use core_rs::http_method::HttpMethod;

@@ -40,7 +40,6 @@ use crate::types::generated::generated::{
     get_portfolio_transactions_response::GetPortfolioTransactionsResponse as GeneratedGetPortfolioTransactionsResponse,
     get_transaction_response::GetTransactionResponse as GeneratedGetTransactionResponse,
     get_wallet_transactions_response::GetWalletTransactionsResponse as GeneratedGetWalletTransactionsResponse,
-    list_advanced_transfer_transactions_response::ListAdvancedTransferTransactionsResponse as GeneratedListAdvancedTransferTransactionsResponse,
 };
 
 pub struct TransactionsService {

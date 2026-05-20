@@ -21,9 +21,7 @@ use crate::services::allocations::types::{
     ListPortfolioAllocationsRequest, ListPortfolioAllocationsResponse,
 };
 use crate::types::generated::generated::{
-    create_allocation_request::CreateAllocationRequest as GeneratedCreateAllocationRequest,
     create_allocation_response::CreateAllocationResponse as GeneratedCreateAllocationResponse,
-    create_net_allocation_request::CreateNetAllocationRequest as GeneratedCreateNetAllocationRequest,
     create_net_allocation_response::CreateNetAllocationResponse as GeneratedCreateNetAllocationResponse,
     get_allocation_response::GetAllocationResponse as GeneratedGetAllocationResponse,
     get_allocations_by_client_netting_id_response::GetAllocationsByClientNettingIdResponse as GeneratedGetAllocationsByClientNettingIdResponse,

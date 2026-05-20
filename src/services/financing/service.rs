@@ -35,13 +35,6 @@ use crate::types::generated::generated::{
     get_post_trade_credit_response::GetPostTradeCreditResponse as GeneratedGetPostTradeCreditResponse,
     get_tf_tiered_pricing_fees_response::GetTfTieredPricingFeesResponse as GeneratedGetTfTieredPricingFeesResponse,
     get_withdrawal_power_response::GetWithdrawalPowerResponse as GeneratedGetWithdrawalPowerResponse,
-    get_cross_margin_overview_response::GetCrossMarginOverviewResponse as GeneratedGetCrossMarginOverviewResponse,
-    get_cross_margin_risk_parameters_response::GetCrossMarginRiskParametersResponse as GeneratedGetCrossMarginRiskParametersResponse,
-    get_cross_margin_prime_overview_response::GetCrossMarginPrimeOverviewResponse as GeneratedGetCrossMarginPrimeOverviewResponse,
-    list_financing_eligible_assets_response::ListFinancingEligibleAssetsResponse as GeneratedListFinancingEligibleAssetsResponse,
-    list_tf_obligations_response::ListTfObligationsResponse as GeneratedListTfObligationsResponse,
-    get_market_data_response::GetMarketDataResponse as GeneratedGetMarketDataResponse,
-    set_funding_settings_response::SetFundingSettingsResponse as GeneratedSetFundingSettingsResponse,
 };
 
 /// Service for interacting with financing-related endpoints
