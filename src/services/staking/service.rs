@@ -18,9 +18,6 @@ use crate::error::HttpResult;
 use crate::types::generated::generated::{
     get_staking_status_response::GetStakingStatusResponse as GeneratedGetStakingStatusResponse,
     get_unstaking_status_response::GetUnstakingStatusResponse as GeneratedGetUnstakingStatusResponse,
-    list_transaction_validators_response::ListTransactionValidatorsResponse as GeneratedListTransactionValidatorsResponse,
-    portfolio_staking_initiate_response::PortfolioStakingInitiateResponse as GeneratedPortfolioStakingInitiateResponse,
-    portfolio_staking_unstake_response::PortfolioStakingUnstakeResponse as GeneratedPortfolioStakingUnstakeResponse,
     preview_unstake_response::PreviewUnstakeResponse as GeneratedPreviewUnstakeResponse,
     staking_claim_rewards_response::StakingClaimRewardsResponse as GeneratedStakingClaimRewardsResponse,
     staking_initiate_response::StakingInitiateResponse as GeneratedStakingInitiateResponse,
