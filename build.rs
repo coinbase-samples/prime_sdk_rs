@@ -69,21 +69,60 @@ const TYPE_OVERRIDES: &[(&str, &str)] = &[
 fn main() {
     println!("cargo:rerun-if-changed=api_spec/prime-public-api-spec.json");
     println!("cargo:rerun-if-changed=api_spec/types/src/models");
+    println!("cargo:rerun-if-changed={GENERATED_DIR}");
+    println!("cargo:rerun-if-changed=src/generated_types.rs");
 
-    if !Path::new(MODELS_DIR).exists() {
-        eprintln!(
-            "Warning: OpenAPI Generator CLI output not found at {}",
-            MODELS_DIR
-        );
-        eprintln!("Please run 'make generate-types' or 'make all' first");
-        generate_fallback_types();
+    if Path::new(MODELS_DIR).exists() {
+        if let Err(e) = process_generated_types() {
+            panic!(
+                "Error processing generated types: {e}. Run 'make generate-types' to refresh OpenAPI output."
+            );
+        }
         return;
     }
 
-    if let Err(e) = process_generated_types() {
-        eprintln!("Error processing generated types: {}", e);
-        generate_fallback_types();
+    if has_committed_generated_types() {
+        println!(
+            "cargo:warning=Using committed types in {GENERATED_DIR} (run 'make generate-types' to regenerate from OpenAPI)"
+        );
+        return;
     }
+
+    panic!(
+        "OpenAPI model output not found at {MODELS_DIR} and no committed types in {GENERATED_DIR}. \
+         Run 'make generate-types' before building."
+    );
+}
+
+/// True when src/generated/mod.rs lists a full module tree (e.g. crates.io publish without api_spec/types).
+fn has_committed_generated_types() -> bool {
+    let mod_rs_path = Path::new(GENERATED_DIR).join("mod.rs");
+    let generated_types_path = Path::new("src/generated_types.rs");
+
+    if !mod_rs_path.exists() || !generated_types_path.exists() {
+        return false;
+    }
+
+    let Ok(mod_rs) = fs::read_to_string(&mod_rs_path) else {
+        return false;
+    };
+    let Ok(generated_types) = fs::read_to_string(&generated_types_path) else {
+        return false;
+    };
+
+    if mod_rs.contains("Fallback generated module") {
+        return false;
+    }
+
+    let module_count = mod_rs
+        .lines()
+        .filter(|line| {
+            let trimmed = line.trim();
+            trimmed.starts_with("pub mod ") && trimmed.ends_with(';')
+        })
+        .count();
+
+    module_count > 10 && generated_types.contains("pub mod generated")
 }
 
 fn process_generated_types() -> Result<(), Box<dyn std::error::Error>> {
@@ -872,38 +911,6 @@ fn write_output_files(mod_rs_content: &str) -> Result<(), Box<dyn std::error::Er
     fs::write(&generated_types_file, generated_types_content)?;
 
     Ok(())
-}
-
-fn generate_fallback_types() {
-    let generated_dir = Path::new(GENERATED_DIR);
-    if !generated_dir.exists() {
-        fs::create_dir_all(generated_dir).expect("Failed to create generated directory");
-    }
-
-    let fallback_content = "/* Fallback types - OpenAPI Generator CLI output not found\n\
-                           * Please run 'make generate-types' to generate proper types\n\
-                           */\n\
-                           use serde::{Deserialize, Serialize};\n\n\
-                           #[derive(Debug, Clone, Serialize, Deserialize)]\n\
-                           pub struct ActivityMetadataOrders {\n\
-                               // Empty struct for now - no properties defined in the API spec\n\
-                           }\n";
-
-    let fallback_file = generated_dir.join("fallback.rs");
-    fs::write(&fallback_file, fallback_content).expect("Failed to write fallback types");
-
-    let mod_rs_content = "/* Fallback generated module */\n\
-                         pub mod fallback;\n";
-
-    let mod_rs_file = generated_dir.join("mod.rs");
-    fs::write(&mod_rs_file, mod_rs_content).expect("Failed to write mod.rs");
-
-    let generated_types_content = "/* Fallback types - OpenAPI Generator CLI output not found */\n\
-                                  pub mod generated;\n";
-
-    let generated_types_file = Path::new("src").join("generated_types.rs");
-    fs::write(&generated_types_file, generated_types_content)
-        .expect("Failed to write generated_types.rs");
 }
 
 fn fix_custody_activity_type_references() -> Result<(), Box<dyn std::error::Error>> {
