@@ -23,6 +23,34 @@ use std::path::Path;
 const MODELS_DIR: &str = "api_spec/types/src/models";
 const GENERATED_DIR: &str = "src/generated";
 
+// Filename prefixes stripped when deriving module names from OpenAPI model files
+const FILENAME_PREFIXES: &[&str] = &[
+    "coinbase_period_custody_period_api_period_",
+    "coinbase_period_public_rest_api_period_",
+    "coinbase_brokerage_proxy_events_materialized_api_",
+    "coinbase_public_rest_api_",
+    "coinbase_custody_api_",
+    "prime_restapi_",
+    "public_rest_api_",
+    "prime_beta_",
+    "beta_prime_",
+    "beta_",
+];
+
+// Type-name prefixes stripped when simplifying generated struct/enum names
+const TYPE_PREFIXES: &[&str] = &[
+    "CoinbasePeriodCustodyPeriodApiPeriod",
+    "CoinbasePeriodPublicRestApiPeriod",
+    "CoinbaseBrokerageProxyEventsMaterializedApi",
+    "CoinbasePublicRestApi",
+    "CoinbaseCustodyApi",
+    "PrimeRestapi",
+    "PublicRestApi",
+    "PrimeBeta",
+    "BetaPrime",
+    "Beta",
+];
+
 // Type overrides for simplifying complex type names
 const TYPE_OVERRIDES: &[(&str, &str)] = &[
     (
@@ -33,6 +61,8 @@ const TYPE_OVERRIDES: &[(&str, &str)] = &[
         "CoinbasePeriodPublicRestApiPeriodActivityType",
         "PrimeActivityType",
     ),
+    ("CoinbaseCustodyApiActivityType", "CustodyActivityType"),
+    ("CoinbasePublicRestApiActivityType", "PrimeActivityType"),
     ("ActivityType", "PrimeActivityType"),
 ];
 
@@ -88,6 +118,10 @@ fn build_type_overrides() -> HashMap<&'static str, &'static str> {
     TYPE_OVERRIDES.iter().cloned().collect()
 }
 
+fn should_skip_model(filename: &str) -> bool {
+    filename == "google_protobuf_any" || filename == "google_rpc_status"
+}
+
 fn build_type_mapping(
     type_overrides: &HashMap<&str, &str>,
 ) -> Result<HashMap<String, String>, Box<dyn std::error::Error>> {
@@ -97,16 +131,12 @@ fn build_type_mapping(
     for entry in fs::read_dir(models_dir)? {
         let entry = entry?;
         if let Some(extension) = entry.path().extension() {
-            if extension == "rs"
-                && !entry
-                    .path()
-                    .file_stem()
-                    .unwrap()
-                    .to_str()
-                    .unwrap()
-                    .starts_with("google_")
-            {
-                process_type_mapping_file(&entry.path(), type_overrides, &mut type_to_module)?;
+            if extension == "rs" {
+                let path = entry.path();
+                let filename = path.file_stem().unwrap().to_str().unwrap();
+                if !should_skip_model(filename) {
+                    process_type_mapping_file(&path, type_overrides, &mut type_to_module)?;
+                }
             }
         }
     }
@@ -144,22 +174,48 @@ fn process_type_mapping_file(
 }
 
 fn simplify_filename(filename: &str) -> String {
-    filename
-        .replace("coinbase_period_custody_period_api_period_", "")
-        .replace("coinbase_period_public_rest_api_period_", "")
-        .replace("prime_restapi_", "")
+    let mut simplified = filename.to_string();
+    for prefix in FILENAME_PREFIXES {
+        simplified = simplified.replace(prefix, "");
+    }
+    simplified
+}
+
+fn strip_type_prefixes(type_name: &str) -> String {
+    let mut simplified = type_name.to_string();
+    loop {
+        let matching_prefix = TYPE_PREFIXES
+            .iter()
+            .filter(|prefix| simplified.starts_with(**prefix) && simplified.len() > prefix.len())
+            .max_by_key(|prefix| prefix.len());
+
+        match matching_prefix {
+            Some(prefix) => simplified = simplified[prefix.len()..].to_string(),
+            None => break,
+        }
+    }
+    simplified
+}
+
+fn strip_type_prefixes_from_identifiers(content: &str) -> String {
+    let identifier_re = Regex::new(r"\b([A-Z][A-Za-z0-9_]*)\b").unwrap();
+    identifier_re
+        .replace_all(content, |caps: &regex::Captures| {
+            let stripped = strip_type_prefixes(&caps[1]);
+            if stripped.is_empty() {
+                caps[1].to_string()
+            } else {
+                stripped
+            }
+        })
+        .into_owned()
 }
 
 fn apply_type_override(type_name: &str, type_overrides: &HashMap<&str, &str>) -> String {
     type_overrides
         .get(type_name)
         .map(|s| s.to_string())
-        .unwrap_or_else(|| {
-            type_name
-                .replace("CoinbasePeriodCustodyPeriodApiPeriod", "")
-                .replace("CoinbasePeriodPublicRestApiPeriod", "")
-                .replace("PrimeRestapi", "")
-        })
+        .unwrap_or_else(|| strip_type_prefixes(type_name))
 }
 
 fn create_mod_rs_header() -> String {
@@ -200,22 +256,18 @@ fn process_model_files(
     for entry in fs::read_dir(models_dir)? {
         let entry = entry?;
         if let Some(extension) = entry.path().extension() {
-            if extension == "rs"
-                && !entry
-                    .path()
-                    .file_stem()
-                    .unwrap()
-                    .to_str()
-                    .unwrap()
-                    .starts_with("google_")
-            {
-                process_single_model_file(
-                    &entry.path(),
-                    type_overrides,
-                    type_to_module,
-                    written_modules,
-                    mod_rs_content,
-                )?;
+            if extension == "rs" {
+                let path = entry.path();
+                let filename = path.file_stem().unwrap().to_str().unwrap();
+                if !should_skip_model(filename) {
+                    process_single_model_file(
+                        &path,
+                        type_overrides,
+                        type_to_module,
+                        written_modules,
+                        mod_rs_content,
+                    )?;
+                }
             }
         }
     }
@@ -316,8 +368,9 @@ fn process_file_content(
         }
     }
 
-    // Special case: if this is the custody activity type file, replace PrimeActivityType with CustodyActivityType
-    if filename == "coinbase_period_custody_period_api_period_activity_type"
+    // Special case: custody activity type uses CustodyActivityType instead of PrimeActivityType
+    if (filename == "coinbase_period_custody_period_api_period_activity_type"
+        || filename == "coinbase_custody_api_activity_type")
         && processed_content.contains("pub enum PrimeActivityType")
     {
         processed_content =
@@ -334,7 +387,7 @@ fn process_file_content(
             processed_content.replace("-> PrimeActivityType", "-> CustodyActivityType");
     }
     // For all custody files, replace references to PrimeActivityType with CustodyActivityType
-    if filename.starts_with("coinbase_period_custody_period_api_period_") {
+    if is_custody_model(filename) {
         processed_content = processed_content.replace("PrimeActivityType", "CustodyActivityType");
     }
 
@@ -350,10 +403,13 @@ fn should_skip_line(line: &str) -> bool {
 }
 
 fn apply_line_transformations(line: &str) -> String {
-    line.replace("models::", "crate::types::generated::generated::")
-        .replace("CoinbasePeriodCustodyPeriodApiPeriod", "")
-        .replace("CoinbasePeriodPublicRestApiPeriod", "")
-        .replace("PrimeRestapi", "")
+    let transformed = line.replace("models::", "crate::types::generated::generated::");
+    strip_type_prefixes_from_identifiers(&transformed)
+}
+
+fn is_custody_model(filename: &str) -> bool {
+    filename.starts_with("coinbase_period_custody_period_api_period_")
+        || filename.starts_with("coinbase_custody_api_")
 }
 
 fn apply_type_overrides_to_line(line: &str, type_overrides: &HashMap<&str, &str>) -> String {

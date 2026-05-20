@@ -17,6 +17,7 @@
  */
 
 use serde::{Deserialize, Serialize};
+use crate::types::generated::generated::secondary_permission::SecondaryPermission;
 use crate::types::generated::generated::user_role::UserRole;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
@@ -38,6 +39,12 @@ pub struct PortfolioUser {
     pub entity_id: Option<String>,
     #[serde(rename = "role", skip_serializing_if = "Option::is_none")]
     pub role: Option<UserRole>,
+    /// All primary roles assigned to the user.
+    #[serde(rename = "roles", skip_serializing_if = "Option::is_none")]
+    pub roles: Option<Vec<UserRole>>,
+    /// All secondary permissions assigned to the user.
+    #[serde(rename = "secondary_permissions", skip_serializing_if = "Option::is_none")]
+    pub secondary_permissions: Option<Vec<SecondaryPermission>>,
 }
 impl PortfolioUser {
     pub fn new() -> PortfolioUser {
@@ -48,6 +55,8 @@ impl PortfolioUser {
             portfolio_id: None,
             entity_id: None,
             role: None,
+            roles: None,
+            secondary_permissions: None,
         }
     }
 }

@@ -102,6 +102,7 @@ impl AddressBookService {
             currency_symbol: request.currency_symbol,
             name: request.name,
             account_identifier: request.account_identifier,
+            chain_ids: None,
         };
 
         let req = HttpRequest::new(HttpMethod::Post, &path)

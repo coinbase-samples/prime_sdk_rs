@@ -31,6 +31,9 @@ pub struct CreatePortfolioAddressBookEntryRequest {
     /// Account Identifier (memo/destination tag)
     #[serde(rename = "account_identifier", skip_serializing_if = "Option::is_none")]
     pub account_identifier: Option<String>,
+    /// List of compatible chain IDs for the address, empty for Solana
+    #[serde(rename = "chain_ids", skip_serializing_if = "Option::is_none")]
+    pub chain_ids: Option<Vec<String>>,
 }
 impl CreatePortfolioAddressBookEntryRequest {
     pub fn new(address: String, currency_symbol: String, name: String) -> CreatePortfolioAddressBookEntryRequest {
@@ -39,6 +42,7 @@ impl CreatePortfolioAddressBookEntryRequest {
             currency_symbol,
             name,
             account_identifier: None,
+            chain_ids: None,
         }
     }
 }

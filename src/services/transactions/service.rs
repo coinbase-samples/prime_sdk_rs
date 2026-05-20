@@ -14,7 +14,8 @@
  * limitations under the License.
  */
 use super::types::{
-    GetTransactionRequest, GetTransactionResponse, ListPortfolioTransactionsRequest,
+    GetTransactionRequest, GetTransactionResponse, ListAdvancedTransferTransactionsRequest,
+    ListAdvancedTransferTransactionsResponse, ListPortfolioTransactionsRequest,
     ListPortfolioTransactionsResponse, ListWalletTransactionsRequest,
     ListWalletTransactionsResponse,
 };
@@ -39,6 +40,7 @@ use crate::types::generated::generated::{
     get_portfolio_transactions_response::GetPortfolioTransactionsResponse as GeneratedGetPortfolioTransactionsResponse,
     get_transaction_response::GetTransactionResponse as GeneratedGetTransactionResponse,
     get_wallet_transactions_response::GetWalletTransactionsResponse as GeneratedGetWalletTransactionsResponse,
+    list_advanced_transfer_transactions_response::ListAdvancedTransferTransactionsResponse as GeneratedListAdvancedTransferTransactionsResponse,
 };
 
 pub struct TransactionsService {
@@ -144,6 +146,20 @@ impl TransactionsService {
         let resp = self.client.execute(req).await?;
         let response: GeneratedGetWalletTransactionsResponse = resp.json().await?;
         Ok(response.into())
+    }
+
+    pub async fn list_advanced_transfer_transactions(
+        &self,
+        request: ListAdvancedTransferTransactionsRequest,
+    ) -> HttpResult<ListAdvancedTransferTransactionsResponse> {
+        let path = format!(
+            "portfolios/{}/advanced_transfers/{}/transactions",
+            request.portfolio_id, request.advanced_transfer_id
+        );
+        let req = HttpRequest::new(HttpMethod::Get, &path)
+            .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?;
+        let resp = self.client.execute(req).await?;
+        Ok(resp.json().await?)
     }
 
     pub async fn create_onchain_transaction(

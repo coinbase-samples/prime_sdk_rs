@@ -17,7 +17,10 @@
  */
 
 use serde::{Deserialize, Serialize};
+use crate::types::generated::generated::fcm_trading_session_details::FcmTradingSessionDetails;
+use crate::types::generated::generated::future_product_details::FutureProductDetails;
 use crate::types::generated::generated::product_permissions::ProductPermissions;
+use crate::types::generated::generated::product_type::ProductType;
 use crate::types::generated::generated::rfq_product_details::RfqProductDetails;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
@@ -51,6 +54,12 @@ pub struct Product {
     pub price_increment: Option<String>,
     #[serde(rename = "rfq_product_details", skip_serializing_if = "Option::is_none")]
     pub rfq_product_details: Option<Box<RfqProductDetails>>,
+    #[serde(rename = "product_type", skip_serializing_if = "Option::is_none")]
+    pub product_type: Option<ProductType>,
+    #[serde(rename = "fcm_trading_session_details", skip_serializing_if = "Option::is_none")]
+    pub fcm_trading_session_details: Option<Box<FcmTradingSessionDetails>>,
+    #[serde(rename = "future_product_details", skip_serializing_if = "Option::is_none")]
+    pub future_product_details: Option<Box<FutureProductDetails>>,
 }
 impl Product {
     pub fn new() -> Product {
@@ -65,6 +74,9 @@ impl Product {
             permissions: None,
             price_increment: None,
             rfq_product_details: None,
+            product_type: None,
+            fcm_trading_session_details: None,
+            future_product_details: None,
         }
     }
 }

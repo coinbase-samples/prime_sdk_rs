@@ -17,9 +17,13 @@
  */
 
 use serde::{Deserialize, Serialize};
+use crate::types::generated::generated::commission_detail_total::CommissionDetailTotal;
+use crate::types::generated::generated::limit_order_edit::LimitOrderEdit;
+use crate::types::generated::generated::order_edit::OrderEdit;
 use crate::types::generated::generated::order_side::OrderSide;
 use crate::types::generated::generated::order_status::OrderStatus;
 use crate::types::generated::generated::order_type::OrderType;
+use crate::types::generated::generated::product_type::ProductType;
 use crate::types::generated::generated::time_in_force_type::TimeInForceType;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
@@ -54,17 +58,17 @@ pub struct Order {
     pub limit_price: Option<String>,
     /// The start time of the order in UTC (only applies to TWAP, VWAP orders.)
     #[serde(rename = "start_time", skip_serializing_if = "Option::is_none")]
-    pub start_time: Option<String>,
+    pub start_time: Option<chrono::DateTime<chrono::FixedOffset>>,
     /// The expiry time of the order in UTC (applies to TWAP, VWAP, LIMIT, and STOP_LIMIT orders with `time_in_force` set to `GTD`)
     #[serde(rename = "expiry_time", skip_serializing_if = "Option::is_none")]
-    pub expiry_time: Option<String>,
+    pub expiry_time: Option<chrono::DateTime<chrono::FixedOffset>>,
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<OrderStatus>,
     #[serde(rename = "time_in_force", skip_serializing_if = "Option::is_none")]
     pub time_in_force: Option<TimeInForceType>,
     /// The order creation time as a UTC timestamp
     #[serde(rename = "created_at", skip_serializing_if = "Option::is_none")]
-    pub created_at: Option<String>,
+    pub created_at: Option<chrono::DateTime<chrono::FixedOffset>>,
     /// Size filled (in base asset units)
     #[serde(rename = "filled_quantity", skip_serializing_if = "Option::is_none")]
     pub filled_quantity: Option<String>,
@@ -95,6 +99,40 @@ pub struct Order {
     /// The client product ID of the fill indictating the settlment currency
     #[serde(rename = "client_product_id", skip_serializing_if = "Option::is_none")]
     pub client_product_id: Option<String>,
+    /// Post-only flag - indicates whether the order was placed as post-only
+    #[serde(rename = "post_only", skip_serializing_if = "Option::is_none")]
+    pub post_only: Option<bool>,
+    /// The history of order edits (deprecated: use edit_history instead)
+    #[serde(rename = "order_edit_history", skip_serializing_if = "Option::is_none")]
+    pub order_edit_history: Option<Vec<LimitOrderEdit>>,
+    /// Indicates if this was a raise exact order (size inclusive of fees for sell orders in quote)
+    #[serde(rename = "is_raise_exact", skip_serializing_if = "Option::is_none")]
+    pub is_raise_exact: Option<bool>,
+    /// Display size for the order
+    #[serde(rename = "display_size", skip_serializing_if = "Option::is_none")]
+    pub display_size: Option<String>,
+    /// The history of order edits
+    #[serde(rename = "edit_history", skip_serializing_if = "Option::is_none")]
+    pub edit_history: Option<Vec<OrderEdit>>,
+    /// The maximum order size that will show up on venue order books (in quote currency).
+    #[serde(rename = "display_quote_size", skip_serializing_if = "Option::is_none")]
+    pub display_quote_size: Option<String>,
+    /// The maximum order size that will show up on venue order books (in base currency).
+    #[serde(rename = "display_base_size", skip_serializing_if = "Option::is_none")]
+    pub display_base_size: Option<String>,
+    /// The peg offset type for PEG orders (PRICE, BASIS_POINTS, or CUMULATIVE_DEPTH_IN_BASE_UNITS)
+    #[serde(rename = "peg_offset_type", skip_serializing_if = "Option::is_none")]
+    pub peg_offset_type: Option<String>,
+    /// The offset value for PEG orders
+    #[serde(rename = "offset", skip_serializing_if = "Option::is_none")]
+    pub offset: Option<String>,
+    /// The wig (would if good) level for PEG orders - best price opposite to limit_price
+    #[serde(rename = "wig_level", skip_serializing_if = "Option::is_none")]
+    pub wig_level: Option<String>,
+    #[serde(rename = "product_type", skip_serializing_if = "Option::is_none")]
+    pub product_type: Option<ProductType>,
+    #[serde(rename = "commission_detail_total", skip_serializing_if = "Option::is_none")]
+    pub commission_detail_total: Option<Box<CommissionDetailTotal>>,
 }
 impl Order {
     pub fn new() -> Order {
@@ -124,6 +162,18 @@ impl Order {
             net_average_filled_price: None,
             user_context: None,
             client_product_id: None,
+            post_only: None,
+            order_edit_history: None,
+            is_raise_exact: None,
+            display_size: None,
+            edit_history: None,
+            display_quote_size: None,
+            display_base_size: None,
+            peg_offset_type: None,
+            offset: None,
+            wig_level: None,
+            product_type: None,
+            commission_detail_total: None,
         }
     }
 }

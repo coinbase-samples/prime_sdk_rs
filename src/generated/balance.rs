@@ -58,6 +58,9 @@ pub struct Balance {
     /// Amount available for unbonding/unstaking, in whole units
     #[serde(rename = "unbondable_amount", skip_serializing_if = "Option::is_none")]
     pub unbondable_amount: Option<String>,
+    /// ETH staking rewards currently available to claim, in whole units. This field is returned only in GetWalletBalance responses for ETH wallets. It is omitted or empty for portfolio-level responses and for non-ETH assets; use pending_rewards_amount where applicable.
+    #[serde(rename = "claimable_rewards_amount", skip_serializing_if = "Option::is_none")]
+    pub claimable_rewards_amount: Option<String>,
 }
 impl Balance {
     pub fn new() -> Balance {
@@ -75,6 +78,7 @@ impl Balance {
             withdrawable_amount: None,
             fiat_amount: None,
             unbondable_amount: None,
+            claimable_rewards_amount: None,
         }
     }
 }

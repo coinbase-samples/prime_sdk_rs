@@ -21,6 +21,8 @@ pub use types::{
     CreateConversionRequest, CreateConversionResponse, CreateOnchainTransactionRequest,
     CreateOnchainTransactionResponse, CreateWalletTransferRequest, CreateWalletTransferResponse,
     CreateWalletWithdrawalRequest, CreateWalletWithdrawalResponse, GetTransactionRequest,
-    GetTransactionResponse, ListPortfolioTransactionsRequest, ListPortfolioTransactionsResponse,
-    ListWalletTransactionsRequest, ListWalletTransactionsResponse,
+    GetTransactionResponse, ListAdvancedTransferTransactionsRequest,
+    ListAdvancedTransferTransactionsResponse, ListPortfolioTransactionsRequest,
+    ListPortfolioTransactionsResponse, ListWalletTransactionsRequest,
+    ListWalletTransactionsResponse,
 };

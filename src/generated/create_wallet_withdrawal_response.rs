@@ -18,6 +18,7 @@
 
 use serde::{Deserialize, Serialize};
 use crate::types::generated::generated::blockchain_address::BlockchainAddress;
+use crate::types::generated::generated::counterparty_destination::CounterpartyDestination;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct CreateWalletWithdrawalResponse {
@@ -44,6 +45,8 @@ pub struct CreateWalletWithdrawalResponse {
     pub source_type: Option<String>,
     #[serde(rename = "blockchain_destination", skip_serializing_if = "Option::is_none")]
     pub blockchain_destination: Option<Box<BlockchainAddress>>,
+    #[serde(rename = "counterparty_destination", skip_serializing_if = "Option::is_none")]
+    pub counterparty_destination: Option<Box<CounterpartyDestination>>,
     #[serde(rename = "blockchain_source", skip_serializing_if = "Option::is_none")]
     pub blockchain_source: Option<Box<BlockchainAddress>>,
     /// The id of the just created transaction
@@ -61,6 +64,7 @@ impl CreateWalletWithdrawalResponse {
             destination_type: None,
             source_type: None,
             blockchain_destination: None,
+            counterparty_destination: None,
             blockchain_source: None,
             transaction_id: None,
         }

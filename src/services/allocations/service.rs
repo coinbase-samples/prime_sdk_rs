@@ -15,11 +15,16 @@
  */
 use crate::client::PrimeClient;
 use crate::services::allocations::types::{
-    GetAllocationRequest, GetAllocationResponse, ListAllocationsByClientNettingIdRequest,
-    ListAllocationsByClientNettingIdResponse, ListPortfolioAllocationsRequest,
-    ListPortfolioAllocationsResponse,
+    CreateAllocationRequest, CreateAllocationResponse, CreateNetAllocationRequest,
+    CreateNetAllocationResponse, GetAllocationRequest, GetAllocationResponse,
+    ListAllocationsByClientNettingIdRequest, ListAllocationsByClientNettingIdResponse,
+    ListPortfolioAllocationsRequest, ListPortfolioAllocationsResponse,
 };
 use crate::types::generated::generated::{
+    create_allocation_request::CreateAllocationRequest as GeneratedCreateAllocationRequest,
+    create_allocation_response::CreateAllocationResponse as GeneratedCreateAllocationResponse,
+    create_net_allocation_request::CreateNetAllocationRequest as GeneratedCreateNetAllocationRequest,
+    create_net_allocation_response::CreateNetAllocationResponse as GeneratedCreateNetAllocationResponse,
     get_allocation_response::GetAllocationResponse as GeneratedGetAllocationResponse,
     get_allocations_by_client_netting_id_response::GetAllocationsByClientNettingIdResponse as GeneratedGetAllocationsByClientNettingIdResponse,
     get_portfolio_allocations_response::GetPortfolioAllocationsResponse as GeneratedGetPortfolioAllocationsResponse,
@@ -143,5 +148,39 @@ impl AllocationService {
         let response: GeneratedGetAllocationResponse = resp.json().await?;
 
         Ok(response.into())
+    }
+
+    /// Create an allocation for a portfolio
+    pub async fn create_allocation(
+        &self,
+        request: CreateAllocationRequest,
+    ) -> crate::error::HttpResult<CreateAllocationResponse> {
+        let body = request;
+        let json_body = serde_json::to_value(&body)
+            .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?;
+        let req = HttpRequest::new(HttpMethod::Post, "allocations")
+            .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?
+            .with_json_body(json_body);
+
+        let resp = self.client.execute(req).await?;
+        let response: GeneratedCreateAllocationResponse = resp.json().await?;
+        Ok(response)
+    }
+
+    /// Create a net allocation for a portfolio
+    pub async fn create_net_allocation(
+        &self,
+        request: CreateNetAllocationRequest,
+    ) -> crate::error::HttpResult<CreateNetAllocationResponse> {
+        let body = request;
+        let json_body = serde_json::to_value(&body)
+            .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?;
+        let req = HttpRequest::new(HttpMethod::Post, "allocations/net")
+            .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?
+            .with_json_body(json_body);
+
+        let resp = self.client.execute(req).await?;
+        let response: GeneratedCreateNetAllocationResponse = resp.json().await?;
+        Ok(response)
     }
 }

@@ -24,6 +24,11 @@ use crate::types::generated::generated::{
     schedule_futures_sweep_response::ScheduleFuturesSweepResponse as GeneratedScheduleFuturesSweepResponse,
     set_auto_sweep_request::SetAutoSweepRequest as GeneratedSetAutoSweepRequest,
     set_auto_sweep_response::SetAutoSweepResponse as GeneratedSetAutoSweepResponse,
+    get_fcm_equity_response::GetFcmEquityResponse as GeneratedGetFcmEquityResponse,
+    get_fcm_margin_call_details_response::GetFcmMarginCallDetailsResponse as GeneratedGetFcmMarginCallDetailsResponse,
+    get_fcm_risk_limits_response::GetFcmRiskLimitsResponse as GeneratedGetFcmRiskLimitsResponse,
+    get_fcm_settings_response::GetFcmSettingsResponse as GeneratedGetFcmSettingsResponse,
+    set_fcm_settings_response::SetFcmSettingsResponse as GeneratedSetFcmSettingsResponse,
 };
 use core_rs::http_client::HttpClient;
 use core_rs::http_method::HttpMethod;
@@ -136,5 +141,63 @@ impl FuturesService {
         let resp = self.client.execute(req).await?;
         let response: GeneratedCancelFuturesSweepResponse = resp.json().await?;
         Ok(response.into())
+    }
+
+    pub async fn get_fcm_equity(
+        &self,
+        request: GetFcmEquityRequest,
+    ) -> HttpResult<GetFcmEquityResponse> {
+        let path = format!("entities/{}/futures/equity", request.entity_id);
+        let req = HttpRequest::new(HttpMethod::Get, &path)
+            .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?;
+        let resp = self.client.execute(req).await?;
+        Ok(resp.json().await?)
+    }
+
+    pub async fn get_fcm_margin_call_details(
+        &self,
+        request: GetFcmMarginCallDetailsRequest,
+    ) -> HttpResult<GetFcmMarginCallDetailsResponse> {
+        let path = format!("entities/{}/futures/margin_call_details", request.entity_id);
+        let req = HttpRequest::new(HttpMethod::Get, &path)
+            .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?;
+        let resp = self.client.execute(req).await?;
+        Ok(resp.json().await?)
+    }
+
+    pub async fn get_fcm_risk_limits(
+        &self,
+        request: GetFcmRiskLimitsRequest,
+    ) -> HttpResult<GetFcmRiskLimitsResponse> {
+        let path = format!("entities/{}/futures/risk_limits", request.entity_id);
+        let req = HttpRequest::new(HttpMethod::Get, &path)
+            .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?;
+        let resp = self.client.execute(req).await?;
+        Ok(resp.json().await?)
+    }
+
+    pub async fn get_fcm_settings(
+        &self,
+        request: GetFcmSettingsRequest,
+    ) -> HttpResult<GetFcmSettingsResponse> {
+        let path = format!("entities/{}/futures/settings", request.entity_id);
+        let req = HttpRequest::new(HttpMethod::Get, &path)
+            .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?;
+        let resp = self.client.execute(req).await?;
+        Ok(resp.json().await?)
+    }
+
+    pub async fn set_fcm_settings(
+        &self,
+        request: SetFcmSettingsRequest,
+    ) -> HttpResult<SetFcmSettingsResponse> {
+        let path = format!("entities/{}/futures/settings", request.entity_id);
+        let json_body = serde_json::to_value(&request.body)
+            .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?;
+        let req = HttpRequest::new(HttpMethod::Post, &path)
+            .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?
+            .with_json_body(json_body);
+        let resp = self.client.execute(req).await?;
+        Ok(resp.json().await?)
     }
 }

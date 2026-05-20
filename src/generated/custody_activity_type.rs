@@ -19,8 +19,6 @@
 use serde::{Deserialize, Serialize};
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum CustodyActivityType {
-    #[serde(rename = "ACTIVITY_TYPE_UNKNOWN")]
-    ActivityTypeUnknown,
     #[serde(rename = "ACTIVITY_TYPE_GOVERNANCE_VOTE")]
     ActivityTypeGovernanceVote,
     #[serde(rename = "ACTIVITY_TYPE_INVITATION")]
@@ -83,7 +81,6 @@ pub enum CustodyActivityType {
 impl std::fmt::Display for CustodyActivityType {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match self {
-            Self::ActivityTypeUnknown => write!(f, "ACTIVITY_TYPE_UNKNOWN"),
             Self::ActivityTypeGovernanceVote => write!(f, "ACTIVITY_TYPE_GOVERNANCE_VOTE"),
             Self::ActivityTypeInvitation => write!(f, "ACTIVITY_TYPE_INVITATION"),
             Self::ActivityTypeWalletChange => write!(f, "ACTIVITY_TYPE_WALLET_CHANGE"),
@@ -118,6 +115,6 @@ impl std::fmt::Display for CustodyActivityType {
 }
 impl Default for CustodyActivityType {
     fn default() -> CustodyActivityType {
-        Self::ActivityTypeUnknown
+        Self::ActivityTypeGovernanceVote
     }
 }

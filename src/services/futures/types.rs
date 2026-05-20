@@ -16,12 +16,18 @@
 use crate::types::generated::generated::{
     fcm_futures_sweep::FcmFuturesSweep, fcm_position::FcmPosition,
     get_fcm_balance_response::GetFcmBalanceResponse as GeneratedGetFcmBalanceResponse,
+    get_fcm_equity_response::GetFcmEquityResponse as GeneratedGetFcmEquityResponse,
+    get_fcm_margin_call_details_response::GetFcmMarginCallDetailsResponse as GeneratedGetFcmMarginCallDetailsResponse,
+    get_fcm_risk_limits_response::GetFcmRiskLimitsResponse as GeneratedGetFcmRiskLimitsResponse,
+    get_fcm_settings_response::GetFcmSettingsResponse as GeneratedGetFcmSettingsResponse,
     get_futures_sweeps_response::GetFuturesSweepsResponse as GeneratedGetFuturesSweepsResponse,
     get_positions_response::GetPositionsResponse as GeneratedGetPositionsResponse,
     schedule_futures_sweep_request::ScheduleFuturesSweepRequest as GeneratedScheduleFuturesSweepRequest,
     schedule_futures_sweep_response::ScheduleFuturesSweepResponse as GeneratedScheduleFuturesSweepResponse,
     set_auto_sweep_request::SetAutoSweepRequest as GeneratedSetAutoSweepRequest,
     set_auto_sweep_response::SetAutoSweepResponse as GeneratedSetAutoSweepResponse,
+    set_fcm_settings_request::SetFcmSettingsRequest as GeneratedSetFcmSettingsRequest,
+    set_fcm_settings_response::SetFcmSettingsResponse as GeneratedSetFcmSettingsResponse,
 };
 
 // ============================================================================
@@ -228,3 +234,70 @@ impl From<crate::types::generated::generated::cancel_futures_sweep_response::Can
         }
     }
 }
+
+#[derive(Debug, Clone)]
+pub struct GetFcmEquityRequest {
+    pub entity_id: String,
+}
+impl GetFcmEquityRequest {
+    pub fn new(entity_id: impl Into<String>) -> Self {
+        Self {
+            entity_id: entity_id.into(),
+        }
+    }
+}
+pub type GetFcmEquityResponse = GeneratedGetFcmEquityResponse;
+
+#[derive(Debug, Clone)]
+pub struct GetFcmMarginCallDetailsRequest {
+    pub entity_id: String,
+}
+impl GetFcmMarginCallDetailsRequest {
+    pub fn new(entity_id: impl Into<String>) -> Self {
+        Self {
+            entity_id: entity_id.into(),
+        }
+    }
+}
+pub type GetFcmMarginCallDetailsResponse = GeneratedGetFcmMarginCallDetailsResponse;
+
+#[derive(Debug, Clone)]
+pub struct GetFcmRiskLimitsRequest {
+    pub entity_id: String,
+}
+impl GetFcmRiskLimitsRequest {
+    pub fn new(entity_id: impl Into<String>) -> Self {
+        Self {
+            entity_id: entity_id.into(),
+        }
+    }
+}
+pub type GetFcmRiskLimitsResponse = GeneratedGetFcmRiskLimitsResponse;
+
+#[derive(Debug, Clone)]
+pub struct GetFcmSettingsRequest {
+    pub entity_id: String,
+}
+impl GetFcmSettingsRequest {
+    pub fn new(entity_id: impl Into<String>) -> Self {
+        Self {
+            entity_id: entity_id.into(),
+        }
+    }
+}
+pub type GetFcmSettingsResponse = GeneratedGetFcmSettingsResponse;
+
+#[derive(Debug, Clone)]
+pub struct SetFcmSettingsRequest {
+    pub entity_id: String,
+    pub body: GeneratedSetFcmSettingsRequest,
+}
+impl SetFcmSettingsRequest {
+    pub fn new(entity_id: impl Into<String>, body: GeneratedSetFcmSettingsRequest) -> Self {
+        Self {
+            entity_id: entity_id.into(),
+            body,
+        }
+    }
+}
+pub type SetFcmSettingsResponse = GeneratedSetFcmSettingsResponse;

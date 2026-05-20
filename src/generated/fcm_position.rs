@@ -43,7 +43,7 @@ pub struct FcmPosition {
     pub avg_entry_price: Option<String>,
     /// Expiration time of position
     #[serde(rename = "expiration_time", skip_serializing_if = "Option::is_none")]
-    pub expiration_time: Option<String>,
+    pub expiration_time: Option<chrono::DateTime<chrono::FixedOffset>>,
 }
 impl FcmPosition {
     pub fn new() -> FcmPosition {

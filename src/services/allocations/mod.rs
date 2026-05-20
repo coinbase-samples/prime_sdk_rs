@@ -18,7 +18,8 @@ pub mod types;
 
 pub use service::AllocationService;
 pub use types::{
-    GetAllocationRequest, GetAllocationResponse, ListAllocationsByClientNettingIdRequest,
-    ListAllocationsByClientNettingIdResponse, ListPortfolioAllocationsRequest,
-    ListPortfolioAllocationsResponse,
+    CreateAllocationRequest, CreateAllocationResponse, CreateNetAllocationRequest,
+    CreateNetAllocationResponse, GetAllocationRequest, GetAllocationResponse,
+    ListAllocationsByClientNettingIdRequest, ListAllocationsByClientNettingIdResponse,
+    ListPortfolioAllocationsRequest, ListPortfolioAllocationsResponse,
 };

@@ -17,9 +17,19 @@ use crate::types::generated::generated::{
     accrual::Accrual, buying_power::BuyingPower, conversion::Conversion,
     create_new_locates_request::CreateNewLocatesRequest as GeneratedCreateNewLocatesRequest,
     create_new_locates_response::CreateNewLocatesResponse as GeneratedCreateNewLocatesResponse,
-    existing_locate::ExistingLocate, locate::Locate, margin_information::MarginInformation,
+    existing_locate::ExistingLocate,
+    get_cross_margin_overview_response::GetCrossMarginOverviewResponse as GeneratedGetCrossMarginOverviewResponse,
+    get_cross_margin_prime_overview_response::GetCrossMarginPrimeOverviewResponse as GeneratedGetCrossMarginPrimeOverviewResponse,
+    get_cross_margin_risk_parameters_response::GetCrossMarginRiskParametersResponse as GeneratedGetCrossMarginRiskParametersResponse,
+    get_market_data_response::GetMarketDataResponse as GeneratedGetMarketDataResponse,
+    list_financing_eligible_assets_response::ListFinancingEligibleAssetsResponse as GeneratedListFinancingEligibleAssetsResponse,
+    list_tf_obligations_response::ListTfObligationsResponse as GeneratedListTfObligationsResponse,
+    locate::Locate,
+    margin_information::MarginInformation,
     margin_summary_historical::MarginSummaryHistorical,
     post_trade_credit_information::PostTradeCreditInformation,
+    set_funding_settings_request::SetFundingSettingsRequest as GeneratedSetFundingSettingsRequest,
+    set_funding_settings_response::SetFundingSettingsResponse as GeneratedSetFundingSettingsResponse,
     tiered_pricing_fee::TieredPricingFee, withdrawal_power::WithdrawalPower,
 };
 
@@ -450,3 +460,92 @@ impl From<GeneratedCreateNewLocatesResponse> for CreateNewLocatesResponse {
         }
     }
 }
+
+#[derive(Debug, Clone)]
+pub struct GetCrossMarginOverviewRequest {
+    pub entity_id: String,
+}
+impl GetCrossMarginOverviewRequest {
+    pub fn new(entity_id: impl Into<String>) -> Self {
+        Self {
+            entity_id: entity_id.into(),
+        }
+    }
+}
+pub type GetCrossMarginOverviewResponse = GeneratedGetCrossMarginOverviewResponse;
+
+#[derive(Debug, Clone)]
+pub struct GetCrossMarginRiskParametersRequest {
+    pub entity_id: String,
+}
+impl GetCrossMarginRiskParametersRequest {
+    pub fn new(entity_id: impl Into<String>) -> Self {
+        Self {
+            entity_id: entity_id.into(),
+        }
+    }
+}
+pub type GetCrossMarginRiskParametersResponse = GeneratedGetCrossMarginRiskParametersResponse;
+
+#[derive(Debug, Clone)]
+pub struct GetCrossMarginPrimeOverviewRequest {
+    pub entity_id: String,
+}
+impl GetCrossMarginPrimeOverviewRequest {
+    pub fn new(entity_id: impl Into<String>) -> Self {
+        Self {
+            entity_id: entity_id.into(),
+        }
+    }
+}
+pub type GetCrossMarginPrimeOverviewResponse = GeneratedGetCrossMarginPrimeOverviewResponse;
+
+#[derive(Debug, Clone)]
+pub struct ListFinancingEligibleAssetsRequest;
+impl ListFinancingEligibleAssetsRequest {
+    pub fn new() -> Self {
+        Self
+    }
+}
+pub type ListFinancingEligibleAssetsResponse = GeneratedListFinancingEligibleAssetsResponse;
+
+#[derive(Debug, Clone)]
+pub struct ListTfObligationsRequest {
+    pub entity_id: String,
+}
+impl ListTfObligationsRequest {
+    pub fn new(entity_id: impl Into<String>) -> Self {
+        Self {
+            entity_id: entity_id.into(),
+        }
+    }
+}
+pub type ListTfObligationsResponse = GeneratedListTfObligationsResponse;
+
+#[derive(Debug, Clone)]
+pub struct GetMarketDataRequest {
+    pub entity_id: String,
+}
+impl GetMarketDataRequest {
+    pub fn new(entity_id: impl Into<String>) -> Self {
+        Self {
+            entity_id: entity_id.into(),
+        }
+    }
+}
+pub type GetMarketDataResponse = GeneratedGetMarketDataResponse;
+
+#[derive(Debug, Clone)]
+pub struct SetFundingSettingsRequest {
+    pub entity_id: String,
+    pub body: GeneratedSetFundingSettingsRequest,
+}
+impl SetFundingSettingsRequest {
+    pub fn new(entity_id: impl Into<String>, body: GeneratedSetFundingSettingsRequest) -> Self {
+        Self {
+            entity_id: entity_id.into(),
+            body,
+        }
+    }
+}
+pub type SetFundingSettingsResponse = GeneratedSetFundingSettingsResponse;

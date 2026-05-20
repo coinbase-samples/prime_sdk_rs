@@ -21,8 +21,6 @@ use serde::{Deserialize, Serialize};
 /// - UNKNOWN_ORDER_SIDE: nil value  - BUY: Buy order  - SELL: Sell order
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum OrderSide {
-    #[serde(rename = "UNKNOWN_ORDER_SIDE")]
-    UnknownOrderSide,
     #[serde(rename = "BUY")]
     Buy,
     #[serde(rename = "SELL")]
@@ -31,7 +29,6 @@ pub enum OrderSide {
 impl std::fmt::Display for OrderSide {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match self {
-            Self::UnknownOrderSide => write!(f, "UNKNOWN_ORDER_SIDE"),
             Self::Buy => write!(f, "BUY"),
             Self::Sell => write!(f, "SELL"),
         }
@@ -39,6 +36,6 @@ impl std::fmt::Display for OrderSide {
 }
 impl Default for OrderSide {
     fn default() -> OrderSide {
-        Self::UnknownOrderSide
+        Self::Buy
     }
 }

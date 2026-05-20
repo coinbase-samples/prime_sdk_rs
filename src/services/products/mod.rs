@@ -17,4 +17,7 @@ pub mod service;
 pub mod types;
 
 pub use service::ProductsService;
-pub use types::{ListPortfolioProductsRequest, ListPortfolioProductsResponse};
+pub use types::{
+    GetCandlesRequest, GetCandlesResponse, ListPortfolioProductsRequest,
+    ListPortfolioProductsResponse,
+};

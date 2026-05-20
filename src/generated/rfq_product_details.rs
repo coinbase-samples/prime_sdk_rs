@@ -19,12 +19,27 @@
 use serde::{Deserialize, Serialize};
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct RfqProductDetails {
+    /// Whether the product is tradable via RFQ
     #[serde(rename = "tradable", skip_serializing_if = "Option::is_none")]
     pub tradable: Option<bool>,
+    /// Deprecated: Value will be an empty string
     #[serde(rename = "min_notional_size", skip_serializing_if = "Option::is_none")]
     pub min_notional_size: Option<String>,
+    /// Deprecated: Value will be an empty string
     #[serde(rename = "max_notional_size", skip_serializing_if = "Option::is_none")]
     pub max_notional_size: Option<String>,
+    /// Minimum base size for RFQ
+    #[serde(rename = "min_base_size", skip_serializing_if = "Option::is_none")]
+    pub min_base_size: Option<String>,
+    /// Maximum base size for RFQ
+    #[serde(rename = "max_base_size", skip_serializing_if = "Option::is_none")]
+    pub max_base_size: Option<String>,
+    /// Minimum quote size for RFQ
+    #[serde(rename = "min_quote_size", skip_serializing_if = "Option::is_none")]
+    pub min_quote_size: Option<String>,
+    /// Maximum quote size for RFQ
+    #[serde(rename = "max_quote_size", skip_serializing_if = "Option::is_none")]
+    pub max_quote_size: Option<String>,
 }
 impl RfqProductDetails {
     pub fn new() -> RfqProductDetails {
@@ -32,6 +47,10 @@ impl RfqProductDetails {
             tradable: None,
             min_notional_size: None,
             max_notional_size: None,
+            min_base_size: None,
+            max_base_size: None,
+            min_quote_size: None,
+            max_quote_size: None,
         }
     }
 }

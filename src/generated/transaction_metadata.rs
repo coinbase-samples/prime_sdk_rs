@@ -18,6 +18,7 @@
 
 use serde::{Deserialize, Serialize};
 use crate::types::generated::generated::match_metadata::MatchMetadata;
+use crate::types::generated::generated::reward_metadata::RewardMetadata;
 use crate::types::generated::generated::web3_transaction_metadata::Web3TransactionMetadata;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
@@ -26,12 +27,15 @@ pub struct TransactionMetadata {
     pub match_metadata: Option<Box<MatchMetadata>>,
     #[serde(rename = "web3_transaction_metadata", skip_serializing_if = "Option::is_none")]
     pub web3_transaction_metadata: Option<Box<Web3TransactionMetadata>>,
+    #[serde(rename = "reward_metadata", skip_serializing_if = "Option::is_none")]
+    pub reward_metadata: Option<Box<RewardMetadata>>,
 }
 impl TransactionMetadata {
     pub fn new() -> TransactionMetadata {
         TransactionMetadata {
             match_metadata: None,
             web3_transaction_metadata: None,
+            reward_metadata: None,
         }
     }
 }

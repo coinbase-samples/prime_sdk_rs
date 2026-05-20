@@ -19,8 +19,6 @@
 use serde::{Deserialize, Serialize};
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum SigningStatus {
-    #[serde(rename = "SIGNING_STATUS_UNKNOWN")]
-    SigningStatusUnknown,
     #[serde(rename = "SIGNED")]
     Signed,
     #[serde(rename = "UNSIGNED")]
@@ -29,7 +27,6 @@ pub enum SigningStatus {
 impl std::fmt::Display for SigningStatus {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match self {
-            Self::SigningStatusUnknown => write!(f, "SIGNING_STATUS_UNKNOWN"),
             Self::Signed => write!(f, "SIGNED"),
             Self::Unsigned => write!(f, "UNSIGNED"),
         }
@@ -37,6 +34,6 @@ impl std::fmt::Display for SigningStatus {
 }
 impl Default for SigningStatus {
     fn default() -> SigningStatus {
-        Self::SigningStatusUnknown
+        Self::Signed
     }
 }

@@ -27,7 +27,7 @@ pub struct AmountDue {
     pub amount: Option<String>,
     /// The date this settlement is due, expressed in UTC
     #[serde(rename = "due_date", skip_serializing_if = "Option::is_none")]
-    pub due_date: Option<String>,
+    pub due_date: Option<chrono::DateTime<chrono::FixedOffset>>,
 }
 impl AmountDue {
     pub fn new() -> AmountDue {

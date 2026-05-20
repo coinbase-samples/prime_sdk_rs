@@ -19,7 +19,7 @@ use crate::types::generated::generated::{
     create_conversion_request::CreateConversionRequest as GeneratedCreateConversionRequest,
     create_conversion_response::CreateConversionResponse as GeneratedCreateConversionResponse,
     create_onchain_transaction_request::CreateOnchainTransactionRequest as GeneratedCreateOnchainTransactionRequest,
-    create_onchain_transaction_request_period_evm_params::CreateOnchainTransactionRequestPeriodEvmParams,
+    create_onchain_transaction_request_evm_params::CreateOnchainTransactionRequestEvmParams,
     create_onchain_transaction_response::CreateOnchainTransactionResponse as GeneratedCreateOnchainTransactionResponse,
     create_wallet_transfer_response::CreateWalletTransferResponse as GeneratedCreateWalletTransferResponse,
     create_wallet_withdrawal_request::CreateWalletWithdrawalRequest as GeneratedCreateWalletWithdrawalRequest,
@@ -28,6 +28,7 @@ use crate::types::generated::generated::{
     get_portfolio_transactions_response::GetPortfolioTransactionsResponse as GeneratedGetPortfolioTransactionsResponse,
     get_transaction_response::GetTransactionResponse as GeneratedGetTransactionResponse,
     get_wallet_transactions_response::GetWalletTransactionsResponse as GeneratedGetWalletTransactionsResponse,
+    list_advanced_transfer_transactions_response::ListAdvancedTransferTransactionsResponse as GeneratedListAdvancedTransferTransactionsResponse,
     paginated_response::PaginatedResponse, payment_method_destination::PaymentMethodDestination,
     rpc_config::RpcConfig, sort_direction::SortDirection, transaction::Transaction,
     transaction_type::TransactionType,
@@ -194,7 +195,7 @@ pub type GetTransactionResponse = GeneratedGetTransactionResponse;
 pub struct CreateOnchainTransactionRequest {
     pub raw_unsigned_txn: String,
     pub rpc: Option<Box<RpcConfig>>,
-    pub evm_params: Option<Box<CreateOnchainTransactionRequestPeriodEvmParams>>,
+    pub evm_params: Option<Box<CreateOnchainTransactionRequestEvmParams>>,
 }
 
 impl CreateOnchainTransactionRequest {
@@ -211,7 +212,7 @@ impl CreateOnchainTransactionRequest {
     }
     pub fn with_evm_params(
         mut self,
-        evm_params: CreateOnchainTransactionRequestPeriodEvmParams,
+        evm_params: CreateOnchainTransactionRequestEvmParams,
     ) -> Self {
         self.evm_params = Some(Box::new(evm_params));
         self
@@ -308,6 +309,8 @@ impl From<CreateWalletWithdrawalRequest> for GeneratedCreateWalletWithdrawalRequ
             currency_symbol: req.currency_symbol,
             payment_method: req.payment_method,
             blockchain_address: req.blockchain_address,
+            counterparty: None,
+            travel_rule_data: None,
         }
     }
 }
@@ -351,3 +354,24 @@ impl From<CreateConversionRequest> for GeneratedCreateConversionRequest {
     }
 }
 pub type CreateConversionResponse = GeneratedCreateConversionResponse;
+
+#[derive(Debug, Clone)]
+pub struct ListAdvancedTransferTransactionsRequest {
+    pub portfolio_id: String,
+    pub advanced_transfer_id: String,
+}
+
+impl ListAdvancedTransferTransactionsRequest {
+    pub fn new(
+        portfolio_id: impl Into<String>,
+        advanced_transfer_id: impl Into<String>,
+    ) -> Self {
+        Self {
+            portfolio_id: portfolio_id.into(),
+            advanced_transfer_id: advanced_transfer_id.into(),
+        }
+    }
+}
+
+pub type ListAdvancedTransferTransactionsResponse =
+    GeneratedListAdvancedTransferTransactionsResponse;

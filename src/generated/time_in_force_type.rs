@@ -21,8 +21,6 @@ use serde::{Deserialize, Serialize};
 /// - UNKNOWN_TIME_IN_FORCE: nil value  - GOOD_UNTIL_DATE_TIME: Expires at a certain date/time  - GOOD_UNTIL_CANCELLED: Order stays on the books until cancelled  - IMMEDIATE_OR_CANCEL: Order is executed immediately at submission or is cancelled  - FILL_OR_KILL: Order is executed immediately and fully at submission or is cancelled
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum TimeInForceType {
-    #[serde(rename = "UNKNOWN_TIME_IN_FORCE")]
-    UnknownTimeInForce,
     #[serde(rename = "GOOD_UNTIL_DATE_TIME")]
     GoodUntilDateTime,
     #[serde(rename = "GOOD_UNTIL_CANCELLED")]
@@ -35,7 +33,6 @@ pub enum TimeInForceType {
 impl std::fmt::Display for TimeInForceType {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match self {
-            Self::UnknownTimeInForce => write!(f, "UNKNOWN_TIME_IN_FORCE"),
             Self::GoodUntilDateTime => write!(f, "GOOD_UNTIL_DATE_TIME"),
             Self::GoodUntilCancelled => write!(f, "GOOD_UNTIL_CANCELLED"),
             Self::ImmediateOrCancel => write!(f, "IMMEDIATE_OR_CANCEL"),
@@ -45,6 +42,6 @@ impl std::fmt::Display for TimeInForceType {
 }
 impl Default for TimeInForceType {
     fn default() -> TimeInForceType {
-        Self::UnknownTimeInForce
+        Self::GoodUntilDateTime
     }
 }

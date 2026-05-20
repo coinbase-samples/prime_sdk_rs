@@ -17,6 +17,7 @@
  */
 
 use serde::{Deserialize, Serialize};
+/// StakingUnstakeResponse : StakingUnstakeResponse contains the response data from initiating an unstaking operation.
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct StakingUnstakeResponse {
     /// The wallet ID
@@ -30,6 +31,7 @@ pub struct StakingUnstakeResponse {
     pub activity_id: String,
 }
 impl StakingUnstakeResponse {
+    /// StakingUnstakeResponse contains the response data from initiating an unstaking operation.
     pub fn new(wallet_id: String, transaction_id: String, activity_id: String) -> StakingUnstakeResponse {
         StakingUnstakeResponse {
             wallet_id,

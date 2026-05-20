@@ -22,13 +22,16 @@ pub struct QuoteResponse {
     #[serde(rename = "quote_id", skip_serializing_if = "Option::is_none")]
     pub quote_id: Option<String>,
     #[serde(rename = "expiration_time", skip_serializing_if = "Option::is_none")]
-    pub expiration_time: Option<String>,
+    pub expiration_time: Option<chrono::DateTime<chrono::FixedOffset>>,
     #[serde(rename = "best_price", skip_serializing_if = "Option::is_none")]
     pub best_price: Option<String>,
     #[serde(rename = "order_total", skip_serializing_if = "Option::is_none")]
     pub order_total: Option<String>,
     #[serde(rename = "price_inclusive_of_fees", skip_serializing_if = "Option::is_none")]
     pub price_inclusive_of_fees: Option<String>,
+    /// Echo of the quote_duration_ms supplied in the request. 0 if the client did not supply a value, in which case the server applies the default of 3000 ms (3 seconds).
+    #[serde(rename = "quote_duration_ms", skip_serializing_if = "Option::is_none")]
+    pub quote_duration_ms: Option<String>,
 }
 impl QuoteResponse {
     pub fn new() -> QuoteResponse {
@@ -38,6 +41,7 @@ impl QuoteResponse {
             best_price: None,
             order_total: None,
             price_inclusive_of_fees: None,
+            quote_duration_ms: None,
         }
     }
 }

@@ -19,8 +19,6 @@
 use serde::{Deserialize, Serialize};
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum PortfolioBalanceType {
-    #[serde(rename = "UNKNOWN_BALANCE_TYPE")]
-    UnknownBalanceType,
     #[serde(rename = "TRADING_BALANCES")]
     TradingBalances,
     #[serde(rename = "VAULT_BALANCES")]
@@ -35,7 +33,6 @@ pub enum PortfolioBalanceType {
 impl std::fmt::Display for PortfolioBalanceType {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match self {
-            Self::UnknownBalanceType => write!(f, "UNKNOWN_BALANCE_TYPE"),
             Self::TradingBalances => write!(f, "TRADING_BALANCES"),
             Self::VaultBalances => write!(f, "VAULT_BALANCES"),
             Self::TotalBalances => write!(f, "TOTAL_BALANCES"),
@@ -46,6 +43,6 @@ impl std::fmt::Display for PortfolioBalanceType {
 }
 impl Default for PortfolioBalanceType {
     fn default() -> PortfolioBalanceType {
-        Self::UnknownBalanceType
+        Self::TradingBalances
     }
 }

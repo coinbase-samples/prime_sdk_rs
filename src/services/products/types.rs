@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 use crate::types::generated::generated::{
+    candles_granularity::CandlesGranularity,
+    get_candles_response::GetCandlesResponse as GeneratedGetCandlesResponse,
     get_portfolio_products_response::GetPortfolioProductsResponse,
     paginated_response::PaginatedResponse, product::Product,
     product_permissions::ProductPermissions, sort_direction::SortDirection,
@@ -146,3 +148,32 @@ impl ListPortfolioProductsRequest {
         self
     }
 }
+
+#[derive(Debug, Clone)]
+pub struct GetCandlesRequest {
+    pub portfolio_id: String,
+    pub product_id: String,
+    pub start_time: String,
+    pub end_time: String,
+    pub granularity: CandlesGranularity,
+}
+
+impl GetCandlesRequest {
+    pub fn new(
+        portfolio_id: impl Into<String>,
+        product_id: impl Into<String>,
+        start_time: impl Into<String>,
+        end_time: impl Into<String>,
+        granularity: CandlesGranularity,
+    ) -> Self {
+        Self {
+            portfolio_id: portfolio_id.into(),
+            product_id: product_id.into(),
+            start_time: start_time.into(),
+            end_time: end_time.into(),
+            granularity,
+        }
+    }
+}
+
+pub type GetCandlesResponse = GeneratedGetCandlesResponse;

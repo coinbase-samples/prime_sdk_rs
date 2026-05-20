@@ -29,6 +29,8 @@ use crate::types::generated::generated::{
     order_preview_request::OrderPreviewRequest as GeneratedOrderPreviewRequest,
     post_order_preview_response::PostOrderPreviewResponse as GeneratedPostOrderPreviewResponse,
     quote_response::QuoteResponse as GeneratedQuoteResponse, rfq::Rfq as GeneratedRfq,
+    edit_order_response::EditOrderResponse as GeneratedEditOrderResponse,
+    get_order_edit_history_response::GetOrderEditHistoryResponse as GeneratedGetOrderEditHistoryResponse,
 };
 use core_rs::http_client::HttpClient;
 use core_rs::http_method::HttpMethod;
@@ -284,5 +286,35 @@ impl OrdersService {
         let resp = self.client.execute(req).await?;
         let response: GeneratedAcceptQuoteResponse = resp.json().await?;
         Ok(response.into())
+    }
+
+    pub async fn edit_order(&self, request: EditOrderRequest) -> HttpResult<EditOrderResponse> {
+        let path = format!(
+            "portfolios/{}/orders/{}/edit",
+            request.portfolio_id, request.order_id
+        );
+        let json_body = serde_json::to_value(&request.body)
+            .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?;
+        let req = HttpRequest::new(HttpMethod::Put, &path)
+            .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?
+            .with_json_body(json_body);
+        let resp = self.client.execute(req).await?;
+        let response: GeneratedEditOrderResponse = resp.json().await?;
+        Ok(response)
+    }
+
+    pub async fn get_order_edit_history(
+        &self,
+        request: GetOrderEditHistoryRequest,
+    ) -> HttpResult<GetOrderEditHistoryResponse> {
+        let path = format!(
+            "portfolios/{}/orders/{}/edit_history",
+            request.portfolio_id, request.order_id
+        );
+        let req = HttpRequest::new(HttpMethod::Get, &path)
+            .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?;
+        let resp = self.client.execute(req).await?;
+        let response: GeneratedGetOrderEditHistoryResponse = resp.json().await?;
+        Ok(response)
     }
 }

@@ -31,6 +31,8 @@ pub enum LoanType {
     ShortCollateralLoan,
     #[serde(rename = "SHORT_COLLATERAL")]
     ShortCollateral,
+    #[serde(rename = "CROSS_MARGIN")]
+    CrossMargin,
 }
 impl std::fmt::Display for LoanType {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
@@ -41,6 +43,7 @@ impl std::fmt::Display for LoanType {
             Self::PortfolioMargin => write!(f, "PORTFOLIO_MARGIN"),
             Self::ShortCollateralLoan => write!(f, "SHORT_COLLATERAL_LOAN"),
             Self::ShortCollateral => write!(f, "SHORT_COLLATERAL"),
+            Self::CrossMargin => write!(f, "CROSS_MARGIN"),
         }
     }
 }

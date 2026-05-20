@@ -44,10 +44,10 @@ pub struct PostOrderPreviewResponse {
     pub limit_price: Option<String>,
     /// The start time of the order in UTC (only applies to TWAP orders.)
     #[serde(rename = "start_time", skip_serializing_if = "Option::is_none")]
-    pub start_time: Option<String>,
+    pub start_time: Option<chrono::DateTime<chrono::FixedOffset>>,
     /// The expiry time of the order in UTC (TWAP, VWAP, LIMIT and STOP_LIMIT GTD only). Required for TWAP and VWAP orders if historical_pov is unspecified
     #[serde(rename = "expiry_time", skip_serializing_if = "Option::is_none")]
-    pub expiry_time: Option<String>,
+    pub expiry_time: Option<chrono::DateTime<chrono::FixedOffset>>,
     #[serde(rename = "time_in_force", skip_serializing_if = "Option::is_none")]
     pub time_in_force: Option<TimeInForceType>,
     /// Indicate the total commission paid on this order in quote currency - only applicable if the order has any fills
@@ -71,6 +71,21 @@ pub struct PostOrderPreviewResponse {
     /// The estimated participation rate for a TWAP/VWAP order. This field can be specified instead of expiry time, and will be used to compute the expiry time of the order based on historical participation rate.
     #[serde(rename = "historical_pov", skip_serializing_if = "Option::is_none")]
     pub historical_pov: Option<String>,
+    /// Raise Exact order flag
+    #[serde(rename = "is_raise_exact", skip_serializing_if = "Option::is_none")]
+    pub is_raise_exact: Option<bool>,
+    /// Stop price for the order
+    #[serde(rename = "stop_price", skip_serializing_if = "Option::is_none")]
+    pub stop_price: Option<String>,
+    /// The maximum order size that will show up on venue order books.
+    #[serde(rename = "display_size", skip_serializing_if = "Option::is_none")]
+    pub display_size: Option<String>,
+    /// The maximum order size that will show up on venue order books (in quote currency).
+    #[serde(rename = "display_quote_size", skip_serializing_if = "Option::is_none")]
+    pub display_quote_size: Option<String>,
+    /// The maximum order size that will show up on venue order books (in base currency).
+    #[serde(rename = "display_base_size", skip_serializing_if = "Option::is_none")]
+    pub display_base_size: Option<String>,
 }
 impl PostOrderPreviewResponse {
     pub fn new() -> PostOrderPreviewResponse {
@@ -92,6 +107,11 @@ impl PostOrderPreviewResponse {
             average_filled_price: None,
             order_total: None,
             historical_pov: None,
+            is_raise_exact: None,
+            stop_price: None,
+            display_size: None,
+            display_quote_size: None,
+            display_base_size: None,
         }
     }
 }

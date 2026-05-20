@@ -21,8 +21,6 @@ use serde::{Deserialize, Serialize};
 /// - UNKNOWN_PAYMENT_METHOD_TYPE: nil value  - METHOD_WIRE: Wire transfer  - METHOD_SEN: Silvergate exchange network  - METHOD_SWIFT: Swift
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum PaymentMethodType {
-    #[serde(rename = "UNKNOWN_PAYMENT_METHOD_TYPE")]
-    UnknownPaymentMethodType,
     #[serde(rename = "METHOD_WIRE")]
     MethodWire,
     #[serde(rename = "METHOD_SEN")]
@@ -33,7 +31,6 @@ pub enum PaymentMethodType {
 impl std::fmt::Display for PaymentMethodType {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match self {
-            Self::UnknownPaymentMethodType => write!(f, "UNKNOWN_PAYMENT_METHOD_TYPE"),
             Self::MethodWire => write!(f, "METHOD_WIRE"),
             Self::MethodSen => write!(f, "METHOD_SEN"),
             Self::MethodSwift => write!(f, "METHOD_SWIFT"),
@@ -42,6 +39,6 @@ impl std::fmt::Display for PaymentMethodType {
 }
 impl Default for PaymentMethodType {
     fn default() -> PaymentMethodType {
-        Self::UnknownPaymentMethodType
+        Self::MethodWire
     }
 }

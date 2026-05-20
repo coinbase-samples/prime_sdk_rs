@@ -21,6 +21,7 @@ use crate::types::generated::generated::asset_change::AssetChange;
 use crate::types::generated::generated::estimated_network_fees::EstimatedNetworkFees;
 use crate::types::generated::generated::network::Network;
 use crate::types::generated::generated::onchain_transaction_details::OnchainTransactionDetails;
+use crate::types::generated::generated::process_requirements::ProcessRequirements;
 use crate::types::generated::generated::transaction_metadata::TransactionMetadata;
 use crate::types::generated::generated::transaction_status::TransactionStatus;
 use crate::types::generated::generated::transaction_type::TransactionType;
@@ -46,10 +47,10 @@ pub struct Transaction {
     pub symbol: Option<String>,
     /// The transaction creation time (as a UTC timestamp)
     #[serde(rename = "created_at", skip_serializing_if = "Option::is_none")]
-    pub created_at: Option<String>,
+    pub created_at: Option<chrono::DateTime<chrono::FixedOffset>>,
     /// The transaction completion time (as a UTC timestamp)
     #[serde(rename = "completed_at", skip_serializing_if = "Option::is_none")]
-    pub completed_at: Option<String>,
+    pub completed_at: Option<chrono::DateTime<chrono::FixedOffset>>,
     /// The transaction amount in whole units
     #[serde(rename = "amount", skip_serializing_if = "Option::is_none")]
     pub amount: Option<String>,
@@ -92,6 +93,8 @@ pub struct Transaction {
     pub onchain_details: Option<Box<OnchainTransactionDetails>>,
     #[serde(rename = "network_info", skip_serializing_if = "Option::is_none")]
     pub network_info: Option<Box<Network>>,
+    #[serde(rename = "process_requirements", skip_serializing_if = "Option::is_none")]
+    pub process_requirements: Option<Box<ProcessRequirements>>,
 }
 impl Transaction {
     pub fn new() -> Transaction {
@@ -120,6 +123,7 @@ impl Transaction {
             idempotency_key: None,
             onchain_details: None,
             network_info: None,
+            process_requirements: None,
         }
     }
 }

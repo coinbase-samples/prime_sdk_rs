@@ -15,6 +15,7 @@
  */
 pub mod activities;
 pub mod address_book;
+pub mod advanced_transfers;
 pub mod allocations;
 pub mod assets;
 pub mod balances;
@@ -28,7 +29,9 @@ pub mod payment_methods;
 pub mod portfolios;
 pub mod positions;
 pub mod products;
+pub mod staking;
 pub mod transactions;
+pub mod travel_rule;
 pub mod users;
 pub mod wallets;
 
@@ -42,10 +45,14 @@ pub use address_book::{
     GetAddressBookResponse, ListAddressBookRequest, ListAddressBookResponse,
 };
 
+pub use advanced_transfers::AdvancedTransfersService;
+
 pub use allocations::{
-    AllocationService, GetAllocationRequest, GetAllocationResponse,
-    ListAllocationsByClientNettingIdRequest, ListAllocationsByClientNettingIdResponse,
-    ListPortfolioAllocationsRequest, ListPortfolioAllocationsResponse,
+    AllocationService, CreateAllocationRequest, CreateAllocationResponse,
+    CreateNetAllocationRequest, CreateNetAllocationResponse, GetAllocationRequest,
+    GetAllocationResponse, ListAllocationsByClientNettingIdRequest,
+    ListAllocationsByClientNettingIdResponse, ListPortfolioAllocationsRequest,
+    ListPortfolioAllocationsResponse,
 };
 
 pub use assets::{AssetsService, ListEntityAssetsRequest, ListEntityAssetsResponse};
@@ -62,26 +69,38 @@ pub use commission::{
 
 pub use financing::{
     CreateNewLocatesRequest, CreateNewLocatesResponse, FinancingService, GetBuyingPowerRequest,
-    GetBuyingPowerResponse, GetMarginInformationRequest, GetMarginInformationResponse,
-    GetPostTradeCreditRequest, GetPostTradeCreditResponse, GetWithdrawalPowerRequest,
-    GetWithdrawalPowerResponse, ListExistingLocatesRequest, ListExistingLocatesResponse,
-    ListInterestAccrualsRequest, ListInterestAccrualsResponse, ListLocateAvailabilitiesRequest,
-    ListLocateAvailabilitiesResponse, ListMarginConversionsRequest, ListMarginConversionsResponse,
-    ListMarginSummariesRequest, ListMarginSummariesResponse, ListPortfolioInterestAccrualsRequest,
-    ListPortfolioInterestAccrualsResponse, ListTFTieredPricingFeesRequest,
-    ListTFTieredPricingFeesResponse,
+    GetBuyingPowerResponse, GetCrossMarginOverviewRequest, GetCrossMarginOverviewResponse,
+    GetCrossMarginPrimeOverviewRequest, GetCrossMarginPrimeOverviewResponse,
+    GetCrossMarginRiskParametersRequest, GetCrossMarginRiskParametersResponse,
+    GetMarginInformationRequest, GetMarginInformationResponse, GetMarketDataRequest,
+    GetMarketDataResponse, GetPostTradeCreditRequest, GetPostTradeCreditResponse,
+    GetWithdrawalPowerRequest, GetWithdrawalPowerResponse, ListExistingLocatesRequest,
+    ListExistingLocatesResponse, ListFinancingEligibleAssetsRequest,
+    ListFinancingEligibleAssetsResponse, ListInterestAccrualsRequest,
+    ListInterestAccrualsResponse, ListLocateAvailabilitiesRequest, ListLocateAvailabilitiesResponse,
+    ListMarginConversionsRequest, ListMarginConversionsResponse, ListMarginSummariesRequest,
+    ListMarginSummariesResponse, ListPortfolioInterestAccrualsRequest,
+    ListPortfolioInterestAccrualsResponse, ListTfObligationsRequest, ListTfObligationsResponse,
+    ListTFTieredPricingFeesRequest, ListTFTieredPricingFeesResponse, SetFundingSettingsRequest,
+    SetFundingSettingsResponse,
 };
 
 pub use futures::{
-    FuturesService, GetFcmBalanceRequest, GetFcmBalanceResponse, GetFuturesSweepsRequest,
-    GetFuturesSweepsResponse, GetPositionsRequest, GetPositionsResponse,
+    FuturesService, GetFcmBalanceRequest, GetFcmBalanceResponse, GetFcmEquityRequest,
+    GetFcmEquityResponse, GetFcmMarginCallDetailsRequest, GetFcmMarginCallDetailsResponse,
+    GetFcmRiskLimitsRequest, GetFcmRiskLimitsResponse, GetFcmSettingsRequest,
+    GetFcmSettingsResponse, GetFuturesSweepsRequest, GetFuturesSweepsResponse, GetPositionsRequest,
+    GetPositionsResponse, SetFcmSettingsRequest, SetFcmSettingsResponse,
 };
 
 pub use invoices::{InvoiceService, ListInvoicesRequest, ListInvoicesResponse};
 
 pub use onchain_address_groups::*;
 
-pub use orders::{CreateOrderRequest, OrderSide, OrderType, OrdersService, TimeInForceType};
+pub use orders::{
+    CreateOrderRequest, EditOrderRequest, EditOrderResponse, GetOrderEditHistoryRequest,
+    GetOrderEditHistoryResponse, OrderSide, OrderType, OrdersService, TimeInForceType,
+};
 
 pub use payment_methods::{
     GetEntityPaymentMethodDetailsRequest, GetEntityPaymentMethodDetailsResponse,
@@ -94,12 +113,24 @@ pub use positions::{
     ListAggregateEntityPositionsResponse, ListEntityPositionsResponse, PositionsService,
 };
 
-pub use products::{ListPortfolioProductsRequest, ListPortfolioProductsResponse, ProductsService};
+pub use products::{
+    GetCandlesRequest, GetCandlesResponse, ListPortfolioProductsRequest,
+    ListPortfolioProductsResponse, ProductsService,
+};
+
+pub use staking::StakingService;
 
 pub use transactions::{
-    GetTransactionRequest, GetTransactionResponse, ListPortfolioTransactionsRequest,
+    CreateOnchainTransactionRequest, CreateOnchainTransactionResponse, GetTransactionRequest,
+    GetTransactionResponse, ListAdvancedTransferTransactionsRequest,
+    ListAdvancedTransferTransactionsResponse, ListPortfolioTransactionsRequest,
     ListPortfolioTransactionsResponse, ListWalletTransactionsRequest,
     ListWalletTransactionsResponse, TransactionsService,
+};
+
+pub use travel_rule::{
+    GetTransactionTravelRuleDataRequest, GetTransactionTravelRuleDataResponse,
+    SubmitDepositTravelRuleDataRequest, SubmitDepositTravelRuleDataResponse, TravelRuleService,
 };
 
 pub use users::{

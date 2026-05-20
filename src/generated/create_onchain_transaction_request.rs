@@ -17,7 +17,7 @@
  */
 
 use serde::{Deserialize, Serialize};
-use crate::types::generated::generated::create_onchain_transaction_request_period_evm_params::CreateOnchainTransactionRequestPeriodEvmParams;
+use crate::types::generated::generated::create_onchain_transaction_request_evm_params::CreateOnchainTransactionRequestEvmParams;
 use crate::types::generated::generated::rpc_config::RpcConfig;
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
@@ -28,7 +28,7 @@ pub struct CreateOnchainTransactionRequest {
     #[serde(rename = "rpc", skip_serializing_if = "Option::is_none")]
     pub rpc: Option<Box<RpcConfig>>,
     #[serde(rename = "evm_params", skip_serializing_if = "Option::is_none")]
-    pub evm_params: Option<Box<CreateOnchainTransactionRequestPeriodEvmParams>>,
+    pub evm_params: Option<Box<CreateOnchainTransactionRequestEvmParams>>,
 }
 impl CreateOnchainTransactionRequest {
     pub fn new(raw_unsigned_txn: String) -> CreateOnchainTransactionRequest {

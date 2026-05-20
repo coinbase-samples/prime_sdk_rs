@@ -33,6 +33,14 @@ use crate::types::generated::generated::{
 };
 use crate::utils::paginated_list::PaginatedList;
 
+fn parse_optional_datetime(
+    value: &Option<String>,
+) -> Option<chrono::DateTime<chrono::FixedOffset>> {
+    value
+        .as_ref()
+        .and_then(|timestamp| chrono::DateTime::parse_from_rfc3339(timestamp).ok())
+}
+
 // ============================================================================
 // REQUEST STRUCTS
 // ============================================================================
@@ -344,8 +352,8 @@ impl From<&CreateOrderRequest> for GeneratedCreateOrderRequest {
             base_quantity: req.base_quantity.clone(),
             quote_value: req.quote_value.clone(),
             limit_price: req.limit_price.clone(),
-            start_time: req.start_time.clone(),
-            expiry_time: req.expiry_time.clone(),
+            start_time: parse_optional_datetime(&req.start_time),
+            expiry_time: parse_optional_datetime(&req.expiry_time),
             time_in_force: req.time_in_force.clone(),
             stp_id: req.stp_id.clone(),
             display_quote_size: req.display_quote_size.clone(),
@@ -354,6 +362,10 @@ impl From<&CreateOrderRequest> for GeneratedCreateOrderRequest {
             historical_pov: req.historical_pov.clone(),
             stop_price: req.stop_price.clone(),
             settl_currency: req.settl_currency.clone(),
+            post_only: None,
+            peg_offset_type: None,
+            offset: None,
+            wig_level: None,
         }
     }
 }
@@ -440,13 +452,19 @@ impl From<&OrderPreviewRequest> for GeneratedOrderPreviewRequest {
             base_quantity: req.base_quantity.clone(),
             quote_value: req.quote_value.clone(),
             limit_price: req.limit_price.clone(),
-            start_time: req.start_time.clone(),
-            expiry_time: req.expiry_time.clone(),
+            start_time: parse_optional_datetime(&req.start_time),
+            expiry_time: parse_optional_datetime(&req.expiry_time),
             time_in_force: req.time_in_force.clone(),
             is_raise_exact: req.is_raise_exact,
             historical_pov: req.historical_pov.clone(),
             stop_price: req.stop_price.clone(),
             settl_currency: req.settl_currency.clone(),
+            post_only: None,
+            display_quote_size: None,
+            display_base_size: None,
+            peg_offset_type: None,
+            offset: None,
+            wig_level: None,
         }
     }
 }
@@ -502,6 +520,7 @@ impl From<&RfqRequest> for GeneratedRfq {
             quote_value: req.quote_value.clone(),
             limit_price: req.limit_price.clone(),
             settl_currency: req.settl_currency.clone(),
+            quote_duration_ms: None,
         }
     }
 }
@@ -716,3 +735,49 @@ impl From<GeneratedAcceptQuoteResponse> for AcceptQuoteResponse {
         }
     }
 }
+
+use crate::types::generated::generated::{
+    edit_order_request::EditOrderRequest as GeneratedEditOrderBody,
+    edit_order_response::EditOrderResponse as GeneratedEditOrderResponse,
+    get_order_edit_history_response::GetOrderEditHistoryResponse as GeneratedGetOrderEditHistoryResponse,
+};
+
+#[derive(Debug, Clone)]
+pub struct EditOrderRequest {
+    pub portfolio_id: String,
+    pub order_id: String,
+    pub body: GeneratedEditOrderBody,
+}
+
+impl EditOrderRequest {
+    pub fn new(
+        portfolio_id: impl Into<String>,
+        order_id: impl Into<String>,
+        body: GeneratedEditOrderBody,
+    ) -> Self {
+        Self {
+            portfolio_id: portfolio_id.into(),
+            order_id: order_id.into(),
+            body,
+        }
+    }
+}
+
+pub type EditOrderResponse = GeneratedEditOrderResponse;
+
+#[derive(Debug, Clone)]
+pub struct GetOrderEditHistoryRequest {
+    pub portfolio_id: String,
+    pub order_id: String,
+}
+
+impl GetOrderEditHistoryRequest {
+    pub fn new(portfolio_id: impl Into<String>, order_id: impl Into<String>) -> Self {
+        Self {
+            portfolio_id: portfolio_id.into(),
+            order_id: order_id.into(),
+        }
+    }
+}
+
+pub type GetOrderEditHistoryResponse = GeneratedGetOrderEditHistoryResponse;

@@ -22,7 +22,11 @@ use core_rs::http_method::HttpMethod;
 use core_rs::http_request::HttpRequest;
 use std::collections::HashMap;
 
-use super::types::{ListPortfolioProductsRequest, ListPortfolioProductsResponse};
+use super::types::{
+    GetCandlesRequest, GetCandlesResponse, ListPortfolioProductsRequest,
+    ListPortfolioProductsResponse,
+};
+use crate::types::generated::generated::get_candles_response::GetCandlesResponse as GeneratedGetCandlesResponse;
 
 /// Service for interacting with product-related endpoints
 pub struct ProductsService {
@@ -70,5 +74,26 @@ impl ProductsService {
         let resp = self.client.execute(req).await?;
         let response: GetPortfolioProductsResponse = resp.json().await?;
         Ok(response.into())
+    }
+
+    pub async fn get_candles(
+        &self,
+        request: GetCandlesRequest,
+    ) -> crate::error::HttpResult<GetCandlesResponse> {
+        let path = format!("portfolios/{}/candles", request.portfolio_id);
+        let mut req = HttpRequest::new(HttpMethod::Get, &path)
+            .map_err(|e| crate::error::HttpError::Custom(e.to_string()))?;
+        let mut query_params = HashMap::new();
+        query_params.insert("product_id".to_string(), request.product_id);
+        query_params.insert("start_time".to_string(), request.start_time);
+        query_params.insert("end_time".to_string(), request.end_time);
+        query_params.insert(
+            "granularity".to_string(),
+            request.granularity.to_string(),
+        );
+        req = req.with_query_params(query_params);
+        let resp = self.client.execute(req).await?;
+        let response: GeneratedGetCandlesResponse = resp.json().await?;
+        Ok(response)
     }
 }
