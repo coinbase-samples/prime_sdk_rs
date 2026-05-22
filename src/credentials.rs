@@ -16,6 +16,7 @@
 use crate::constants::*;
 use async_trait::async_trait;
 use base64::{engine::general_purpose::STANDARD as BASE64, Engine as _};
+use core_rs::error::{HttpError, HttpResult};
 use core_rs::http_request::HttpRequest;
 use core_rs::interceptor::PreRequestInterceptor;
 use dotenv::dotenv;
@@ -74,14 +75,13 @@ impl AuthInterceptor {
         ))
     }
 
-    fn generate_signature(&self, method: &str, url_path: &str, body: Option<&str>) -> String {
-        // Get current timestamp
-        let timestamp = SystemTime::now()
-            .duration_since(UNIX_EPOCH)
-            .unwrap()
-            .as_secs()
-            .to_string();
-
+    fn generate_signature(
+        &self,
+        timestamp: &str,
+        method: &str,
+        url_path: &str,
+        body: Option<&str>,
+    ) -> String {
         // Build message: timestamp + method + url_path + body (if present)
         let message = if let Some(body_str) = body {
             format!("{}{}{}{}", timestamp, method, url_path, body_str)
@@ -102,7 +102,7 @@ impl AuthInterceptor {
 
 #[async_trait]
 impl PreRequestInterceptor for AuthInterceptor {
-    async fn intercept(&self, request: &mut HttpRequest) {
+    async fn intercept(&self, request: &mut HttpRequest) -> HttpResult<()> {
         let method = request.get_method();
         let url_path = request.get_url_path();
 
@@ -113,28 +113,40 @@ impl PreRequestInterceptor for AuthInterceptor {
             None
         };
 
-        // Generate signature with body
-        let signature = self.generate_signature(method, url_path, body_for_signature.as_deref());
-
-        // Get timestamp
         let timestamp = SystemTime::now()
             .duration_since(UNIX_EPOCH)
             .unwrap()
             .as_secs()
             .to_string();
 
-        // Add headers using constants
+        let signature = self.generate_signature(
+            &timestamp,
+            method,
+            url_path,
+            body_for_signature.as_deref(),
+        );
+
         request
             .add_header(CB_ACCESS_KEY_HEADER, &self.access_key)
-            .expect("Failed to add access key header");
+            .map_err(|e| {
+                HttpError::Custom(format!("Failed to add access key header: {e}"))
+            })?;
         request
             .add_header(CB_ACCESS_SIGNATURE_HEADER, &signature)
-            .expect("Failed to add signature header");
+            .map_err(|e| {
+                HttpError::Custom(format!("Failed to add signature header: {e}"))
+            })?;
         request
             .add_header(CB_ACCESS_TIMESTAMP_HEADER, &timestamp)
-            .expect("Failed to add timestamp header");
+            .map_err(|e| {
+                HttpError::Custom(format!("Failed to add timestamp header: {e}"))
+            })?;
         request
             .add_header(CB_ACCESS_PHRASE_HEADER, &self.passphrase)
-            .expect("Failed to add passphrase header");
+            .map_err(|e| {
+                HttpError::Custom(format!("Failed to add passphrase header: {e}"))
+            })?;
+
+        Ok(())
     }
 }
