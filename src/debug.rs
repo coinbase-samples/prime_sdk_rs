@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 use async_trait::async_trait;
+use core_rs::error::HttpResult;
 use core_rs::http_request::HttpRequest;
 use core_rs::interceptor::PreRequestInterceptor;
 use log::info;
@@ -23,7 +24,7 @@ pub struct DebugInterceptor;
 
 #[async_trait]
 impl PreRequestInterceptor for DebugInterceptor {
-    async fn intercept(&self, request: &mut HttpRequest) {
+    async fn intercept(&self, request: &mut HttpRequest) -> HttpResult<()> {
         let method = request.get_method();
         let url_path = request.get_url_path();
         let full_url = request.as_reqwest().url().to_string();
@@ -38,5 +39,7 @@ impl PreRequestInterceptor for DebugInterceptor {
         if let Some(ref query_params) = request.query_params {
             info!("🔍 Query Params: {:?}", query_params);
         }
+
+        Ok(())
     }
 }
